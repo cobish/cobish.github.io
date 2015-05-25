@@ -1,28 +1,38 @@
----
-layout: default
-title: 我的Blog
----
-
-<ul>
-    {% for post in paginator.posts %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>我的Blog</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+</head>
+<body onload="prettyPrint()">
+    <div>
+        <ul>
+    <li>博客</li>
+    <li>分类</li>
+    <li>关于我</li>
+</ul>
+    </div>
+    <ul>
+    
         <li>
-            {{ post.date | date_to_string }}
-            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            23 May 2015
+            <a href="/%E5%89%8D%E7%AB%AF/2015/05/23/cobish.html">cobish</a>
         </li>
-    {% endfor %}
+    
 </ul>
 
 <!-- Pagination links -->
 <div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
-  {% else %}
+  
     <span class="previous">Previous</span>
-  {% endif %}
-  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-  {% else %}
-    <span class="next ">Next</span>
-  {% endif %}
+  
+  <span class="page_number ">Page: 1 of 3</span>
+  
+    <a href="/page2" class="next">Next</a>
+  
 </div>
+</body>
+</html>
