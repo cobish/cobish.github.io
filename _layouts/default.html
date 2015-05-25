@@ -4,8 +4,11 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>{{ page.title }}</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+
 </head>
-<body>
+<body onload="prettyPrint()">
     <div>
         {% include categories.ext %}
     </div>
