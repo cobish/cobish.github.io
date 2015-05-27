@@ -32,6 +32,36 @@
 &lt;/html&gt;
 </pre>
 
+<pre class="prettyprint linenums">
+.clearfix:after{
+    content: "020"; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;  
+}
+.clearfix {
+    /* 触发 hasLayout */ 
+    zoom: 1; 
+}
+.box {
+    width: 800px;
+    height: 400px;
+    background: red;
+    border: 1px solid red;
+}
+.left {
+    width: 200px;
+    height: 100px;
+    background: blue;
+}
+.right {
+    width: 200px;
+    height: 100px;
+    background: green;
+}
+</pre>
+
 <!-- 多说评论框 start -->
 <div class="ds-thread" data-thread-key="_posts/2012-08-25-hello-world.html" data-title="你好，世界" data-url="/%E7%94%9F%E6%B4%BB/2012/08/25/hello-world.html"></div>
 <!-- 多说评论框 end -->
