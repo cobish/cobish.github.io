@@ -1,3 +1,227 @@
-.red {
-    color: red;
+/* ---------------------------------------------- css reset ---------------------------------------------- */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    margin: 0;
+    padding: 0;
 }
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+fieldset,img {
+    border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-weight: normal;
+    font-style: normal;
+}
+ol,ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+caption,th {
+    text-align: left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym {
+    border:0;
+}
+legend {
+    display: none;
+}
+.clearfix:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: "020";
+}
+.clearfix {
+    zoom: 1;
+}
+a:hover {
+    -webkit-transition: all 150ms ease-in-out 0s;
+       -moz-transition: all 150ms ease-in-out 0s;
+        -ms-transition: all 150ms ease-in-out 0s;
+         -o-transition: all 150ms ease-in-out 0s;
+            transition: all 150ms ease-in-out 0s;
+}
+
+/* ---------------------------------------------- my blog ---------------------------------------------- */
+html, body {
+    overflow: hidden;
+    height: 100%;
+    font-family: "Microsoft YaHei";
+}
+.left {
+    float: left;
+    min-width: 300px;
+    width: 22%;
+    height: 100%;
+    background-color: #5f6d7e;
+    color: #fff;
+}
+.profile-image {
+    overflow: hidden;
+    margin: 50px auto 20px auto;
+    width: 150px;
+    height: 150px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+}
+.profile-image img {
+    width: 100%;
+}
+.profile-name {
+    text-align: center;
+    font-size: 21px;
+}
+.profile-desc {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 17px;
+}
+.hr {
+    margin: 30px auto;
+    min-width: 260px;
+    width: 85%;
+    height: 1px;
+    background: #4B5867;
+}
+.classify li a {
+    display: block;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    line-height: 60px;
+}
+.classify li a:hover {
+    background-color: #495461;
+}
+.contact {
+    margin: 0 auto;
+    width: 214px;
+}
+.contact li {
+    float: left;
+    margin-left: 35px;
+}
+.contact li a {
+    display: block;
+    width: 48px;
+    height: 48px;
+    text-indent: -999em;
+}
+.contact .li-first {
+    margin-left: 0;
+}
+.contact-weibo {
+    background: url(../img/weibo.png) no-repeat;
+}
+.contact-weibo:hover {
+    background: url(../img/weibo-hover.png) no-repeat;
+}
+.contact-github {
+    background: url(../img/github.png) no-repeat;
+}
+.contact-github:hover {
+    background: url(../img/github-hover.png) no-repeat;
+}
+.contact-gmail {
+    background: url(../img/gmail.png) no-repeat;
+}
+.contact-gmail:hover {
+    background: url(../img/gmail-hover.png) no-repeat;
+}
+.right {
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    background-color: #f7f7f7;
+}
+.banner {
+    position: relative;
+    height: 644px;
+    background: url(../img/tree.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: none\9;
+    color: #fff;
+}
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgba(95, 109, 126, 0.4);
+}
+.banner-text {
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+    padding: 0 100px;
+}
+.banner-text h2 {
+    margin-top: 251px;
+    letter-spacing: 1px;
+    font-size: 40px;
+}
+.banner-text p {
+    margin-top: 25px;
+    font-size: 22px;
+    line-height: 25px;
+}
+.article {
+    overflow: hidden;
+    margin: 55px auto;
+    padding: 30px 4%;
+    width: 84%;
+    border-radius: 0.2em;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.article-title a {
+    color: #205081;
+    font-size: 40px;
+    padding: 5px 0;
+    line-height: 50px;
+}
+.article-title a:hover {
+    border-bottom: 2px solid #205081;
+}
+.article-time {
+    margin-top: 30px;
+    color: #777;
+    font-size: 18px;
+}
+.article-desc {
+    margin-top: 35px;
+    color: #666;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+
+/* ---------------------------------------------- 响应式 ---------------------------------------------- */
+@media screen and (max-width: 768px) {
+    .left {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
