@@ -47,11 +47,11 @@ legend {
     zoom: 1;
 }
 a:hover {
-    -webkit-transition: all 150ms ease-in-out 0s;
-       -moz-transition: all 150ms ease-in-out 0s;
-        -ms-transition: all 150ms ease-in-out 0s;
-         -o-transition: all 150ms ease-in-out 0s;
-            transition: all 150ms ease-in-out 0s;
+    -webkit-transition: background-color 150ms ease-in-out 0s;
+       -moz-transition: background-color 150ms ease-in-out 0s;
+        -ms-transition: background-color 150ms ease-in-out 0s;
+         -o-transition: background-color 150ms ease-in-out 0s;
+            transition: background-color 150ms ease-in-out 0s;
 }
 
 /* ---------------------------------------------- my blog ---------------------------------------------- */
@@ -71,8 +71,8 @@ html, body {
 .profile-image {
     overflow: hidden;
     margin: 50px auto 20px auto;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border: 4px solid #fff;
     border-radius: 50%;
 }
@@ -84,7 +84,7 @@ html, body {
     font-size: 21px;
 }
 .profile-desc {
-    padding: 10px 0;
+    padding: 7px 0;
     text-align: center;
     font-size: 17px;
 }
@@ -124,22 +124,22 @@ html, body {
     margin-left: 0;
 }
 .contact-weibo {
-    background: url(../img/weibo.png) no-repeat;
+    background: url(../img/contact_sprite.png) no-repeat 0 0;
 }
 .contact-weibo:hover {
-    background: url(../img/weibo-hover.png) no-repeat;
+    background-position: -48px 0;
 }
 .contact-github {
-    background: url(../img/github.png) no-repeat;
+    background: url(../img/contact_sprite.png) no-repeat 0 -48px;
 }
 .contact-github:hover {
-    background: url(../img/github-hover.png) no-repeat;
+    background: url(../img/contact_sprite.png) no-repeat -48px -48px;
 }
 .contact-gmail {
-    background: url(../img/gmail.png) no-repeat;
+    background: url(../img/contact_sprite.png) no-repeat 0 -96px;
 }
 .contact-gmail:hover {
-    background: url(../img/gmail-hover.png) no-repeat;
+    background: url(../img/contact_sprite.png) no-repeat -48px -96px;
 }
 .right {
     position: relative;
@@ -149,11 +149,11 @@ html, body {
 }
 .banner {
     position: relative;
-    height: 644px;
+    display: none\9;
+    padding: 262px 100px;
     background: url(../img/tree.jpg) no-repeat;
     background-position: center;
     background-size: cover;
-    display: none\9;
     color: #fff;
 }
 .banner-overlay {
@@ -169,21 +169,19 @@ html, body {
     position: relative;
     z-index: 3;
     overflow: hidden;
-    padding: 0 100px;
 }
 .banner-text h2 {
-    margin-top: 251px;
-    letter-spacing: 1px;
+    letter-spacing: 4px;
     font-size: 40px;
 }
 .banner-text p {
     margin-top: 25px;
     font-size: 22px;
-    line-height: 25px;
+    line-height: 30px;
 }
 .article {
     overflow: hidden;
-    margin: 55px auto;
+    margin: 50px auto;
     padding: 30px 4%;
     width: 84%;
     border-radius: 0.2em;
@@ -210,18 +208,124 @@ html, body {
     font-size: 20px;
     line-height: 30px;
 }
-
+.pagination {
+    margin: -15px auto 50px auto;
+    width: 245px;
+}
+.previous, .next {
+    display: block;
+    width: 110px;
+    height: 45px;
+    background-color: #5f6d7e;
+    float: left;
+    text-align: center;
+    line-height: 45px;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 3px;
+}
+.previous:hover, .next:hover {
+    background-color: #495461;
+}
+.next {
+    margin-left: 25px;
+}
+.previous-unable, .next-unable {
+    background-color: #eee9e9;
+    color: #333;
+    cursor: default;
+}
+.previous-unable:hover, .next-unable:hover {
+    background-color: #eee9e9;
+}
 
 /* ---------------------------------------------- 响应式 ---------------------------------------------- */
-@media screen and (max-width: 768px) {
-    .left {
+/* 平板 and i6横屏 */
+@media screen and (max-width: 800px) {
+    .banner {
+        padding: 100px 50px;
+    }
+    .article {
+        margin: 40px auto;
+    }
+    .profile-image, .profile-desc, .hr, .contact {
         display: none;
+    }
+    .left {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    .profile-name {
+        height: 50px;
+        line-height: 50px;
+        text-align: left;
+        text-indent: 30px;
+    }
+    .classify li {
+        border-top: 1px solid #495461;
+    }
+    .menu {
+        width: 35px;
+        float: right;
+        border: 1px solid #fff;
+        border-radius: 3px;
+        margin: 8px 20px 0 0;
+        -webkit-transition: all 150ms ease-in-out 0s;
+           -moz-transition: all 150ms ease-in-out 0s;
+            -ms-transition: all 150ms ease-in-out 0s;
+             -o-transition: all 150ms ease-in-out 0s;
+                transition: all 150ms ease-in-out 0s;
+    }
+    .menu div {
+        width: 25px;
+        height: 2px;
+        margin: 6px auto;
+        background-color: #fff;
+        -webkit-transition: all 150ms ease-in-out 0s;
+           -moz-transition: all 150ms ease-in-out 0s;
+            -ms-transition: all 150ms ease-in-out 0s;
+             -o-transition: all 150ms ease-in-out 0s;
+                transition: all 150ms ease-in-out 0s;
+    }
+    .menu:hover {
+        background-color: #fff;
+    }
+    .menu:hover div {
+        background-color: #495461;
+    }
+    .classify {
+        height: 0;
+    }
+    .article-bottom {
+        height: 50px;
+    }
+}
+/* 手机竖屏 */
+@media screen and (max-width: 568px) {
+    .banner {
+        display: none;
+    }
+    .article {
+        margin: 25px auto;
+        padding: 25px 4%;
+    }
+    .article-title a {
+        font-size: 30px;
+    }
+    .article-time {
+        font-size: 14px;
+    }
+    .article-desc {
+        font-size: 17px;
+        line-height: 23px;
+        margin-top: 25px;
     }
 }
 
-
-
-
-
-
-
+/* 笔记本电脑 */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .banner {
+        padding: 140px 100px;
+    }
+}

@@ -4,31 +4,39 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
     <title>cobish · 写给未来的自己</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
-    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    
 </head>
+
 <body onload="prettyPrint()">
     <div class="left">
         <!-- 个人信息 -->
 <div class="profile-image">
     <img src="/assets/img/profile.png" alt="cobish" />
 </div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <h1 class="profile-name">cobish</h1>
 <p class="profile-desc">he is a web deleloper.</p>
 <!-- 分类 -->
 <div class="hr"></div>
-<ul class="classify">
-    <li><a href="javascript:void(0);">文章</a></li>
-    <li><a href="javascript:void(0);">归档</a></li>
-    <li><a href="javascript:void(0);">关于</a></li>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="./archieve.html">归档</a></li>
+    <li><a href="/about.html">关于</a></li>
 </ul>
 <!-- 联系方式 -->
 <div class="hr"></div>
 <ul class="contact clearfix">
-    <li class="li-first"><a class="contact-weibo" href="javascript:void(0);" title="微博">Weibo</a></li>
-    <li><a class="contact-github" href="javascript:void(0);" title="Github">Github</a></li>
-    <li><a class="contact-gmail" href="javascript:void(0);" title="Gmail">Gmail</a></li>
+    <li class="li-first"><a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a></li>
+    <li><a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a></li>
+    <li><a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a></li>
 </ul>
     </div>
     <div class="right">
@@ -47,29 +55,20 @@
       <p class="article-desc">在rails中导入csv文件比较简单，使用ruby自带的csv库即可完成..</p>
   </div>
 
-    <div class="article">
-      <h3 class="article-title"><a href="/%E5%89%8D%E7%AB%AF/2015/05/22/test.html">测试</a></h3>
-      <p class="article-time">22 May 2015</p>
-      <p class="article-desc">在rails中导入csv文件比较简单，使用ruby自带的csv库即可完成..</p>
-  </div>
-
-    <div class="article">
-      <h3 class="article-title"><a href="/%E7%94%9F%E6%B4%BB/2012/08/25/hello-world.html">你好，世界</a></h3>
-      <p class="article-time">25 Aug 2012</p>
-      <p class="article-desc">在rails中导入csv文件比较简单，使用ruby自带的csv库即可完成..</p>
-  </div>
-
 
 <!-- Pagination links -->
-<!-- <div class="pagination">
-  
-    <span class="previous">Previous</span>
-  
-  <span class="page_number ">Page: 1 of 1</span>
-  
-    <span class="next ">Next</span>
-  
-</div> -->
+<div class="pagination clearfix">
+    
+        <span class="previous previous-unable">上一页</span>
+    
+    <!-- <span class="page_number ">Page: 1 of 3</span> -->
+    
+        <a href="/page2" class="next">下一页</a>
+    
+</div>
+        <div class="article-bottom"></div>
     </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
 </body>
 </html>
