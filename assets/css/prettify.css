@@ -1,128 +1,129 @@
 /* Tomorrow Night Eighties Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #2d2d2d;
-  font-size: 13px;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
-  line-height: 1.5;
+    padding: 10px 10px 10px 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #2d2d2d;
+    font-size: 13px;
+    font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+    line-height: 1.5;
 }
 .prettyprint ol {
-  overflow: auto;
+    overflow: auto;
 }
 .prettyprint li {
-  color: #666654;
-  list-style-type: decimal;
+  padding-left: 10px;
+    color: #666654;
+    list-style-type: decimal;
 }
 
 .pln {
-  color: #cccccc;
+    color: #cccccc;
 }
 
 @media screen {
-  .str {
-    color: #99cc99;
-  }
+    .str {
+        color: #99cc99;
+    }
 
-  .kwd {
-    color: #cc99cc;
-  }
+    .kwd {
+        color: #cc99cc;
+    }
 
-  .com {
-    color: #999999;
-  }
+    .com {
+        color: #999999;
+    }
 
-  .typ {
-    color: #6699cc;
-  }
+    .typ {
+        color: #6699cc;
+    }
 
-  .lit {
-    color: #f99157;
-  }
+    .lit {
+        color: #f99157;
+    }
 
-  .pun {
-    color: #cccccc;
-  }
+    .pun {
+        color: #cccccc;
+    }
 
-  .opn {
-    color: #cccccc;
-  }
+    .opn {
+        color: #cccccc;
+    }
 
-  .clo {
-    color: #cccccc;
-  }
+    .clo {
+        color: #cccccc;
+    }
 
-  .tag {
-    color: #f2777a;
-  }
+    .tag {
+        color: #f2777a;
+    }
 
-  .atn {
-    color: #f99157;
-  }
+    .atn {
+        color: #f99157;
+    }
 
-  .atv {
-    color: #66cccc;
-  }
+    .atv {
+        color: #66cccc;
+    }
 
-  .dec {
-    color: #f99157;
-  }
+    .dec {
+        color: #f99157;
+    }
 
-  .var {
-    color: #f2777a;
-  }
+    .var {
+        color: #f2777a;
+    }
 
-  .fun {
-    color: #6699cc;
-  }
+    .fun {
+        color: #6699cc;
+    }
 }
 @media print, projection {
-  .str {
-    color: #006600;
-  }
+    .str {
+        color: #006600;
+    }
 
-  .kwd {
-    color: #006;
-    font-weight: bold;
-  }
+    .kwd {
+        color: #006;
+        font-weight: bold;
+    }
 
-  .com {
-    color: #600;
-    font-style: italic;
-  }
+    .com {
+        color: #600;
+        font-style: italic;
+    }
 
-  .typ {
-    color: #404;
-    font-weight: bold;
-  }
+    .typ {
+        color: #404;
+        font-weight: bold;
+    }
 
-  .lit {
-    color: #004444;
-  }
+    .lit {
+        color: #004444;
+    }
 
-  .pun, .opn, .clo {
-    color: #444400;
-  }
+    .pun, .opn, .clo {
+        color: #444400;
+    }
 
-  .tag {
-    color: #006;
-    font-weight: bold;
-  }
+    .tag {
+        color: #006;
+        font-weight: bold;
+    }
 
-  .atn {
-    color: #440044;
-  }
+    .atn {
+        color: #440044;
+    }
 
-  .atv {
-    color: #006600;
-  }
+    .atv {
+        color: #006600;
+    }
 }
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums {
-  margin-top: 0;
-  margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* IE indents via margin-left */
@@ -136,7 +137,7 @@ li.L6,
 li.L7,
 li.L8,
 li.L9 {
-  /* */
+    /* */
 }
 
 /* Alternate shading for lines */
@@ -145,5 +146,5 @@ li.L3,
 li.L5,
 li.L7,
 li.L9 {
-  /* */
+    /* */
 }

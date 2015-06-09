@@ -10,7 +10,7 @@
     
 </head>
 
-<body onload="prettyPrint()">
+<body>
     <div class="left">
         <!-- 个人信息 -->
 <div class="profile-image">
@@ -40,12 +40,10 @@
 </ul>
     </div>
     <div class="right">
-        <h2>你好，世界</h2>
-<p>我的第一篇文章</p>
-<p>i am cobish</p>
-<p>25 Aug 2012</p>
-<p>/%E7%94%9F%E6%B4%BB/2012/08/25/hello-world.html</p>
-<p>_posts/2012-08-25-hello-world.html</p>
+        <div class="article">
+    <h3 class="article-title">你好，世界</h3>
+    <p class="article-time">25 Aug 2012</p>
+    <p class="article-desc article-content">我的第一批文章
 
 <pre class="prettyprint linenums">
 &lt;html style=&quot;height: 100%;&quot;&gt;
@@ -56,7 +54,6 @@
     &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-
 <pre class="prettyprint linenums">
 .clearfix:after{
     content: "020"; 
@@ -85,26 +82,31 @@
     height: 100px;
     background: green;
 }
-</pre>
-
-<!-- 多说评论框 start -->
-<div class="ds-thread" data-thread-key="_posts/2012-08-25-hello-world.html" data-title="你好，世界" data-url="/%E7%94%9F%E6%B4%BB/2012/08/25/hello-world.html"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    var duoshuoQuery = {short_name:"cobish"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-</script>
-<!-- 多说公共JS代码 end -->
+</pre></p>
+</div>
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2012-08-25-hello-world.html" data-title="你好，世界" data-url="/%E7%94%9F%E6%B4%BB/2012/08/25/hello-world.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
         <div class="article-bottom"></div>
     </div>
     <script type="text/javascript" src="/assets/js/prettify.js"></script>
     <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* ---------------------------------------------- css reset ---------------------------------------------- */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+body,div,dl,dt,dd,ul,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
     padding: 0;
 }
@@ -181,14 +181,14 @@ html, body {
 }
 .article {
     overflow: hidden;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 30px 4%;
     width: 84%;
     border-radius: 0.2em;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.article-title a {
+.article-title, .article-title a {
     color: #205081;
     font-size: 40px;
     padding: 5px 0;
@@ -208,8 +208,14 @@ html, body {
     font-size: 20px;
     line-height: 30px;
 }
+.article-content {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #666;
+}
+
 .pagination {
-    margin: -15px auto 50px auto;
+    margin: 0 auto 50px auto;
     width: 245px;
 }
 .previous, .next {
@@ -237,6 +243,9 @@ html, body {
 }
 .previous-unable:hover, .next-unable:hover {
     background-color: #eee9e9;
+}
+.prettyprint {
+    margin: 10px 0;
 }
 
 /* ---------------------------------------------- 响应式 ---------------------------------------------- */
