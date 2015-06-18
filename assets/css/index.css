@@ -247,6 +247,26 @@ html, body {
 .prettyprint {
     margin: 10px 0;
 }
+.archieve-title {
+    font-size: 41px;
+}
+.archieve-list {
+    margin-top: 20px;
+}
+.archieve-list li {
+    list-style-type: square;
+    margin-left: 20px;
+    font-size: 17px;
+    color: #817c7c;
+    line-height: 1.8;
+}
+.archieve-list li a, .archieve-list li span {
+    margin-left: 13px;
+    color: #205081;
+}
+.archieve-list li a:hover {
+    text-decoration: underline;
+}
 
 /* ---------------------------------------------- 响应式 ---------------------------------------------- */
 /* 平板 and i6横屏 */

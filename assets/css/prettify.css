@@ -1,19 +1,18 @@
 /* Tomorrow Night Eighties Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
-    padding: 10px 10px 10px 3px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #2d2d2d;
-    font-size: 13px;
+    font-size: 14px;
     font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 .prettyprint ol {
     overflow: auto;
 }
 .prettyprint li {
-  padding-left: 10px;
     color: #666654;
     list-style-type: decimal;
 }
