@@ -1,4 +1,4 @@
-deploy:
+/deploy:
 	git checkout source
 	jekyll build
 	git add -A

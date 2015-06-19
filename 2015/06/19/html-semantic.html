@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>cobish · HTML语义化</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    
+</head>
+
+<body>
+    <div class="left">
+        <!-- 个人信息 -->
+<div class="profile-image">
+    <img src="/assets/img/profile.png" alt="cobish" />
+</div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<h1 class="profile-name">cobish</h1>
+<p class="profile-desc">he is a web deleloper.</p>
+<!-- 分类 -->
+<div class="hr"></div>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="./archieve.html">归档</a></li>
+    <li><a href="/about.html">关于</a></li>
+</ul>
+<!-- 联系方式 -->
+<div class="hr"></div>
+<ul class="contact clearfix">
+    <li class="li-first"><a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a></li>
+    <li><a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a></li>
+    <li><a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a></li>
+</ul>
+    </div>
+    <div class="right">
+        <div class="article">
+    <h3 class="article-title">HTML语义化</h3>
+    <p class="article-time">19 Jun 2015</p>
+    <div class="article-desc article-content"><h2 id="md">md为什么要使用语义化标签？</h2>
+<ul>
+  <li>为了在没有css的情况下，页面也能呈现出良好的文档结构和代码结构；</li>
+  <li>提高用户体验，例如title、alt可进行详细说明；</li>
+  <li>有利于SEO，爬虫只看得懂代码；</li>
+  <li>方便特殊设备的解析，如屏幕阅读器、盲人阅读器等；</li>
+  <li>便于团队的开发和维护，语义化标签使代码更具可读性。</li>
+</ul>
+
+<h2 id="section">常见的语义化前后的比较</h2>
+
+<h3 id="section-1">标题与内容</h3>
+
+<p>语义化前的代码：</p>
+<pre class="prettyprint linenums">
+&lt;div&gt;山行&lt;/div&gt;
+&lt;div&gt;远上寒山石径斜，&lt;/div&gt;
+&lt;div&gt;白云深处有人家。&lt;/div&gt;
+&lt;div&gt;停车坐爱枫林晚，&lt;/div&gt;
+&lt;div&gt;霜叶红于二月花。&lt;/div&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/01.png" alt="语义化前的标题与内容" /></p>
+
+<p>语义化后的代码：</p>
+<pre class="prettyprint linenums">
+&lt;h2&gt;山行&lt;/h2&gt;
+&lt;p&gt;远上寒山石径斜，&lt;/p&gt;
+&lt;p&gt;白云深处有人家。&lt;/p&gt;
+&lt;p&gt;停车坐爱枫林晚，&lt;/p&gt;
+&lt;p&gt;霜叶红于二月花。&lt;/p&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/02.png" alt="语义化后的标题与内容" /></p>
+
+<p><br /></p>
+
+<h3 id="section-2">表单</h3>
+
+<p>语义化前的代码：</p>
+<pre class="prettyprint linenums">
+&lt;form action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;div&gt;
+        &lt;span&gt;账号：&lt;/span&gt;
+        &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;span&gt;密码：&lt;/span&gt;
+        &lt;input type=&quot;password&quot; id=&quot;pwd&quot; /&gt;
+    &lt;/div&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登录&quot; /&gt;
+&lt;/form&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/03.png" alt="语义化前的表单" /></p>
+
+<p>语义化后的代码：</p>
+<pre class="prettyprint linenums">
+&lt;form action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;登录表单&lt;/legend&gt;
+        &lt;p&gt;
+            &lt;label for=&quot;name&quot;&gt;账号：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label for=&quot;pwd&quot;&gt;密码：&lt;/label&gt;
+            &lt;input type=&quot;password&quot; id=&quot;pwd&quot; /&gt;
+        &lt;/p&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;登录&quot; /&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/04.png" alt="语义化后的表单" /></p>
+
+<p><br /></p>
+
+<h3 id="section-3">表格</h3>
+
+<p>语义化前的代码：</p>
+<pre class="prettyprint linenums">
+&lt;div&gt;几种页面的实现&lt;/div&gt;  
+&lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;
+        &lt;td&gt;实现方式&lt;/td&gt;
+        &lt;td&gt;代码量&lt;/td&gt;
+        &lt;td&gt;搜索引擎的友好&lt;/td&gt;
+        &lt;td&gt;特殊终端兼容&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;table布局&lt;/td&gt;
+        &lt;td&gt;多&lt;/td&gt;
+        &lt;td&gt;差&lt;/td&gt;
+        &lt;td&gt;一般&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;乱用标签的CSS布局&lt;/td&gt;
+        &lt;td&gt;少&lt;/td&gt;
+        &lt;td&gt;一般&lt;/td&gt;
+        &lt;td&gt;差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;标签语义良好的CSS布局&lt;/td&gt;
+        &lt;td&gt;少&lt;/td&gt;
+        &lt;td&gt;好&lt;/td&gt;
+        &lt;td&gt;好&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/05.png" alt="语义化前的表格" /></p>
+
+<p>语义化后的代码：</p>
+<pre class="prettyprint linenums">
+&lt;table border=&quot;1&quot;&gt;
+    &lt;caption&gt;几种页面的实现&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;实现方式&lt;/th&gt;
+            &lt;th&gt;代码量&lt;/th&gt;
+            &lt;th&gt;搜索引擎的友好&lt;/th&gt;
+            &lt;th&gt;特殊终端兼容&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th&gt;table布局&lt;/th&gt;
+            &lt;td&gt;多&lt;/td&gt;
+            &lt;td&gt;差&lt;/td&gt;
+            &lt;td&gt;一般&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;乱用标签的CSS布局&lt;/th&gt;
+            &lt;td&gt;少&lt;/td&gt;
+            &lt;td&gt;一般&lt;/td&gt;
+            &lt;td&gt;差&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;标签语义良好的CSS布局&lt;/th&gt;
+            &lt;td&gt;少&lt;/td&gt;
+            &lt;td&gt;好&lt;/td&gt;
+            &lt;td&gt;好&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+<p><img src="/assets/blog-images/2015-06-19-html-semantic/06.png" alt="语义化后的表格" /></p>
+</div>
+</div>
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2015-06-19-html-semantic.md" data-title="HTML语义化" data-url="/2015/06/19/html-semantic.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+        <div class="article-bottom"></div>
+    </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
+</body>
+</html>
