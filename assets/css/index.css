@@ -198,7 +198,7 @@ html, body {
     border-bottom: 2px solid #205081;
 }
 .article-time {
-    margin-top: 30px;
+    margin-top: 15px;
     color: #777;
     font-size: 18px;
 }
@@ -209,11 +209,33 @@ html, body {
     line-height: 30px;
 }
 .article-content {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.6;
     color: #666;
 }
-
+.article-content h2 {
+    margin: 20px 0 12px 0;
+    font-size: 25px;
+    line-height: 2.0;
+    color: #444;
+    border-bottom: 2px solid #dbdbdb;
+}
+.article-content h3 {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #454545;
+}
+.article-content ul {
+    list-style-type: square;
+    margin-left: 20px;
+}
+.article-content img {
+    padding: 5px;
+    background: #f4f7f9;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 3px;
+}
 .pagination {
     margin: 0 auto 50px auto;
     width: 245px;
