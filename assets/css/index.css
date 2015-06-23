@@ -47,11 +47,11 @@ legend {
     zoom: 1;
 }
 a:hover {
-    -webkit-transition: background-color 150ms ease-in-out 0s;
-       -moz-transition: background-color 150ms ease-in-out 0s;
-        -ms-transition: background-color 150ms ease-in-out 0s;
-         -o-transition: background-color 150ms ease-in-out 0s;
-            transition: background-color 150ms ease-in-out 0s;
+    -webkit-transition: background-color 300ms ease-in-out 0s;
+       -moz-transition: background-color 300ms ease-in-out 0s;
+        -ms-transition: background-color 300ms ease-in-out 0s;
+         -o-transition: background-color 300ms ease-in-out 0s;
+            transition: background-color 300ms ease-in-out 0s;
 }
 
 /* ---------------------------------------------- my blog ---------------------------------------------- */
@@ -59,6 +59,11 @@ html, body {
     overflow: hidden;
     height: 100%;
     font-family: "Microsoft YaHei";
+}
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
 }
 .left {
     float: left;
@@ -119,6 +124,28 @@ html, body {
     width: 48px;
     height: 48px;
     text-indent: -999em;
+}
+.contact li a:hover {
+    animation:bg 300ms;
+    
+}
+@-webkit-keyframes bg {
+    0%   { opacity: 0; }
+    25%  { opacity: 0.15; }
+    40%  { opacity: 0.3; }
+    50%  { opacity: 0.5; }
+    60%  { opacity: 0.6; }
+    75%  { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+@keyframes bg {
+    0%   { opacity: 0; }
+    25%  { opacity: 0.15; }
+    40%  { opacity: 0.3; }
+    50%  { opacity: 0.5; }
+    60%  { opacity: 0.6; }
+    75%  { opacity: 0.85; }
+    100% { opacity: 1; }
 }
 .contact .li-first {
     margin-left: 0;
@@ -196,6 +223,11 @@ html, body {
 }
 .article-title a:hover {
     border-bottom: 2px solid #205081;
+    -webkit-transition: border 150ms ease-in-out 0s;
+       -moz-transition: border 150ms ease-in-out 0s;
+        -ms-transition: border 150ms ease-in-out 0s;
+         -o-transition: border 150ms ease-in-out 0s;
+            transition: border 150ms ease-in-out 0s;
 }
 .article-time {
     margin-top: 15px;
@@ -203,27 +235,27 @@ html, body {
     font-size: 18px;
 }
 .article-desc {
-    margin-top: 35px;
-    color: #666;
-    font-size: 20px;
-    line-height: 30px;
+    margin-top: 30px;
+    color: #333;
+    font-size: 18px;
+    line-height: 29px;
 }
 .article-content {
     font-size: 16px;
     line-height: 1.6;
-    color: #666;
+    color: #353333;
 }
 .article-content h2 {
     margin: 20px 0 12px 0;
     font-size: 25px;
     line-height: 2.0;
-    color: #444;
+    color: #333;
     border-bottom: 2px solid #dbdbdb;
 }
 .article-content h3 {
     margin: 10px 0;
     font-size: 20px;
-    color: #454545;
+    color: #343434;
 }
 .article-content ul {
     list-style-type: square;
@@ -322,22 +354,22 @@ html, body {
         border: 1px solid #fff;
         border-radius: 3px;
         margin: 8px 20px 0 0;
-        -webkit-transition: all 150ms ease-in-out 0s;
-           -moz-transition: all 150ms ease-in-out 0s;
-            -ms-transition: all 150ms ease-in-out 0s;
-             -o-transition: all 150ms ease-in-out 0s;
-                transition: all 150ms ease-in-out 0s;
+        -webkit-transition: all 300ms ease-in-out 0s;
+           -moz-transition: all 300ms ease-in-out 0s;
+            -ms-transition: all 300ms ease-in-out 0s;
+             -o-transition: all 300ms ease-in-out 0s;
+                transition: all 300ms ease-in-out 0s;
     }
     .menu div {
         width: 25px;
         height: 2px;
         margin: 6px auto;
         background-color: #fff;
-        -webkit-transition: all 150ms ease-in-out 0s;
-           -moz-transition: all 150ms ease-in-out 0s;
-            -ms-transition: all 150ms ease-in-out 0s;
-             -o-transition: all 150ms ease-in-out 0s;
-                transition: all 150ms ease-in-out 0s;
+        -webkit-transition: all 300ms ease-in-out 0s;
+           -moz-transition: all 300ms ease-in-out 0s;
+            -ms-transition: all 300ms ease-in-out 0s;
+             -o-transition: all 300ms ease-in-out 0s;
+                transition: all 300ms ease-in-out 0s;
     }
     .menu:hover {
         background-color: #fff;
