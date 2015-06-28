@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>cobish · Grunt插件的使用</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    
+</head>
+
+<body>
+    <div class="left">
+        <!-- 个人信息 -->
+<div class="profile-image">
+    <img src="/assets/img/profile.png" alt="cobish" />
+</div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<h1 class="profile-name">cobish</h1>
+<p class="profile-desc">he is a web deleloper.</p>
+<!-- 分类 -->
+<div class="hr"></div>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="/page/archieve.html">归档</a></li>
+    <li><a href="/page/about.html">关于</a></li>
+</ul>
+<!-- 联系方式 -->
+<div class="hr"></div>
+<ul class="contact clearfix">
+    <li class="li-first">
+        <a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a>
+    </li>
+    <li>
+        <a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a>
+    </li>
+    <li>
+        <a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a>
+    </li>
+</ul>
+    </div>
+    <div class="right">
+        <div class="article">
+    <h3 class="article-title">Grunt插件的使用</h3>
+    <p class="article-time">Jun 28, 2015</p>
+    <div class="article-desc article-content"><h2 id="gruntgrunt">了解Grunt工具与搭建Grunt环境</h2>
+<ul>
+  <li><a href="http://www.gruntjs.net/" target="_blank">Grunt官网</a></li>
+  <li><a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html" target="_blank">如何搭建Grunt环境</a></li>
+</ul>
+
+<h2 id="grunt">Grunt常用插件的使用</h2>
+
+<h3 id="section">使用之前，对插件进行安装</h3>
+
+<p>package.json文件里写好需要使用到的插件名称与版本，代码如下：</p>
+
+<pre class="prettyprint linenums">
+{
+    "name": "grunt_demo",
+    "version": "1.0.0",
+    "author": "cobish",
+    "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-cmd-concat": "0.1.0",
+        "grunt-contrib-clean": "0.4.0",
+        "grunt-contrib-concat": "^0.5.1",
+        "grunt-contrib-cssmin": "~0.7.0",
+        "grunt-contrib-imagemin": "^0.9.4",
+        "grunt-contrib-uglify": "0.2.0",
+        "grunt-contrib-watch": "~0.5.3"
+    }
+}
+</pre>
+
+<p>在命令行里输入以下命令进行安装，安装完毕将会产生一个名为<code>node_modules</code>的文件夹</p>
+
+<pre class="prettyprint linenums">
+$ npm install
+</pre>
+
+<p><br /></p>
+
+<h3 id="section-1">图片压缩</h3>
+
+<p>图片压缩使用到的是<code>grunt-contrib-imagemin</code>，根据以下配置好路径</p>
+
+<pre class="prettyprint linenums">
+module.exports = function(grunt) {
+
+    // 任务配置
+    grunt.initConfig({
+        pkg : grunt.file.readJSON('package.json'),
+
+        /**
+         * 压缩图片大小
+         */
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: './src/images',
+                    src: ['**/*.{png,gif,jpg,jpeg}'],
+                    dest: './dest/images',
+                }],
+            },
+        },
+    });
+
+    // 载入任务
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+
+    // 注册任务
+    grunt.registerTask('img', ['imagemin']);
+};
+</pre>
+
+<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的图片，压缩后的图片保存在<code>dest</code>文件夹下</p>
+
+<pre class="prettyprint linenums">
+$ grunt img
+</pre>
+
+<p><br /></p>
+
+<h3 id="css">css代码合并与压缩</h3>
+
+<p>css代码合并与压缩用到的有<code>grunt-contrib-concat</code>、<code>grunt-contrib-cssmin</code>和<code>grunt-contrib-clean</code></p>
+
+<pre class="prettyprint linenums">
+module.exports = function(grunt) {
+
+    // 任务配置
+    grunt.initConfig({
+        // ...
+
+        /**
+         * 文件合并
+         */
+        concat: {
+            options: {
+                separator: ';',
+                stripBanners: true,
+            },
+            css: {
+                files: {
+                    './dest/css/demo.css': ['./src/css/demo/*.css'],
+                },
+            },
+        },
+
+        /**
+         * 压缩css代码
+         */
+        cssmin: {
+            options: {
+                banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n',
+                beautify: {
+                    ascii_only: true,
+                },
+            },
+            build: {
+                expand: true,
+                cwd: './dest/css',
+                src: ['**/*.css', '!*.min.css'],
+                dest: './dest/css',
+                ext: '.min.css',
+            },
+        },
+
+        /**
+         * 删除多余文件
+         */
+        clean: {
+            css: ['./dest/css/*.css', '!./dest/css/*.min.css'],
+        },
+    });
+
+    // 载入任务
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+
+    // 注册任务
+    grunt.registerTask('css', ['concat:css', 'cssmin', 'clean:css']);
+};
+</pre>
+
+<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的css代码，压缩后的css代码保存在<code>dest</code>文件夹下</p>
+
+<pre class="prettyprint linenums">
+$ grunt css
+</pre>
+
+<p><br /></p>
+
+<h3 id="js">js代码合并与压缩</h3>
+
+<p>js代码合并与压缩用到的有<code>grunt-contrib-concat</code>、<code>grunt-contrib-uglify</code>和<code>grunt-contrib-clean</code></p>
+
+<pre class="prettyprint linenums">
+module.exports = function(grunt) {
+
+    // 任务配置
+    grunt.initConfig({
+        // ...
+
+        /**
+         * 文件合并
+         */
+        concat: {
+            options: {
+                separator: ';',
+                stripBanners: true,
+            },
+            js: {
+                files: {
+                    './dest/js/demo.js': ['./src/js/demo/*.js'],
+                },
+            },
+        },
+
+        /**
+         * 压缩js代码
+         */
+        uglify: {
+            options: {
+                banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n',
+            },
+            build: {
+                expand: true,
+                cwd: './dest/js',
+                src: ['**/*.js', '!*.min.js'],
+                dest: './dest/js',
+                ext: '.min.js',
+            },
+        },
+
+        /**
+         * 删除多余文件
+         */
+        clean: {
+            js: ['./dest/js/*js', '!./dest/js/*.min.js'],
+        },
+    });
+
+    // 载入任务
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+
+    // 注册任务
+    grunt.registerTask('js', ['concat:js', 'uglify', 'clean:js']);
+};
+</pre>
+
+<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的js代码，压缩后的js代码保存在<code>dest</code>文件夹下</p>
+
+<pre class="prettyprint linenums">
+$ grunt js
+</pre>
+
+<p><br /></p>
+
+<h3 id="section-2">代码监控</h3>
+
+<p>代码监控的主要作用是只要监控到你的css或js代码一旦保存改动，便会做出一系列操作。比如可以使用它来进行合并压缩代码。使用到的插件是<code>grunt-contrib-watch</code></p>
+
+<pre class="prettyprint linenums">
+module.exports = function(grunt) {
+
+    // 任务配置
+    grunt.initConfig({
+        // ...
+
+        /**
+         * 监控
+         */
+        watch: {
+            css: {
+                files: './css/src/**/*.css',
+                tasks: ['concat:css', 'cssmin', 'clean:css'],
+            },
+            js: {
+                files: './js/src/**/*.js',
+                tasks: ['concat:js', 'uglify', 'clean:js'],
+            }
+        },
+    });
+
+    // 载入任务
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    // 注册任务
+    grunt.registerTask('default', ['watch']);
+};
+</pre>
+
+<p>由于它比较常用，于是把它设置成<code>default</code>，只要输入以下命令，并保持命令行不关闭，它便会一直监听</p>
+
+<pre class="prettyprint linenums">
+$ grunt
+</pre>
+
+<p><br /></p>
+
+<h2 id="demo">demo下载</h2>
+<ul>
+  <li><a href="https://github.com/cobish/grunt_demo" target="_blank">一个简单的Grunt例子</a></li>
+</ul>
+</div>
+</div>
+
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2015-06-28-grunt-use.md" data-title="Grunt插件的使用" data-url="/2015/06/28/grunt-use.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+        <div class="article-bottom"></div>
+    </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
+</body>
+</html>
