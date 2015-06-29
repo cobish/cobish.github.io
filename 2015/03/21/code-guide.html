@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>cobish · 前端编码规范</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    
+</head>
+
+<body>
+    <div class="left">
+        <!-- 个人信息 -->
+<div class="profile-image">
+    <img src="/assets/img/profile.png" alt="cobish" />
+</div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<h1 class="profile-name">cobish</h1>
+<p class="profile-desc">he is a web deleloper.</p>
+<!-- 分类 -->
+<div class="hr"></div>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="/page/archieve.html">归档</a></li>
+    <li><a href="/page/about.html">关于</a></li>
+</ul>
+<!-- 联系方式 -->
+<div class="hr"></div>
+<ul class="contact clearfix">
+    <li class="li-first">
+        <a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a>
+    </li>
+    <li>
+        <a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a>
+    </li>
+    <li>
+        <a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a>
+    </li>
+</ul>
+    </div>
+    <div class="right">
+        <div class="article">
+    <h3 class="article-title">前端编码规范</h3>
+    <p class="article-time">Mar 21, 2015</p>
+    <div class="article-desc article-content"><h2 id="html">HTML</h2>
+
+<h3 id="section">语法</h3>
+<ul>
+  <li>四个空格代替制表符(tab)。</li>
+  <li>注释、注释、注释。</li>
+  <li>嵌套元素须缩进一次，杜绝内容错乱。</li>
+  <li>属性定义一律使用<code>双引号</code>。</li>
+  <li>标签结束加上斜杠，包括单标签。</li>
+  <li>保证标签<code>语义化</code>。</li>
+  <li>属性应按照一定顺序依次排列，确保代码易读性。</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="section-1">补充</h3>
+<p>属性排序</p>
+
+<ul>
+  <li>class</li>
+  <li>id，name</li>
+  <li>data-*</li>
+  <li>src，for，type，href</li>
+  <li>title，alt</li>
+  <li>aria-*，role</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="css">CSS</h2>
+
+<h3 id="section-2">语法</h3>
+<ul>
+  <li>四个空格代替制表符(tab)。</li>
+  <li>命名：类名使用<code>小写字母</code>，<code>中划线</code>分隔，id采用<code>驼峰式</code>命名。</li>
+  <li>每写完一个选择器的属性后，添加一个回车保证代码易读。</li>
+  <li>为了代码的易读性，在每个声明块的左花括号前添加一个空格。</li>
+  <li>每条属性声明的冒号后面需添加一个空格。</li>
+  <li>每条属性声明应该独占一行。</li>
+  <li>每条属性声明结尾都应加上分号表示结束。</li>
+  <li>十六进制值应该全部小写。</li>
+  <li>属性应按照一定顺序依次排列，确保代码易读性。</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="section-3">补充</h3>
+<p>属性排序</p>
+
+<ul>
+  <li>positioning(定位)，如 postion，margin</li>
+  <li>box model(盒模型)，如width，float</li>
+  <li>typographic(印刷)，如font，color</li>
+  <li>visual(视觉)，如background，border</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="javascript">JavaScript</h2>
+
+<h3 id="section-4">语法</h3>
+<ul>
+  <li>四个空格代替制表符(tab)。</li>
+  <li>注释、注释、注释。</li>
+  <li>字符串最外层统一使用<code>单引号</code>。</li>
+  <li>命名：变量函数采用<code>驼峰式</code>命名，常量<code>全大写</code>，用<code>下划线</code>连接。</li>
+  <li>构造函数，首字母大写。</li>
+  <li>jquery对象以<code>$</code>开头命名。</li>
+  <li>一个函数作用于内所有变量声明放在函数首部，只用一个var声明，逗号隔开。</li>
+  <li>多用<code>===</code>和<code>!==</code>，少用<code>==</code>和<code>!=</code>。</li>
+  <li>上下文this引用统一使用<code>self</code>变量来命名。</li>
+</ul>
+
+<h2 id="section-5">参考</h2>
+<ul>
+  <li><a href="http://codeguide.bootcss.com/" target="_blank">编码规范 by @mdo</a></li>
+  <li><a href="http://alloyteam.github.io/CodeGuide/" target="_blank">编码规范 by @AlloyTeam</a></li>
+</ul>
+</div>
+</div>
+
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2015-03-21-code-guide.md" data-title="前端编码规范" data-url="/2015/03/21/code-guide.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+        <div class="article-bottom"></div>
+    </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
+</body>
+</html>
