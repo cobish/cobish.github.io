@@ -263,6 +263,7 @@ html * {
 }
 .article-content img {
     padding: 5px;
+    width: 96%;
     background: #f4f7f9;
     border: 1px solid #ddd;
     margin: 5px 0;

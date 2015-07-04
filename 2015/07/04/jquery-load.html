@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>cobish · 再见，2014</title>
+    <title>cobish · jQuery load 实现页面局部刷新</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
@@ -47,47 +47,58 @@
     </div>
     <div class="right">
         <div class="article">
-    <h3 class="article-title">再见，2014</h3>
-    <p class="article-time">Jan 01, 2015</p>
-    <div class="article-desc article-content"><h2 id="section">前序</h2>
-<p>这一年，我从大三迈向大四；这一年，我从上课迈向求职；这一年，我迷茫过，工作并没想象中找得那么顺利；这一年，我改变许多，我开始为自己身体着想，争取每晚锻炼身体；我开始不厌其烦地每天写日记，为了以后的我能够回味当前的酸甜苦辣；我开始进行理财记账，不再大手大脚地花费自己的钱财；我开始争取每天读一会书，努力充实自己的知识。</p>
+    <h3 class="article-title">jQuery load 实现页面局部刷新</h3>
+    <p class="article-time">Jul 04, 2015</p>
+    <div class="article-desc article-content"><h2 id="section">用法</h2>
 
-<h2 id="section-1">年度总结</h2>
 <ul>
-  <li>一月：大学三年了第一次回老家，也收了很多利是哈。</li>
-  <li>二月：呆在学校开发我的第一个苹果应用。</li>
-  <li>三月：开始每天写日记，参加了百公里。</li>
-  <li>四月：苹果应用上线，开始写技术博客，腾讯实习笔试没通过。</li>
-  <li>五月：科目一通过，科目二练车中。</li>
-  <li>六月：开始记账，上课，期末复习。</li>
-  <li>七月：考完试，放暑假，开始实习，科目二通过，长训通过。</li>
-  <li>八月：创业公司实习中，期间接触了Python和Django，Web前端，github，grunt等知识。</li>
-  <li>九月：创业公司实习中，百度三面没通过，深信服一面没通过。</li>
-  <li>十月：学习理财，实习结束，京东笔试没通过，开始毕业设计。</li>
-  <li>十一月：黑色十一月，迷茫，工作没找着，没方向的复习与学习中。</li>
-  <li>十二月：参加了很多宣讲会，失败离场。但此时也得到了深圳报业集团的offer。</li>
+  <li><a href="http://www.w3school.com.cn/jquery/ajax_load.asp" target="_blank">jQuery ajax - load() 方法</a></li>
 </ul>
 
-<h2 id="section-2">阅读书籍</h2>
+<h2 id="section-1">运行环境</h2>
+
+<p>jQuery的<code>load()</code>方法跟<code>jQuery AJAX</code>一样都需要用到服务器端来支持，所以你会发现如果你只是写了静态页面并直接双击运行，浏览器会给你一个<code>XMLHttpRequest cannot load</code>的错误，你需要把代码放在服务器上才能运行。</p>
+
+<h2 id="section-2">深入使用</h2>
+
+<p>如果单单是使用<code>load()</code>方法，你就会发现，在ajax请求中，不能更新地址栏，地址栏上的“前进”和“后退”按钮就失效了,带来了另外一种糟糕的用户体验。</p>
+
+<p><br /></p>
+
+<p>解决方案有三种，分别是（详情使用请移步：<a href="http://www.cnblogs.com/xumingxiang/archive/2012/11/25/2787530.html" target="_blank">Ajax保留浏览器历史的解决方案</a>）：</p>
+
 <ul>
-  <li>理财：《30年后，你拿什么养活自己》，《小狗钱钱》，《富爸爸穷爸爸》，《邻家的百万富翁》</li>
-  <li>职场：《杜拉拉升职记》，《杜拉拉2华年似水》</li>
-  <li>专业：《大话数据结构》</li>
-  <li>生活：《不持有生活》</li>
+  <li>使用<code>window.Onhashchange</code>事件；</li>
+  <li>使用<code>jQuery.History.js</code>第三方插件；</li>
+  <li>使用<code>jquery.ba-hashchange.js</code>第三方插件。</li>
 </ul>
 
-<h2 id="section-3">展望未来</h2>
+<h2 id="section-3">使用方案</h2>
+
+<p>由于我需要兼容<code>ie6</code>以上的浏览器，加上<code>jQuery.History.js</code>不再维护，所以我选择第三种方案来解决以上问题。期间我遇到了以下问题：</p>
+
 <ul>
-  <li>顺顺利利毕业，认认真真工作。</li>
-  <li>进一步提高自己专业技能，提高竞争力。</li>
-  <li>阅读更多的书籍。</li>
+  <li>在jquery 1.9以上版本中，控制台会提示<code>msie</code>找不到的问题，原因是<code>browser</code>属性已经被移除</li>
 </ul>
+
+<p><br /></p>
+
+<p>解决方法：</p>
+
+<ul>
+  <li>官方建议使用 <a href="http://modernizr.com/" target="_blank">Modernizr</a> 库</li>
+  <li>在引入 jquery 和 jquery.ba-hashchange.js 代码期间引入以下js代码</li>
+</ul>
+
+<pre class="prettyprint linenums">
+jQuery.browser={};(function(){jQuery.browser.msie=false; jQuery.browser.version=0;if(navigator.userAgent.match(/MSIE ([0-9]+)./)){ jQuery.browser.msie=true;jQuery.browser.version=RegExp.$1;}})();
+</pre>
 </div>
 </div>
 
 <div class="article">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="_posts/2015-01-01-goodbye-2014.md" data-title="再见，2014" data-url="/2015/01/01/goodbye-2014.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2015-07-04-jquery-load.md" data-title="jQuery load 实现页面局部刷新" data-url="/2015/07/04/jquery-load.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
