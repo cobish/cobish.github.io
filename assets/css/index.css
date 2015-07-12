@@ -222,7 +222,7 @@ html * {
     line-height: 50px;
 }
 .article-title a:hover {
-    border-bottom: 2px solid #205081;
+    border-bottom: 1px solid #205081;
     -webkit-transition: border 150ms ease-in-out 0s;
        -moz-transition: border 150ms ease-in-out 0s;
         -ms-transition: border 150ms ease-in-out 0s;
@@ -263,7 +263,7 @@ html * {
 }
 .article-content img {
     padding: 5px;
-    width: 96%;
+    max-width: 96%;
     background: #f4f7f9;
     border: 1px solid #ddd;
     margin: 5px 0;

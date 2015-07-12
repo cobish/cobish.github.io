@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>cobish · 让footer固定在底部</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    
+</head>
+
+<body>
+    <div class="left">
+        <!-- 个人信息 -->
+<div class="profile-image">
+    <img src="/assets/img/profile.png" alt="cobish" />
+</div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<h1 class="profile-name">cobish</h1>
+<p class="profile-desc">he is a web deleloper.</p>
+<!-- 分类 -->
+<div class="hr"></div>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="/page/archieve.html">归档</a></li>
+    <li><a href="/page/about.html">关于</a></li>
+</ul>
+<!-- 联系方式 -->
+<div class="hr"></div>
+<ul class="contact clearfix">
+    <li class="li-first">
+        <a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a>
+    </li>
+    <li>
+        <a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a>
+    </li>
+    <li>
+        <a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a>
+    </li>
+</ul>
+    </div>
+    <div class="right">
+        <div class="article">
+    <h3 class="article-title">让footer固定在底部</h3>
+    <p class="article-time">Jul 12, 2015</p>
+    <div class="article-desc article-content"><h2 id="section">角色介绍</h2>
+
+<ul>
+  <li>class为<code>main</code>的一名战士：负责展示网页中的主体信息；</li>
+  <li>class为<code>wrap</code>的一名指挥官：是<code>main</code>的父亲；</li>
+  <li>class为<code>footer</code>的另一名战士：负责展示网页的版权信息等。</li>
+</ul>
+
+<h2 id="section-1">开头介绍</h2>
+
+<p>很久很久以前，<code>footer</code>喜欢跟在<code>main</code>的身后。当<code>main</code>的丰功伟绩很多的时候还好（即出现了滚动条）,但是当他的丰功伟绩屈指可数的时候（即页面内容较少时，撑不开浏览器的高度），他就受不了，风头都给<code>footer</code>抢走了一半。情况就是这样的：</p>
+
+<pre class="prettyprint linenums">
+&lt;div class=&quot;main&quot;&gt;这里是网页的主体&lt;/div&gt;
+&lt;div class=&quot;footer&quot;&gt;这里是页脚&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+html, body{
+    margin: 0;
+    padding: 0;
+}
+.main {
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    background-color: #ffffcc;
+}
+.footer {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ffcccc;
+}
+</pre>
+
+<p><img src="/assets/blog-images/2015-07-12-footer-bottom/01.png" alt="footer没有固定在底部" /></p>
+
+<h2 id="section-2">故事情节</h2>
+
+<p>前面说到<code>main</code>受不了了，于是他请了自己的父亲<code>wrap</code>帮忙，父亲用了一招<code>min-height:100%</code>，顺利地将<code>footer</code>驱逐到屏幕下面。但<code>footer</code>也不是吃素的，立马用了一招<code>margin-top:-30px</code>反击（它的高度为30px）。而这时父亲<code>wrap</code>发现自己没受伤，也发现<code>main</code>在丰功伟绩少的时候<code>footer</code>没跟在他后面，于是便就此作罢。</p>
+
+<p><br /></p>
+
+<p>不久<code>main</code>才发现<code>footer</code>原来不安好心，当他的丰功伟绩很多时，<code>footer</code>总是抢占他的30px的功劳，于是他使出了必杀<code>padding-bottom:30px</code>，让出自己的30px位置给<code>footer</code>。</p>
+
+<p><br />
+<code>footer</code>拿他们没辙了，事情也就此作罢，委屈地固定在了底部：</p>
+
+<pre class="prettyprint linenums">
+&lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;main&quot;&gt;这里是网页的主体&lt;/div&gt;
+&lt;div&gt;
+&lt;div class=&quot;footer&quot;&gt;这里是页脚&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.wrap {
+    overflow: hidden;
+    min-height: 100%;
+    height: 100%;
+    height: auto;
+}
+.main {
+    height: 300px;
+    /*height: 800px;*/
+    padding-bottom: 30px;
+    line-height: 300px;
+    text-align: center;
+    background-color: #ffffcc;
+}
+.footer {
+    margin-top: -30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ffcccc;
+}
+</pre>
+
+<p><img src="/assets/blog-images/2015-07-12-footer-bottom/02.png" alt="footer固定在了底部" /></p>
+
+<p><img src="/assets/blog-images/2015-07-12-footer-bottom/03.png" alt="footer固定在了底部" /></p>
+</div>
+</div>
+
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2015-07-12-footer-bottom.md" data-title="让footer固定在底部" data-url="/2015/07/12/footer-bottom.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+        <div class="article-bottom"></div>
+    </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
+</body>
+</html>
