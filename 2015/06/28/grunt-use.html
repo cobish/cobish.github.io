@@ -66,15 +66,23 @@
     "name": "grunt_demo",
     "version": "1.0.0",
     "author": "cobish",
+    "path": {
+        "src": "./src/",
+        "dest": "./dest/",
+        "tmp": "./.tmp/"
+    },
     "devDependencies": {
-        "grunt": "0.4.1",
+        "grunt": "^0.4.5",
         "grunt-cmd-concat": "0.1.0",
         "grunt-contrib-clean": "0.4.0",
         "grunt-contrib-concat": "^0.5.1",
         "grunt-contrib-cssmin": "~0.7.0",
         "grunt-contrib-imagemin": "^0.9.4",
         "grunt-contrib-uglify": "0.2.0",
-        "grunt-contrib-watch": "~0.5.3"
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-newer": "^1.1.1",
+        "load-grunt-tasks": "^3.2.0",
+        "time-grunt": "^1.2.1"
     }
 }
 </pre>
@@ -105,11 +113,11 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: './src/images',
+                    cwd: '&lt;%= pkg.path.src %&gt;images',
                     src: ['**/*.{png,gif,jpg,jpeg}'],
-                    dest: './dest/images',
-                }],
-            },
+                    dest: '&lt;%= pkg.path.dest %&gt;images'
+                }]
+            }
         },
     });
 
@@ -131,7 +139,7 @@ $ grunt img
 
 <h3 id="css">css代码合并与压缩</h3>
 
-<p>css代码合并与压缩用到的有<code>grunt-contrib-concat</code>、<code>grunt-contrib-cssmin</code>和<code>grunt-contrib-clean</code></p>
+<p>css代码合并与压缩用到的有<code>grunt-contrib-concat</code>和<code>grunt-contrib-cssmin</code></p>
 
 <pre class="prettyprint linenums">
 module.exports = function(grunt) {
@@ -145,14 +153,13 @@ module.exports = function(grunt) {
          */
         concat: {
             options: {
-                separator: ';',
                 stripBanners: true,
             },
             css: {
                 files: {
-                    './dest/css/demo.css': ['./src/css/demo/*.css'],
-                },
-            },
+                    '&lt;%= pkg.path.tmp %&gt;css/demo.css': ['&lt;%= pkg.path.src %&gt;css/demo/*.css']
+                }
+            }
         },
 
         /**
@@ -162,33 +169,25 @@ module.exports = function(grunt) {
             options: {
                 banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n',
                 beautify: {
-                    ascii_only: true,
-                },
+                    ascii_only: true
+                }
             },
             build: {
                 expand: true,
-                cwd: './dest/css',
+                cwd: '&lt;%= pkg.path.tmp %&gt;css',
                 src: ['**/*.css', '!*.min.css'],
-                dest: './dest/css',
-                ext: '.min.css',
-            },
-        },
-
-        /**
-         * 删除多余文件
-         */
-        clean: {
-            css: ['./dest/css/*.css', '!./dest/css/*.min.css'],
-        },
+                dest: '&lt;%= pkg.path.dest %&gt;css',
+                ext: '.min.css'
+            }
+        }
     });
 
     // 载入任务
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // 注册任务
-    grunt.registerTask('css', ['concat:css', 'cssmin', 'clean:css']);
+    grunt.registerTask('css', ['concat:css', 'cssmin']);
 };
 </pre>
 
@@ -202,7 +201,7 @@ $ grunt css
 
 <h3 id="js">js代码合并与压缩</h3>
 
-<p>js代码合并与压缩用到的有<code>grunt-contrib-concat</code>、<code>grunt-contrib-uglify</code>和<code>grunt-contrib-clean</code></p>
+<p>js代码合并与压缩用到的有<code>grunt-contrib-concat</code>和<code>grunt-contrib-uglify</code></p>
 
 <pre class="prettyprint linenums">
 module.exports = function(grunt) {
@@ -216,12 +215,11 @@ module.exports = function(grunt) {
          */
         concat: {
             options: {
-                separator: ';',
                 stripBanners: true,
             },
             js: {
                 files: {
-                    './dest/js/demo.js': ['./src/js/demo/*.js'],
+                    '&lt;%= pkg.path.tmp %&gt;js/demo.js': ['&lt;%= pkg.path.src %&gt;js/demo/*.js']
                 },
             },
         },
@@ -235,28 +233,20 @@ module.exports = function(grunt) {
             },
             build: {
                 expand: true,
-                cwd: './dest/js',
+                cwd: '&lt;%= pkg.path.tmp %&gt;js',
                 src: ['**/*.js', '!*.min.js'],
-                dest: './dest/js',
-                ext: '.min.js',
-            },
-        },
-
-        /**
-         * 删除多余文件
-         */
-        clean: {
-            js: ['./dest/js/*js', '!./dest/js/*.min.js'],
-        },
+                dest: '&lt;%= pkg.path.dest %&gt;js',
+                ext: '.min.js'
+            }
+        }
     });
 
     // 载入任务
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // 注册任务
-    grunt.registerTask('js', ['concat:js', 'uglify', 'clean:js']);
+    grunt.registerTask('js', ['concat:js', 'uglify']);
 };
 </pre>
 
@@ -270,7 +260,7 @@ $ grunt js
 
 <h3 id="section-2">代码监控</h3>
 
-<p>代码监控的主要作用是只要监控到你的css或js代码一旦保存改动，便会做出一系列操作。比如可以使用它来进行合并压缩代码。使用到的插件是<code>grunt-contrib-watch</code></p>
+<p>代码监控的主要作用是只要监控到你的css或js代码一旦保存改动，便会做出一系列操作。比如可以使用它来进行合并压缩代码。使用到的插件是<code>grunt-contrib-watch</code>，其中还使用了<code>grunt-newer</code>（作用是只对修改了的文件做操作）</p>
 
 <pre class="prettyprint linenums">
 module.exports = function(grunt) {
@@ -284,12 +274,12 @@ module.exports = function(grunt) {
          */
         watch: {
             css: {
-                files: './css/src/**/*.css',
-                tasks: ['concat:css', 'cssmin', 'clean:css'],
+                files: '&lt;%= pkg.path.src %&gt;css/**/*.css',
+                tasks: ['newer:concat:css', 'newer:cssmin']
             },
             js: {
-                files: './js/src/**/*.js',
-                tasks: ['concat:js', 'uglify', 'clean:js'],
+                files: '&lt;%= pkg.path.src %&gt;js/**/*.js',
+                tasks: ['newer:concat:js', 'newer:uglify']
             }
         },
     });
@@ -310,6 +300,24 @@ module.exports = function(grunt) {
 
 <pre class="prettyprint linenums">
 $ grunt
+</pre>
+
+<p><br /></p>
+
+<h3 id="section-3">载入任务简化</h3>
+
+<p>当你的插件较多的时候，loadNpmTasks就会很占地方，这时<code>load-grunt-tasks</code>便起作用了，它会自动地加载你已经安装的插件，而不需要你去手动添加。<code>time-grunt</code>则可以计算出插件运行的时间</p>
+
+<pre class="prettyprint linenums">
+// 载入任务
+// grunt.loadNpmTasks('grunt-contrib-concat');
+// grunt.loadNpmTasks('grunt-contrib-cssmin');
+// grunt.loadNpmTasks('grunt-contrib-uglify');
+// grunt.loadNpmTasks('grunt-contrib-clean');
+// grunt.loadNpmTasks('grunt-contrib-watch');
+
+require('time-grunt')(grunt);
+require('load-grunt-tasks')(grunt);
 </pre>
 
 <p><br /></p>
