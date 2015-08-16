@@ -63,26 +63,10 @@
 
 <pre class="prettyprint linenums">
 {
-    "name": "grunt_demo",
+    "name": "grunt-demo",
     "version": "1.0.0",
-    "author": "cobish",
-    "path": {
-        "src": "./src/",
-        "dest": "./dest/",
-        "tmp": "./.tmp/"
-    },
     "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-cmd-concat": "0.1.0",
-        "grunt-contrib-clean": "0.4.0",
-        "grunt-contrib-concat": "^0.5.1",
-        "grunt-contrib-cssmin": "~0.7.0",
-        "grunt-contrib-imagemin": "^0.9.4",
-        "grunt-contrib-uglify": "0.2.0",
-        "grunt-contrib-watch": "~0.5.3",
-        "grunt-newer": "^1.1.1",
-        "load-grunt-tasks": "^3.2.0",
-        "time-grunt": "^1.2.1"
+        "grunt": "^0.4.5"
     }
 }
 </pre>
@@ -97,14 +81,19 @@ $ npm install
 
 <h3 id="section-1">图片压缩</h3>
 
-<p>图片压缩使用到的是<code>grunt-contrib-imagemin</code>，根据以下配置好路径</p>
+<p>图片压缩使用到的是<code>grunt-contrib-imagemin</code>，安装</p>
+
+<pre class="prettyprint linenums">
+npm install grunt-contrib-imagemin --save-dev
+</pre>
+
+<p>根据以下配置好路径：</p>
 
 <pre class="prettyprint linenums">
 module.exports = function(grunt) {
 
     // 任务配置
     grunt.initConfig({
-        pkg : grunt.file.readJSON('package.json'),
 
         /**
          * 压缩图片大小
@@ -113,12 +102,12 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '&lt;%= pkg.path.src %&gt;images',
+                    cwd: 'src/images',
                     src: ['**/*.{png,gif,jpg,jpeg}'],
-                    dest: '&lt;%= pkg.path.dest %&gt;images'
+                    dest: 'dest/images'
                 }]
             }
-        },
+        }
     });
 
     // 载入任务
@@ -137,123 +126,179 @@ $ grunt img
 
 <p><br /></p>
 
-<h3 id="css">css代码合并与压缩</h3>
+<h3 id="css">css属性排序</h3>
 
-<p>css代码合并与压缩用到的有<code>grunt-contrib-concat</code>和<code>grunt-contrib-cssmin</code></p>
+<p>属性排序使用到的是<code>grunt-csscomb</code>，安装</p>
 
 <pre class="prettyprint linenums">
-module.exports = function(grunt) {
-
-    // 任务配置
-    grunt.initConfig({
-        // ...
-
-        /**
-         * 文件合并
-         */
-        concat: {
-            options: {
-                stripBanners: true,
-            },
-            css: {
-                files: {
-                    '&lt;%= pkg.path.tmp %&gt;css/demo.css': ['&lt;%= pkg.path.src %&gt;css/demo/*.css']
-                }
-            }
-        },
-
-        /**
-         * 压缩css代码
-         */
-        cssmin: {
-            options: {
-                banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n',
-                beautify: {
-                    ascii_only: true
-                }
-            },
-            build: {
-                expand: true,
-                cwd: '&lt;%= pkg.path.tmp %&gt;css',
-                src: ['**/*.css', '!*.min.css'],
-                dest: '&lt;%= pkg.path.dest %&gt;css',
-                ext: '.min.css'
-            }
-        }
-    });
-
-    // 载入任务
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-
-    // 注册任务
-    grunt.registerTask('css', ['concat:css', 'cssmin']);
-};
+npm install grunt-csscomb --save-dev
 </pre>
 
-<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的css代码，压缩后的css代码保存在<code>dest</code>文件夹下</p>
+<p>配置：</p>
 
 <pre class="prettyprint linenums">
-$ grunt css
+/**
+ * css属性排序
+ */
+csscomb: {
+    bar: {
+        files: {
+            'dest/index.resorted.css': ['src/index.css']
+        }
+    }
+}
 </pre>
 
 <p><br /></p>
 
-<h3 id="js">js代码合并与压缩</h3>
+<h3 id="css-1">css自动添加浏览器厂商前缀</h3>
 
-<p>js代码合并与压缩用到的有<code>grunt-contrib-concat</code>和<code>grunt-contrib-uglify</code></p>
+<p>为了避免书写太多重复的css代码，使用到的是<code>grunt-autoprefixer</code>，安装</p>
 
 <pre class="prettyprint linenums">
-module.exports = function(grunt) {
-
-    // 任务配置
-    grunt.initConfig({
-        // ...
-
-        /**
-         * 文件合并
-         */
-        concat: {
-            options: {
-                stripBanners: true,
-            },
-            js: {
-                files: {
-                    '&lt;%= pkg.path.tmp %&gt;js/demo.js': ['&lt;%= pkg.path.src %&gt;js/demo/*.js']
-                },
-            },
-        },
-
-        /**
-         * 压缩js代码
-         */
-        uglify: {
-            options: {
-                banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n',
-            },
-            build: {
-                expand: true,
-                cwd: '&lt;%= pkg.path.tmp %&gt;js',
-                src: ['**/*.js', '!*.min.js'],
-                dest: '&lt;%= pkg.path.dest %&gt;js',
-                ext: '.min.js'
-            }
-        }
-    });
-
-    // 载入任务
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-
-    // 注册任务
-    grunt.registerTask('js', ['concat:js', 'uglify']);
-};
+npm install grunt-autoprefixer --save-dev
 </pre>
 
-<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的js代码，压缩后的js代码保存在<code>dest</code>文件夹下</p>
+<p>配置：</p>
 
 <pre class="prettyprint linenums">
-$ grunt js
+/**
+ * 自动添加浏览器厂商前缀
+ */
+autoprefixer: {
+    dist: {
+        files: {
+            'dest/index.prefixer.css': ['src/index.css']
+        }
+    }
+}
+</pre>
+
+<p><br /></p>
+
+<h3 id="js">js代码检测</h3>
+
+<p>代码检测用到的是<code>grunt-contrib-jshint</code>，安装</p>
+
+<pre class="prettyprint linenums">
+npm install grunt-contrib-jshint --save-dev
+</pre>
+
+<p>配置：</p>
+
+<pre class="prettyprint linenums">
+/**
+ * js代码检测
+ */
+jshint: {
+    options: {
+        // 大括号包裹
+        curly: true,
+
+        // 对于首字母大写的函数（声明的类），强制使用new
+        newcap: true,
+
+        // 对于简单类型，使用===和!==，而不是==和!=
+        eqeqeq: true,
+
+        // 禁用arguments.caller和arguments.callee
+        noarg: true,
+
+        // 对于属性使用aaa.bbb而不是aaa['bbb']
+        sub: true,
+
+        // 查找所有未定义的变量
+        // undef: true,
+        
+        // 查找类似于if(a = 0)的代码
+        boss: true
+    },
+    files: {
+        src: ['Gruntfile.js', 'src/*.js']
+    }
+}
+</pre>
+
+<p><br /></p>
+
+<h3 id="css-2">css代码合并与压缩</h3>
+
+<p>css代码合并与压缩用到的是<code>grunt-contrib-cssmin</code></p>
+
+<pre class="prettyprint linenums">
+// 任务配置
+grunt.initConfig({
+    pkg : grunt.file.readJSON('package.json'),
+
+    /**
+     * 合并压缩css代码
+     */
+    cssmin: {
+        options: {
+            banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */',
+            beautify: {
+                ascii_only: true
+            },
+
+            //设置兼容模式 
+            compatibility : 'ie8', 
+
+            //取消高级特性 
+            noAdvanced : true,
+
+            // source map
+            sourceMap: true
+        },
+        build: {
+            files: {
+                'dest/index.min.css': ['src/index1.css', 'src/index2.css']
+            }
+        }
+    }
+});
+</pre>
+
+<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的css代码，压缩后的css代码保存在<code>dest</code>文件夹下，并生成map文件方便调试</p>
+
+<pre class="prettyprint linenums">
+$ grunt cssmin
+</pre>
+
+<p><br /></p>
+
+<h3 id="js-1">js代码合并与压缩</h3>
+
+<p>js代码合并与压缩用到的是<code>grunt-contrib-uglify</code></p>
+
+<pre class="prettyprint linenums">
+// 任务配置
+grunt.initConfig({
+    pkg : grunt.file.readJSON('package.json'),
+
+    /**
+     * 合并压缩js代码
+     */
+    uglify: {
+        options: {
+            banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */',
+            sourceMapRoot: '../src/',
+            sourceMap: function(path) { 
+                return path.replace('.js',".map")
+            }
+        },
+        build: {
+            files: {
+                'dest/index.min.js': ['src/index1.js', 'src/index2.js']
+            }
+        }
+    }
+});
+</pre>
+
+<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的js代码，压缩后的js代码保存在<code>dest</code>文件夹下，并生成map文件方便调试</p>
+
+<pre class="prettyprint linenums">
+$ grunt uglify
 </pre>
 
 <p><br /></p>
@@ -274,22 +319,21 @@ module.exports = function(grunt) {
          */
         watch: {
             css: {
-                files: '&lt;%= pkg.path.src %&gt;css/**/*.css',
-                tasks: ['newer:concat:css', 'newer:cssmin']
+                files: 'src/css/**/*.css',
+                tasks: [newer:cssmin']
             },
             js: {
-                files: '&lt;%= pkg.path.src %&gt;js/**/*.js',
-                tasks: ['newer:concat:js', 'newer:uglify']
+                files: 'src/js/**/*.js',
+                tasks: [newer:uglify']
             }
         },
     });
 
     // 载入任务
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-newer');
 
     // 注册任务
     grunt.registerTask('default', ['watch']);
@@ -322,59 +366,9 @@ require('load-grunt-tasks')(grunt);
 
 <p><br /></p>
 
-<h3 id="sprite">自动生成sprite图片</h3>
-
-<p>除了设计师帮我们做成一张sprite图片外，我们可以用其他工具生成，但css代码里的位置还是需要我们自己去写，<code>grunt-css-sprite</code>插件可以让我们在代码中使用切好的图片，执行它便会帮我们把css代码中的图片合成一张，并修改好里面的position</p>
-
-<pre class="prettyprint linenums">
-/**
- * 自动雪碧图
- */
-sprite: {
-    options: {
-        // sprite背景图源文件夹，只有匹配此路径才会处理，默认 images/slice/
-        imagepath: 'src/images/',
-        // 映射CSS中背景路径，支持函数和数组，默认为 null
-        imagepath_map: null,
-        // 雪碧图输出目录，注意，会覆盖之前文件！默认 images/
-        spritedest: 'dest/images/',
-        // 替换后的背景路径，默认 ../images/
-        spritepath: '../images/',
-        // 各图片间间距，如果设置为奇数，会强制+1以保证生成的2x图片为偶数宽高，默认 0
-        padding: 2,
-        // 是否使用 image-set 作为2x图片实现，默认不使用
-        useimageset: false,
-        // 是否以时间戳为文件名生成新的雪碧图文件，如果启用请注意清理之前生成的文件，默认不生成新文件
-        newsprite: false,
-        // 给雪碧图追加时间戳，默认不追加
-        spritestamp: false,
-        // 在CSS文件末尾追加时间戳，默认不追加
-        cssstamp: false,
-        // 默认使用二叉树最优排列算法
-        algorithm: 'binary-tree',
-        // 默认使用`pixelsmith`图像处理引擎
-        engine: 'pixelsmith'
-    },
-    autoSprite: {
-        files: [{
-            // 启用动态扩展
-            expand: true,
-            // css文件源的文件夹
-            cwd: 'src/css/',
-            // 匹配规则
-            src: 'sprite.css',
-            // 导出css和sprite的路径地址
-            dest: 'dest/css/',
-            // 导出的css名
-            // ext: '.sprite.css'
-        }]
-    }
-}
-</pre>
-
 <h2 id="demo">demo下载</h2>
 <ul>
-  <li><a href="https://github.com/cobish/grunt_demo" target="_blank">一个简单的Grunt例子</a></li>
+  <li><a href="https://github.com/cobish/grunt-demo" target="_blank">简单的Grunt例子</a></li>
 </ul>
 </div>
 </div>
