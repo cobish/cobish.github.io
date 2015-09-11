@@ -208,7 +208,7 @@ jshint: {
         sub: true,
 
         // 查找所有未定义的变量
-        // undef: true,
+        undef: true,
         
         // 查找类似于if(a = 0)的代码
         boss: true
@@ -320,11 +320,11 @@ module.exports = function(grunt) {
         watch: {
             css: {
                 files: 'src/css/**/*.css',
-                tasks: [newer:cssmin']
+                tasks: ['newer:cssmin']
             },
             js: {
                 files: 'src/js/**/*.js',
-                tasks: [newer:uglify']
+                tasks: ['newer:uglify']
             }
         },
     });
