@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>cobish · js模板引擎</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    
+</head>
+
+<body>
+    <div class="left">
+        <!-- 个人信息 -->
+<div class="profile-image">
+    <img src="/assets/img/profile.png" alt="cobish" />
+</div>
+<!-- 菜单 -->
+<div id="menuBtn" class="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<h1 class="profile-name">cobish</h1>
+<p class="profile-desc">he is a web deleloper.</p>
+<!-- 分类 -->
+<div class="hr"></div>
+<ul id="classify" class="classify">
+    <li><a href="/index.html">文章</a></li>
+    <li><a href="/page/archieve.html">归档</a></li>
+    <li><a href="/page/about.html">关于</a></li>
+</ul>
+<!-- 联系方式 -->
+<div class="hr"></div>
+<ul class="contact clearfix">
+    <li class="li-first">
+        <a class="contact-weibo" href="http://weibo.com/cobish" title="微博" target="_blank">Weibo</a>
+    </li>
+    <li>
+        <a class="contact-github" href="https://github.com/cobish" title="Github" target="_blank">Github</a>
+    </li>
+    <li>
+        <a class="contact-gmail" href="mailto:cobish110@gmail.com" title="Gmail" target="_blank">Gmail</a>
+    </li>
+</ul>
+    </div>
+    <div class="right">
+        <div class="article">
+    <h3 class="article-title">js模板引擎</h3>
+    <p class="article-time">Oct 24, 2015</p>
+    <div class="article-desc article-content"><h2 id="section">过去</h2>
+
+<p>当获取到一个类似以下的对象，并需显示在html页面上，你会怎么处理？</p>
+
+<pre class="prettyprint linenums">
+var data = {
+    title: '四大名著',
+    list: ['西游记', '三国演义', '水浒传', '红楼梦']
+};
+</pre>
+
+<p>很简单地想到把html标签拼装，然后添加到一个标签里：</p>
+
+<pre class="prettyprint linenums">
+var html = '';
+
+// 拼装html代码块
+html += '&lt;h1&gt;' + data.title + '&lt;/h1&gt;';
+html += '&lt;ul&gt;';
+for ( var i = 0; i &lt; data.list.length; i++ ) {
+    html += '&lt;li&gt;索引 ' + ( i + 1 ) + ' : ' + data.list[i] + '&lt;/li&gt;';
+}
+html += '&lt;/ul&gt;';
+
+document.getElementById('content').innerHTML = html;
+</pre>
+
+<p>但是这样有以下的缺点：</p>
+
+<ul>
+  <li>代码看起来不太美观，js代码里有html标签代码；</li>
+  <li>代码不易维护，html标签没有合适的缩进。</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="section-1">替换</h2>
+
+<p>我们用另一个对象来举例子，因为接下来的代码不能处理上面的对象，从而需要引出js模板引擎：</p>
+
+<pre class="prettyprint linenums">
+var json = {
+    data: [{
+        name: 'Jack',
+        age: 22
+    }, {
+        name: 'Tom',
+        age: 25
+    }, {
+        name: 'Jerry',
+        age: 23
+    }]
+};
+</pre>
+
+<p>模板：</p>
+
+<pre class="prettyprint linenums">
+&lt;textarea id="temp" style="display:none;"&gt;
+    &lt;li&gt;$name$ - $age$&lt;/li&gt;
+&lt;/textarea&gt;
+</pre>
+
+<p>方法是通过一个正则匹配的方法把需要替换的变量替换掉：</p>
+
+<pre class="prettyprint linenums">
+String.prototype.temp = function(obj) {
+    return this.replace(/\$\w+\$/gi, function(matchs) {
+        var returns = obj[matchs.replace(/\$/g, "")];       
+        return (returns + "") == "undefined"? "": returns;
+    });
+};
+</pre>
+
+<p>然后可以根据具体JSON格式得到需要的HTML片段：</p>
+
+<pre class="prettyprint linenums">
+var htmlList = '',
+    htmlTemp = document.getElementById('temp').value;
+
+for ( var i = 0; i &lt; json.data.length; i++ ) {
+    htmlList += htmlTemp.temp(json.data[i]);
+}
+
+document.getElementById('content').innerHTML = htmlList;
+</pre>
+
+<p>以上方法无法处理if判断与循环等操作，还需再进一步正则匹配等，详情请移步<a href="http://www.zhangxinxu.com/wordpress/2012/09/javascript-html-json-template/" target="_blank">张鑫旭博客</a>。</p>
+
+<p><br /></p>
+
+<h2 id="js---arttemplate">JS模板引擎 - artTemplate</h2>
+
+<p>当然也有现成的模板引擎帮我们解决以上的种种问题，接下来抛砖引玉以下，详情移步<a href="https://github.com/aui/artTemplate" target="_blank">artTemplate源码</a>。</p>
+
+<p><br /></p>
+
+<p>还是原来的对象例子：</p>
+
+<pre class="prettyprint linenums">
+var data = {
+    title: '四大名著',
+    list: ['西游记', '三国演义', '水浒传', '红楼梦']
+};
+</pre>
+
+<p>它也需要html模板：</p>
+
+<pre class="prettyprint linenums">
+&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;
+&lt;ul&gt;
+    &#123;&#123;each list as value i&#125;&#125;
+        &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;
+    &#123;&#123;/each&#125;&#125;
+&lt;/ul&gt;
+</pre>
+
+<p>最后引入template模板文件，并用js进行处理后显示：</p>
+
+<pre class="prettyprint linenums">
+&lt;script type="text/javascript" src="template.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    var html = template('test', data);
+    document.getElementById('content').innerHTML = html;
+&lt;/script&gt;
+</pre>
+
+<p>使用了模板引擎之后代码简洁不少，而且今后在html模板上进行修改也很清晰，找个机会试试吧。</p>
+
+</div>
+</div>
+
+<div class="article">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="_posts/2015-10-24-js-template.md" data-title="js模板引擎" data-url="/2015/10/24/js-template.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"cobish"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+        <div class="article-bottom"></div>
+    </div>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+    prettyPrint();
+    </script>
+</body>
+</html>
