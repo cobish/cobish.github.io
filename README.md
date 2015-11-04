@@ -1,2 +1,2 @@
 # cobish.github.io
-my blog
+cobish's blog
