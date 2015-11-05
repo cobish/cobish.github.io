@@ -121,6 +121,37 @@ a:hover {
     text-decoration: none;
 }
 
+.article {
+    max-width: 650px;
+    margin: auto;
+    padding: 0 15px 20px 15px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #000;
+}
+
+.article a {
+    font-size: 14px;
+}
+
+.article img {
+    max-width: 100%;
+}
+
+.article pre {
+    margin: 10px 0;
+}
+
+.article-title {
+    color: #ff001f;
+    font-size: 18px;
+}
+
+.article-time {
+    color: #9b9b9b;
+    margin: 5px 0 20px 0;
+}
+
 @media screen and (min-width: 568px) {
     #logo {
         margin: 25px 50px;
