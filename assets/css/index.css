@@ -49,12 +49,12 @@ legend {
 
 /* ---------------------------------------------- my blog ---------------------------------------------- */
 body {
-    font: 13px Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-size: 14px;
 }
 
 a {
     color: #44a340;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: underline;
 }
 
