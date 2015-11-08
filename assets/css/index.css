@@ -155,8 +155,8 @@ a:hover {
 
 #showDs {
     display: block;
-    margin: 0 auto;
-    margin-bottom: 40px;
+    margin: 10px auto 30px auto;
+    width: 95%;
     max-width: 650px;
     height: 30px;
     line-height: 30px;
@@ -175,6 +175,7 @@ a:hover {
 
 #ds {
     display: none;
+    overflow: hidden;
 }
 
 @media screen and (min-width: 568px) {
