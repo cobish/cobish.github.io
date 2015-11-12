@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>Grunt插件的使用</title>
+    <title>grunt使用总结</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
@@ -14,329 +14,138 @@
     <a href="/">cobish.github.io</a>
 </div>
     <div class="article">
-    <h3 class="article-title">Grunt插件的使用</h3>
+    <h3 class="article-title">grunt使用总结</h3>
     <p class="article-time">June 28, 2015</p>
-    <div class="article-desc article-content"><h2 id="gruntgrunt">了解Grunt工具与搭建Grunt环境</h2>
-<ul>
-  <li><a href="http://www.gruntjs.net/" target="_blank">Grunt官网</a></li>
-  <li><a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html" target="_blank">如何搭建Grunt环境</a></li>
-</ul>
+    <div class="article-desc article-content"><p>在使用grunt之前，项目静态文件几乎没进行压缩合并便直接放到线上，部分文件手动复制粘贴到某压缩网站进行压缩。没压缩合并的文件显然耗资源，手动压缩的文件后期不易维护，每修改一次便要重复复制粘贴，很不方便。grunt的加入帮忙解决了以上问题，让开发人员更加专注于开发。这里有一篇<a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html" target="_blank">文章</a>很好地教会我们如何搭建grunt环境，而我这有部分插件的<a href="https://github.com/cobish/grunt-demo" target="_blank">demo</a>可供参考学习。</p>
 
-<h2 id="grunt">Grunt常用插件的使用</h2>
+<p><br /></p>
 
-<h3 id="section">使用之前，对插件进行安装</h3>
+<p><a href="http://www.gruntjs.net/" target="_blank">官网</a>的入门文档写得很详细，建议阅读并动手一遍。 网上有人会纠结该用grunt还是glup。个人认为，其实无论是grunt还是glup都是构建工具，基本的功能都差不多，与其浪费时间纠结该使用哪个，还不如先开始选择一个使用，等过段时间熟悉后再考虑是否接触另一个，最后再比较出哪个更适合自己岂不更好。</p>
 
-<p>package.json文件里写好需要使用到的插件名称与版本，代码如下：</p>
+<p><br /></p>
+
+<p>我开始使用grunt的时候只是用来对css，js文件进行合并压缩，使用到的插件分别如下：</p>
 
 <pre class="prettyprint linenums">
-{
-    "name": "grunt-demo",
-    "version": "1.0.0",
-    "devDependencies": {
-        "grunt": "^0.4.5"
-    }
+"devDependencies": {
+  "grunt": "^0.4.5",
+  "grunt-contrib-clean": "^0.6.0",
+  "grunt-contrib-concat": "^0.5.1",
+  "grunt-contrib-cssmin": "^0.14.0",
+  "grunt-contrib-uglify": "^0.10.0",
+  "grunt-contrib-watch": "^0.6.1"
 }
 </pre>
 
-<p>在命令行里输入以下命令进行安装，安装完毕将会产生一个名为<code>node_modules</code>的文件夹</p>
+<p>我先通过watch监控静态文件，一旦文件有改动并保存，便用concat把css或js目录下的文件进行了合并，再用cssmin或uglify把刚刚合并的文件压缩，最后用clean把合并但未压缩的文件删除掉。部分代码（以js为例）如下：</p>
 
 <pre class="prettyprint linenums">
-$ npm install
-</pre>
-
-<p><br /></p>
-
-<h3 id="section-1">图片压缩</h3>
-
-<p>图片压缩使用到的是<code>grunt-contrib-imagemin</code>，安装</p>
-
-<pre class="prettyprint linenums">
-npm install grunt-contrib-imagemin --save-dev
-</pre>
-
-<p>根据以下配置好路径：</p>
-
-<pre class="prettyprint linenums">
-module.exports = function(grunt) {
-
-    // 任务配置
-    grunt.initConfig({
-
-        /**
-         * 压缩图片大小
-         */
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/images',
-                    src: ['**/*.{png,gif,jpg,jpeg}'],
-                    dest: 'dest/images'
-                }]
-            }
-        }
-    });
-
-    // 载入任务
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-
-    // 注册任务
-    grunt.registerTask('img', ['imagemin']);
-};
-</pre>
-
-<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的图片，压缩后的图片保存在<code>dest</code>文件夹下</p>
-
-<pre class="prettyprint linenums">
-$ grunt img
-</pre>
-
-<p><br /></p>
-
-<h3 id="css">css属性排序</h3>
-
-<p>属性排序使用到的是<code>grunt-csscomb</code>，安装</p>
-
-<pre class="prettyprint linenums">
-npm install grunt-csscomb --save-dev
-</pre>
-
-<p>配置：</p>
-
-<pre class="prettyprint linenums">
-/**
- * css属性排序
- */
-csscomb: {
-    bar: {
-        files: {
-            'dest/index.resorted.css': ['src/index.css']
-        }
-    }
-}
-</pre>
-
-<p><br /></p>
-
-<h3 id="css-1">css自动添加浏览器厂商前缀</h3>
-
-<p>为了避免书写太多重复的css代码，使用到的是<code>grunt-autoprefixer</code>，安装</p>
-
-<pre class="prettyprint linenums">
-npm install grunt-autoprefixer --save-dev
-</pre>
-
-<p>配置：</p>
-
-<pre class="prettyprint linenums">
-/**
- * 自动添加浏览器厂商前缀
- */
-autoprefixer: {
-    dist: {
-        files: {
-            'dest/index.prefixer.css': ['src/index.css']
-        }
-    }
-}
-</pre>
-
-<p><br /></p>
-
-<h3 id="js">js代码检测</h3>
-
-<p>代码检测用到的是<code>grunt-contrib-jshint</code>，安装</p>
-
-<pre class="prettyprint linenums">
-npm install grunt-contrib-jshint --save-dev
-</pre>
-
-<p>配置：</p>
-
-<pre class="prettyprint linenums">
-/**
- * js代码检测
- */
-jshint: {
-    options: {
-        // 大括号包裹
-        curly: true,
-
-        // 对于首字母大写的函数（声明的类），强制使用new
-        newcap: true,
-
-        // 对于简单类型，使用===和!==，而不是==和!=
-        eqeqeq: true,
-
-        // 禁用arguments.caller和arguments.callee
-        noarg: true,
-
-        // 对于属性使用aaa.bbb而不是aaa['bbb']
-        sub: true,
-
-        // 查找所有未定义的变量
-        undef: true,
-        
-        // 查找类似于if(a = 0)的代码
-        boss: true
-    },
+// 文件合并
+concat: {
+  js: {
     files: {
-        src: ['Gruntfile.js', 'src/*.js']
+      'dest/js/index.js': ['src/js/index/*.js']
     }
+  }
+},
+
+// 压缩js代码
+uglify: {
+  build: {
+    expand: true,
+    cwd: 'dest/js',
+    src: ['**/*.js', '!*.min.js'],
+    dest: 'dest/js',
+    ext: '.min.js'
+  }
+},
+
+// 删除多余的文件
+clean: {
+  js: ['dest/js/*js', '!dest/js/*.min.js']
+},
+
+// 文件监控
+watch: {
+  js: {
+    files: 'src/js/**/*.js',
+    tasks: ['concat:js', 'uglify', 'clean:js']
+  }
+}
+</pre>
+
+<p>后来发现cssmin和uglify其实已包含了合并的功能，于是乎把concat和clean给移除掉，因为它们功能重复了。代码如下：</p>
+
+<pre class="prettyprint linenums">
+// 合并压缩js代码
+uglify: {
+  build: {
+    files: {
+      'dest/js/index.min.js': ['src/js/index/*.js']
+    }
+  }
 }
 </pre>
 
 <p><br /></p>
 
-<h3 id="css-2">css代码合并与压缩</h3>
+<p>是的，用了cssmin和uglify后在浏览器的调试工具下便无法定位到源代码处，这是有办法解决的。办法就是使用source map，chrome和firefox的调试工具都支持，具体详情请移步<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html" target="_blank">阮一峰博客</a>。</p>
 
-<p>css代码合并与压缩用到的是<code>grunt-contrib-cssmin</code></p>
+<p><br /></p>
 
-<pre class="prettyprint linenums">
-// 任务配置
-grunt.initConfig({
-    pkg : grunt.file.readJSON('package.json'),
-
-    /**
-     * 合并压缩css代码
-     */
-    cssmin: {
-        options: {
-            banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */',
-            beautify: {
-                ascii_only: true
-            },
-
-            //设置兼容模式 
-            compatibility : 'ie8', 
-
-            //取消高级特性 
-            noAdvanced : true,
-
-            // source map
-            sourceMap: true
-        },
-        build: {
-            files: {
-                'dest/index.min.css': ['src/index1.css', 'src/index2.css']
-            }
-        }
-    }
-});
-</pre>
-
-<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的css代码，压缩后的css代码保存在<code>dest</code>文件夹下，并生成map文件方便调试</p>
+<p>使用了cssmin和uglify之初项目还不算大的时候，你也许已经发现了一个现象。那就是我们每次一修改保存文件的时候，watch插件便会立马调用cssmin和uglify。而它们在配置里是对所有的css和js文件进行操作，虽然只对其中一个文件修改，但是目录下的所有文件都会大动干戈地进行合并压缩。配置高的电脑还行，配置低的电脑就悲剧了，至少我试过每次一保存文件都要等待个两三秒钟后合并压缩完成才能去刷新浏览器。一旦静态文件多起来，那这等待的时候只会增多不会减少。后来我找到了<a href="https://www.npmjs.com/package/grunt-newer" target="_blank">grunt-newer</a>这个插件来缓解燃眉之急。newer只会对改动的文件进行操作，这样至少不会每次保存都对全部文件进行操作。它的使用方法很简单：</p>
 
 <pre class="prettyprint linenums">
-$ grunt cssmin
+// 监控
+watch: {
+  js: {
+    files: 'src/js/**/*.js',
+    tasks: [‘newer:uglify']
+  }
+}
 </pre>
 
 <p><br /></p>
 
-<h3 id="js-1">js代码合并与压缩</h3>
-
-<p>js代码合并与压缩用到的是<code>grunt-contrib-uglify</code></p>
+<p>以上便是我目前用于项目的阶段，而此时我做进行开发的项目中主要用了类似于thinkPHP的框架，于是添加css或js外部文件是在php代码里添加，如下：</p>
 
 <pre class="prettyprint linenums">
-// 任务配置
-grunt.initConfig({
-    pkg : grunt.file.readJSON('package.json'),
-
-    /**
-     * 合并压缩js代码
-     */
-    uglify: {
-        options: {
-            banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */',
-            sourceMapRoot: '../src/',
-            sourceMap: function(path) { 
-                return path.replace('.js',".map")
-            }
-        },
-        build: {
-            files: {
-                'dest/index.min.js': ['src/index1.js', 'src/index2.js']
-            }
-        }
-    }
-});
+&lt;?php
+  $this-&gt;addMoreCss('dest/index.min.css');
+  $this-&gt;addMoreJs('dest/index.min.js');
+?&gt;
 </pre>
 
-<p>输入以下命令即可压缩存放在<code>src</code>文件夹下的js代码，压缩后的js代码保存在<code>dest</code>文件夹下，并生成map文件方便调试</p>
+<p>这样虽然开发使用到的文件跟上线的文件一致，但也有一些弊端，比如每次改动保存静态文件便会去执行合并压缩代码，我们每天都在时时刻刻地用ctrl+s，这是没有必要的。我们应该只在准备发版上线的时候才去合并压缩。但这时如果在开发时使用原始文件则会是这样：</p>
 
 <pre class="prettyprint linenums">
-$ grunt uglify
+&lt;?php
+  $this-&gt;addMoreCss('src/index/test1.css');
+  $this-&gt;addMoreCss('src/index/test2.css');
+  $this-&gt;addMoreCss('src/index/test3.css');
+  $this-&gt;addMoreJs('src/index/test1.js');
+  $this-&gt;addMoreJs('src/index/test2.js');
+?&gt;
 </pre>
+
+<p>上面一段代码在上线时是需要注释掉的，那在修复时又要重新打开这份代码，注释掉上面上线使用的代码。如果涉及到多个页面的修改，那得手动打开很多份类似这样的代码，而在修复完成后又得重新重复地进行注释和打开上线代码。万一有哪一段代码没看见忘了就不好了。</p>
 
 <p><br /></p>
 
-<h3 id="section-2">代码监控</h3>
-
-<p>代码监控的主要作用是只要监控到你的css或js代码一旦保存改动，便会做出一系列操作。比如可以使用它来进行合并压缩代码。使用到的插件是<code>grunt-contrib-watch</code>，其中还使用了<code>grunt-newer</code>（作用是只对修改了的文件做操作）</p>
+<p>所以接下来我打算在grunt中使用<a href="https://www.npmjs.com/package/grunt-contrib-sass" target="_blank">grunt-contrib-sass</a>和<a href="https://www.npmjs.com/package/grunt-contrib-requirejs" target="_blank">grunt-contrib-requirejs</a>，这样在php函数都只需要引入一个入口文件，然后sass通过import，requirejs通过require便可去加载它们需要的文件。具体结果得等我实践后才知道，但我相信如果ok的话我便可以移除cssmin和uglify两个插件，因为sass和requirejs也有合并压缩的功能。</p>
 
 <pre class="prettyprint linenums">
-module.exports = function(grunt) {
+&lt;?php
+  // 开发
+  $this-&gt;addMoreCss('src/main.css');
+  $this-&gt;addMoreJs('src/main.js');
 
-    // 任务配置
-    grunt.initConfig({
-        // ...
-
-        /**
-         * 监控
-         */
-        watch: {
-            css: {
-                files: 'src/css/**/*.css',
-                tasks: ['newer:cssmin']
-            },
-            js: {
-                files: 'src/js/**/*.js',
-                tasks: ['newer:uglify']
-            }
-        },
-    });
-
-    // 载入任务
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-newer');
-
-    // 注册任务
-    grunt.registerTask('default', ['watch']);
-};
+  // 上线
+  $this-&gt;addMoreCss('dest/main.css');
+  $this-&gt;addMoreJs('dest/main.js');
+?&gt;
 </pre>
 
-<p>由于它比较常用，于是把它设置成<code>default</code>，只要输入以下命令，并保持命令行不关闭，它便会一直监听</p>
-
-<pre class="prettyprint linenums">
-$ grunt
-</pre>
-
-<p><br /></p>
-
-<h3 id="section-3">载入任务简化</h3>
-
-<p>当你的插件较多的时候，loadNpmTasks就会很占地方，这时<code>load-grunt-tasks</code>便起作用了，它会自动地加载你已经安装的插件，而不需要你去手动添加。<code>time-grunt</code>则可以计算出插件运行的时间</p>
-
-<pre class="prettyprint linenums">
-// 载入任务
-// grunt.loadNpmTasks('grunt-contrib-concat');
-// grunt.loadNpmTasks('grunt-contrib-cssmin');
-// grunt.loadNpmTasks('grunt-contrib-uglify');
-// grunt.loadNpmTasks('grunt-contrib-clean');
-// grunt.loadNpmTasks('grunt-contrib-watch');
-
-require('time-grunt')(grunt);
-require('load-grunt-tasks')(grunt);
-</pre>
-
-<p><br /></p>
-
-<h2 id="demo">demo下载</h2>
-<ul>
-  <li><a href="https://github.com/cobish/grunt-demo" target="_blank">简单的Grunt例子</a></li>
-</ul>
 </div>
 </div>
 
@@ -346,7 +155,7 @@ require('load-grunt-tasks')(grunt);
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
-    <div class="ds-thread" data-thread-key="_posts/2015-06-28-grunt-use.md" data-title="Grunt插件的使用" data-url="/%E5%89%8D%E7%AB%AF/2015/06/28/grunt-use.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2015-06-28-grunt-use.md" data-title="grunt使用总结" data-url="/%E5%89%8D%E7%AB%AF/2015/06/28/grunt-use.html"></div>
 </div>
 
 <script type="text/javascript">
