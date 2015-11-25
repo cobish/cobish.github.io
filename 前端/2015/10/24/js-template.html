@@ -16,113 +16,34 @@
     <div class="article">
     <h3 class="article-title">js模板引擎</h3>
     <p class="article-time">October 24, 2015</p>
-    <div class="article-desc article-content"><h2 id="section">过去</h2>
-
-<p>当获取到一个类似以下的对象，并需显示在html页面上，你会怎么处理？</p>
+    <div class="article-desc article-content"><p>在接触到js模板引擎之前，我都是使用字符串拼接的方式来操作html的标签。例如通过Ajax获取到以下一个对象，把它拼接起来显示到网页上。用久了这一种方式便会发现它的缺点。代码看起来不美观，js代码里包含着大量的html代码；代码不易维护，html标签没有合适的缩进。如果再if等判断语句只会让拼接代码更加的复杂。</p>
 
 <pre class="prettyprint linenums">
 var data = {
     title: '四大名著',
     list: ['西游记', '三国演义', '水浒传', '红楼梦']
 };
-</pre>
-
-<p>很简单地想到把html标签拼装，然后添加到一个标签里：</p>
-
-<pre class="prettyprint linenums">
-var html = '';
 
 // 拼装html代码块
+var html = '';
 html += '&lt;h1&gt;' + data.title + '&lt;/h1&gt;';
 html += '&lt;ul&gt;';
+
 for ( var i = 0; i &lt; data.list.length; i++ ) {
     html += '&lt;li&gt;索引 ' + ( i + 1 ) + ' : ' + data.list[i] + '&lt;/li&gt;';
 }
-html += '&lt;/ul&gt;';
 
+html += '&lt;/ul&gt;';
 document.getElementById('content').innerHTML = html;
 </pre>
 
-<p>但是这样有以下的缺点：</p>
+<p><br /></p>
 
-<ul>
-  <li>代码看起来不太美观，js代码里有html标签代码；</li>
-  <li>代码不易维护，html标签没有合适的缩进。</li>
-</ul>
+<p>后来从<a href="http://www.zhangxinxu.com/wordpress/2012/09/javascript-html-json-template/" target="_blank">张鑫旭博客</a>中学习到另一种处理方法，即将html代码放在一个隐藏的标签里，然后通过js获取到并正则匹配进行替换，最后把替换后的代码块显示在网页上。js模板引擎大致都是类似原理。</p>
 
 <p><br /></p>
 
-<h2 id="section-1">替换</h2>
-
-<p>我们用另一个对象来举例子，因为接下来的代码不能处理上面的对象，从而需要引出js模板引擎：</p>
-
-<pre class="prettyprint linenums">
-var json = {
-    data: [{
-        name: 'Jack',
-        age: 22
-    }, {
-        name: 'Tom',
-        age: 25
-    }, {
-        name: 'Jerry',
-        age: 23
-    }]
-};
-</pre>
-
-<p>模板：</p>
-
-<pre class="prettyprint linenums">
-&lt;textarea id="temp" style="display:none;"&gt;
-    &lt;li&gt;$name$ - $age$&lt;/li&gt;
-&lt;/textarea&gt;
-</pre>
-
-<p>方法是通过一个正则匹配的方法把需要替换的变量替换掉：</p>
-
-<pre class="prettyprint linenums">
-String.prototype.temp = function(obj) {
-    return this.replace(/\$\w+\$/gi, function(matchs) {
-        var returns = obj[matchs.replace(/\$/g, "")];       
-        return (returns + "") == "undefined"? "": returns;
-    });
-};
-</pre>
-
-<p>然后可以根据具体JSON格式得到需要的HTML片段：</p>
-
-<pre class="prettyprint linenums">
-var htmlList = '',
-    htmlTemp = document.getElementById('temp').value;
-
-for ( var i = 0; i &lt; json.data.length; i++ ) {
-    htmlList += htmlTemp.temp(json.data[i]);
-}
-
-document.getElementById('content').innerHTML = htmlList;
-</pre>
-
-<p>以上方法无法处理if判断与循环等操作，还需再进一步正则匹配等，详情请移步<a href="http://www.zhangxinxu.com/wordpress/2012/09/javascript-html-json-template/" target="_blank">张鑫旭博客</a>。</p>
-
-<p><br /></p>
-
-<h2 id="js---arttemplate">JS模板引擎 - artTemplate</h2>
-
-<p>当然也有现成的模板引擎帮我们解决以上的种种问题，接下来抛砖引玉以下，详情移步<a href="https://github.com/aui/artTemplate" target="_blank">artTemplate源码</a>。</p>
-
-<p><br /></p>
-
-<p>还是原来的对象例子：</p>
-
-<pre class="prettyprint linenums">
-var data = {
-    title: '四大名著',
-    list: ['西游记', '三国演义', '水浒传', '红楼梦']
-};
-</pre>
-
-<p>它也需要html模板：</p>
+<p>当然也有现成的模板引擎帮我们解决以上的种种问题，例如<a href="https://github.com/aui/artTemplate" target="_blank">artTemplate</a>。或者是<a href="http://handlebarsjs.com/" target="_blank">Handlebars.js</a>，这里有一份Handlebars.js的<a href="http://segmentfault.com/a/1190000000342636?from=androidqq" target="_blank">中文文档</a>和一份<a href="http://www.cnblogs.com/iyangyuan/archive/2013/12/12/3471227.html" target="_blank">使用教程</a>。以下是artTemplate的一个例子：</p>
 
 <pre class="prettyprint linenums">
 &lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;
@@ -131,20 +52,18 @@ var data = {
         &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;
     &#123;&#123;/each&#125;&#125;
 &lt;/ul&gt;
-</pre>
 
-<p>最后引入template模板文件，并用js进行处理后显示：</p>
-
-<pre class="prettyprint linenums">
 &lt;script type="text/javascript" src="template.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
+    var data = {
+        title: '四大名著',
+        list: ['西游记', '三国演义', '水浒传', '红楼梦']
+    };
+
     var html = template('test', data);
     document.getElementById('content').innerHTML = html;
 &lt;/script&gt;
 </pre>
-
-<p>使用了模板引擎之后代码简洁不少，而且今后在html模板上进行修改也很清晰，找个机会试试吧。</p>
-
 </div>
 </div>
 
