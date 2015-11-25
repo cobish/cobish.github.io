@@ -46,12 +46,14 @@ document.getElementById('content').innerHTML = html;
 <p>当然也有现成的模板引擎帮我们解决以上的种种问题，例如<a href="https://github.com/aui/artTemplate" target="_blank">artTemplate</a>。或者是<a href="http://handlebarsjs.com/" target="_blank">Handlebars.js</a>，这里有一份Handlebars.js的<a href="http://segmentfault.com/a/1190000000342636?from=androidqq" target="_blank">中文文档</a>和一份<a href="http://www.cnblogs.com/iyangyuan/archive/2013/12/12/3471227.html" target="_blank">使用教程</a>。以下是artTemplate的一个例子：</p>
 
 <pre class="prettyprint linenums">
-&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;
-&lt;ul&gt;
-    &#123;&#123;each list as value i&#125;&#125;
-        &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;
-    &#123;&#123;/each&#125;&#125;
-&lt;/ul&gt;
+&lt;script id="test" type="text/html"&gt;
+    &lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;
+    &lt;ul&gt;
+        &#123;&#123;each list as value i&#125;&#125;
+            &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;
+        &#123;&#123;/each&#125;&#125;
+    &lt;/ul&gt;
+&lt;/script&gt;
 
 &lt;script type="text/javascript" src="template.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
