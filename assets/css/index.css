@@ -55,7 +55,6 @@ body {
 a {
     color: #44a340;
     font-size: 13px;
-    text-decoration: underline;
 }
 
 a:hover {
@@ -76,16 +75,16 @@ a:hover {
     position: absolute;
     left: 50%;
     top: 50%;
-    margin: -65px 0 0 -150px;
+    margin: -123px 0 0 -150px;
     width: 300px;
     height: 130px;
     text-align: center;
 }
 
 #home h1 {
+    margin: 20px 0;
     color: #555;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 16px;
 }
 
 #home a {
@@ -197,6 +196,9 @@ a:hover {
 }
 
 @media screen and (max-width: 568px) {
+    #home {
+        margin-top: -100px;
+    }
     #logo {
         margin: 25px 22px;
     }
