@@ -77,7 +77,25 @@ jshint: {
 
 <p><br /></p>
 
-<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。</p>
+<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙的博客里讲的<a href="https://github.com/fouber/blog/issues/6" target="_blank">前端部署</a>，于是便有了非覆盖式发布和静态文件hash，主要用到了<a href="https://www.npmjs.com/package/grunt-filerev" target="_blank">grunt-filerev</a>和<a href="https://www.npmjs.com/package/grunt-usemin" target="_blank">grunt-usemin</a>这个两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
+
+<p><br /></p>
+
+<p>打包分四个步骤。按顺序分别是图片的打包、css文件的打包、js文件的打包、html文件的打包。使用到的插件如下：</p>
+
+<pre class="prettyprint linenums">
+"devDependencies": {
+  "grunt": "^0.4.5",
+  "grunt-contrib-htmlmin": "^0.6.0",
+  "grunt-contrib-imagemin": "^1.0.0",
+  "grunt-contrib-requirejs": "^0.4.4",
+  "grunt-contrib-sass": "^0.9.2",
+  "grunt-filerev": "^2.3.1",
+  "grunt-include-replace": "^3.2.0",
+  "grunt-replace": "^0.11.0",
+  "grunt-usemin": "^3.1.1"
+}
+</pre>
 
 </div>
 </div>
