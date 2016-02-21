@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>按钮数量不定居中显示</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">按钮数量不定居中显示</h3>
+    <p class="article-time">February 21, 2016</p>
+    <div class="article-desc article-content"><style type="text/css">
+.box {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 0;
+}
+
+.box a {
+  display: inline-block;
+  width: 98px;
+  height: 30px;
+  color: #0075eb;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #0075eb;
+  border-radius: 2px;
+  background: #fff;
+  text-decoration: none;
+}
+
+.box-2 {
+  width: 320px;
+}
+
+.box .ml-10 {
+  margin-left: 10px;
+}
+
+.box-3 {
+  margin-left: -10px;
+  text-align: center;
+  font-size: 0;
+}
+
+.box-3 a {
+  display: inline-block;
+  margin-left: 10px;
+  width: 98px;
+  height: 30px;
+  color: #0075eb;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #0075eb;
+  border-radius: 2px;
+  background: #fff;
+  text-decoration: none;
+}
+</style>
+
+<p>如果让你写一段代码，来实现三个按钮居中显示，你是否会这样实现：</p>
+
+<pre class="prettyprint linenums">
+&lt;div class="box"&gt;
+  &lt;a href="#"&gt;增加&lt;/a&gt;
+  &lt;a href="#"&gt;删除&lt;/a&gt;
+  &lt;a href="#"&gt;修改&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+<p>按钮的样式为：</p>
+
+<pre class="prettyprint linenums">
+.box {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 0;
+}
+
+.box a {
+  display: inline-block;
+  width: 98px;
+  height: 30px;
+  color: #0075eb;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #0075eb;
+  border-radius: 2px;
+  background: #fff;
+  text-decoration: none;
+}
+</pre>
+
+<p>效果如下：</p>
+
+<div class="box">
+  <a href="#">增加</a>
+  <a href="#">删除</a>
+  <a href="#">修改</a>
+</div>
+
+<p><br /></p>
+
+<p>当然如果按钮之间还需要10像素的间距，可以这么做：</p>
+
+<pre class="prettyprint linenums">
+&lt;div class="box box-2"&gt;
+  &lt;a href="#"&gt;增加&lt;/a&gt;
+  &lt;a class="ml-10" href="#"&gt;删除&lt;/a&gt;
+  &lt;a class="ml-10" href="#"&gt;修改&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+<p>按钮样式：</p>
+<pre class="prettyprint linenums">
+.box-2 {
+  width: 320px;
+}
+
+.box .ml-10 {
+  margin-left: 10px;
+}
+</pre>
+
+<p>效果如下：</p>
+
+<div class="box box-2">
+  <a href="#">增加</a>
+  <a class="ml-10" href="#">删除</a>
+  <a class="ml-10" href="#">修改</a>
+</div>
+
+<p><br /></p>
+
+<p>好了，我们已经觉得代码完美无缺了，那我就来幸灾乐祸地提出几个问题吧。</p>
+
+<ul>
+  <li>1、如果我想把按钮都改成100像素的宽，保持居中，怎么做？</li>
+  <li>2、如果我想增加或减少一个按钮，保持居中，怎么做？</li>
+  <li>3、如果我想增加或减少多个按钮，保持居中，怎么做？</li>
+</ul>
+
+<p><br /></p>
+
+<p>不问了，很明显，上面的方案不是一个很好的方案。如果要改动一下按钮的样式，特别是宽，那父元素的样式也要跟着改。那么我们就来看看下面这种方案吧，对比一下看看下面的方案有什么优势：</p>
+
+<p><br /></p>
+
+<p>首先，html的格局不变，而按钮的样式稍作修改，给所有的按钮都设置一个左间距。</p>
+
+<pre class="prettyprint linenums">
+.box a {
+  // ...
+
+  margin-left: 10px;
+}
+</pre>
+
+<p>然后是父元素的样式，这里父元素不需要宽度和居中对齐，并且给父元素设置一个负的左间距，用来抵消第一个按钮的左间距，然后设置一个文本居中。</p>
+<pre class="prettyprint linenums">
+.box {
+  margin-left: -10px;
+  text-align: center;
+  font-size: 0;
+}
+</pre>
+
+<p>来看下效果吧：</p>
+<div class="box-3">
+  <a href="#">增加</a>
+  <a href="#">删除</a>
+</div>
+
+<p><br /></p>
+
+<div class="box-3">
+  <a href="#">增加</a>
+  <a href="#">删除</a>
+  <a href="#">修改</a>
+</div>
+
+<p><br /></p>
+
+<p>给父元素设置了一个文本居中就可以让inline-block的元素居中了，有点神奇！这种方案相比于上一个方案有几个优势：</p>
+
+<ul>
+  <li>1、按钮的宽度可以随意修改；</li>
+  <li>2、按钮的数量可以随意增加或减少；</li>
+  <li>3、低版本浏览器也可以兼容。</li>
+</ul>
+
+<p><br /></p>
+
+<p>彩蛋！</p>
+
+<p>你是否还在纠结为什么inline-block的元素之间会有间隙，而且去不掉吗！上面已经有了答案，快给父元素设置一个0的字体吧！更多解决方案请看<a href="http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/" target="_blank">张鑫旭博客</a>。</p>
+
+</div>
+</div>
+
+<a id="showDs">
+    显示评论
+</a>
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-02-21-btn-center.md" data-title="按钮数量不定居中显示" data-url="/%E5%89%8D%E7%AB%AF/2016/02/21/btn-center.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    var showDs = document.getElementById('showDs'),
+        ds = document.getElementById('ds');
+
+    showDs.onclick = function() {
+        showDs.style.display = 'none';
+        ds.style.display = 'block';
+    };
+</script>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript">
+        prettyPrint();
+    </script>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
