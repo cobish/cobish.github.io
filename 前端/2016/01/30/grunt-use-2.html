@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>grunt使用总结(二)</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">grunt使用总结(二)</h3>
+    <p class="article-time">January 30, 2016</p>
+    <div class="article-desc article-content"><p>在上一篇grunt使用总结的基础上，这一篇继续对grunt进行探索研究。这一次不再使用php进行include静态文件，而是在html里面引入。然后主要将grunt用于两个大的方向，一个是用于开发期间，一个用于上线前期打包。使用到的插件可能有些更换。具体目录如下，src目录用于开发与维护，dist目录是打包后的项目，用于上线：</p>
+<pre class="prettyprint linenums">
+├─ dist/
+    ├─ css/
+    ├─ images/
+    ├─ js/
+    └─ view/
+└─ src/
+    ├─ css/
+    ├─ images/
+    ├─ js/
+    ├─ sass/
+    └─ view/
+</pre>
+
+<p><br /></p>
+
+<p>在开发期间，使用到的grunt插件如下，watch插件用了监听文件，一旦文件被修改，可以让它触发浏览器自动刷新：</p>
+
+<pre class="prettyprint linenums">
+"devDependencies": {
+  "grunt": "^0.4.5",
+  "grunt-contrib-jshint": "^0.12.0",
+  "grunt-contrib-sass": "^0.9.2",
+  "grunt-contrib-watch": "^0.6.1"
+}
+</pre>
+
+<p>图片不需要压缩，css使用sass编译，js使用了requirejs，并使用jshint进行检错。其中sass编译好后会在同一目录下生成对应的css目录与文件。jshint的具体配置参考<a href="https://github.com/cobish/grunt-demo/blob/master/grunt-contrib-jshint-demo/Gruntfile.js" target="_blank">例子</a>。</p>
+
+<pre class="prettyprint linenums">
+sass: {
+  dev: {
+    options: {
+      style: 'expanded'
+    },
+    files: [{
+      expand: true,
+      cwd: 'src/sass/',
+      src: ['**/*.scss'],
+      dest: 'src/css/',
+      ext: '.css'
+    }]
+  }
+},
+
+jshint: {
+  options: {
+    curly: true,
+    newcap: true,
+    eqeqeq: true
+    // ...
+  },
+  files: {
+    src: ['Gruntfile.js', 'src/**/*.js']
+  }
+}
+</pre>
+
+<p><br /></p>
+
+<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙的博客里讲的<a href="https://github.com/fouber/blog/issues/6" target="_blank">前端部署</a>，于是便有了非覆盖式发布和静态文件hash，主要用到了<a href="https://www.npmjs.com/package/grunt-filerev" target="_blank">grunt-filerev</a>和<a href="https://www.npmjs.com/package/grunt-usemin" target="_blank">grunt-usemin</a>这两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
+
+<p><br /></p>
+
+<p>打包分四个步骤。按顺序分别是图片的打包、css文件的打包、js文件的打包、html文件的打包。使用到的插件如下：</p>
+
+<pre class="prettyprint linenums">
+"devDependencies": {
+  "grunt": "^0.4.5",
+  "grunt-contrib-clean": "^0.7.0",
+  "grunt-contrib-copy": "^0.8.2",
+  "grunt-contrib-cssmin": "^0.14.0",
+  "grunt-contrib-htmlmin": "^0.6.0",
+  "grunt-contrib-imagemin": "^1.0.0",
+  "grunt-contrib-jshint": "^0.12.0",
+  "grunt-contrib-requirejs": "^0.4.4",
+  "grunt-contrib-sass": "^0.9.2",
+  "grunt-contrib-watch": "^0.6.1",
+  "grunt-css-sprite": "^0.2.2",
+  "grunt-filerev": "^2.3.1",
+  "grunt-include-replace": "^3.2.0",
+  "grunt-newer": "^1.1.1",
+  "grunt-replace": "^0.11.0",
+  "grunt-usemin": "^3.1.1",
+  "load-grunt-tasks": "^3.3.0",
+  "time-grunt": "^1.2.1"
+}
+</pre>
+
+<p><br /></p>
+
+<p>首先得将dist目录给删除掉，因为是非覆盖式部署，所以删掉一些过期用不到的静态文件。第一个步骤是图片打包，将需要合并的图片合并了（并修改对应的css文件）放置于临时目录（tmp），不需要合并的图片则复制粘贴到临时目录（tmp）。然后对临时目录里的图片进行压缩，最后hash后放置于dist生产环境目录。</p>
+
+<pre class="prettyprint linenums">
+// 步骤一：对图片进行打包
+grunt.registerTask('img', [
+  'clean:dist',
+  'sprite',
+  'copy:images',
+  'imagemin',
+  'filerev:img'
+]);
+</pre>
+
+<p><br /></p>
+
+<p>第二个步骤是css文件的打包，先用sass将css压缩到临时目录(tmp)中，接着用usemin替换掉里面的已经hash的图片资源，最后将css文件进行hash后放置于dist生产环境目录。</p>
+
+<pre class="prettyprint linenums">
+// 步骤二：对css进行打包
+grunt.registerTask('css', [
+  'sass:dist',
+  'usemin:css',
+  'filerev:css'
+]);
+</pre>
+
+<p><br /></p>
+
+<p>第三个步骤是js文件的打包，用的是requirejs插件将js文件合并压缩到临时目录(tmp)，然后替换掉文件里的图片资源路径，最后hash到生产环境目录（dist），并把不需要hash的第三方库复制到dist生产环境目录。</p>
+
+<pre class="prettyprint linenums">
+// 步骤三：对js进行打包
+grunt.registerTask('js', [
+  'requirejs',
+  'usemin:js',
+  'filerev:js',
+  'copy:js'
+]);
+</pre>
+
+<p><br /></p>
+
+<p>第四个步骤则是html文件的打包，先用grunt-replace把里面的php include替换成特定的模式放置于临时目录(tmp)，然后再用grunt-include-replace把html依赖的html片段复制粘贴到一个html中，紧接着替换到html中的已hash的静态文件（包括css，js，image），最后将html压缩至dist目录下。</p>
+
+<pre class="prettyprint linenums">
+// 步骤四：对html进行打包
+grunt.registerTask('html', [
+  'replace:before',
+  'includereplace',
+  'usemin:html',
+  'replace:after',
+  'htmlmin',
+  'clean:tmp'
+]);
+</pre>
+
+<p><br /></p>
+
+<p>最后如果你想问我为什么上面的四个步骤不直接写成一个task呢，我也无能为力。我试过写成一个task，后果则是文件里的图片资源路径没能够替换成功，可能是在一个task内usemin插件无法执行多次，于是我就分类写成四个了。
+最后总结一下，以上的方式的好处就在于开发时期不需要去合并压缩文件，方便调试。而生产环境则是尽可能去合并压缩，减少用户的请求时间。</p>
+
+</div>
+</div>
+
+<a id="showDs">
+    显示评论
+</a>
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-01-30-grunt-use-2.md" data-title="grunt使用总结(二)" data-url="/%E5%89%8D%E7%AB%AF/2016/01/30/grunt-use-2.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    var showDs = document.getElementById('showDs'),
+        ds = document.getElementById('ds');
+
+    showDs.onclick = function() {
+        showDs.style.display = 'none';
+        ds.style.display = 'block';
+    };
+</script>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript">
+        prettyPrint();
+    </script>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
