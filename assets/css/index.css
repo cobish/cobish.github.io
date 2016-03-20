@@ -54,7 +54,7 @@ body {
 
 a {
     color: #44a340;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 a:hover {
@@ -96,6 +96,12 @@ a:hover {
     margin-left: 50px;
 }
 
+#category {
+    margin-left: 50px;
+    margin-bottom: 12px;
+    color: #666;
+}
+
 .avatar {
     margin: 0 auto;
     width: 120px;
@@ -128,16 +134,11 @@ a:hover {
 
 .list-post .date-long {
     display: inline-block;
-    width: 150px;
     margin-right: 50px;
-}
-
-.list-post .date-short {
-    display: none;
+    margin-left: 50px;
 }
 
 .list-post a {
-    font-size: 14px;
     text-decoration: none;
 }
 
@@ -145,7 +146,6 @@ a:hover {
     max-width: 650px;
     margin: auto;
     padding: 0 15px 20px 15px;
-    font-size: 14px;
     line-height: 26px;
     color: #555;
 }
@@ -169,6 +169,7 @@ a:hover {
 
 .article-time {
     color: #9b9b9b;
+    font-size: 14px;
     margin: 5px 0 20px 0;
 }
 
@@ -197,24 +198,6 @@ a:hover {
     overflow: hidden;
 }
 
-@media screen and (min-width: 568px) {
-    #logo {
-        margin: 25px 50px;
-    }
-    #list {
-        margin-left: 50px;
-    }
-    .list-post .date-long {
-        display: inline-block;
-        width: 150px;
-        margin-right: 50px;
-    }
-
-    .list-post .date-short {
-        display: none;
-    }
-}
-
 @media screen and (max-width: 568px) {
     #home {
         margin-top: -100px;
@@ -225,14 +208,11 @@ a:hover {
     #list {
        margin-left: 15px;
     }
-    .list-post .date-long {
-        display: none;
+    #category {
+        margin-left: 25px;
     }
-
-    .list-post .date-short {
-        display: inline-block;
-        width: 100px;
-        margin-right: 20px;
+    .list-post .date-long {
+        margin: 0 35px;
     }
 }
 
