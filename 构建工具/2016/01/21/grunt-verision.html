@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>grunt添加版本号</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">grunt添加版本号</h3>
+    <p class="article-time">2016-01-21</p>
+    <div class="article-desc article-content"><p>为了上线之后用户能使用到最新的静态资源，大部分人会使用添加时间戳来清掉缓存，类似于下面这样的代码。读过张云龙的<a href="https://github.com/fouber/blog/issues/6" target="_blank">《大公司里怎样开发和部署前端代码》</a>，意识这种方法有几个弊端。一则是每次修改一下时间戳全部的静态资源都会重新被下载一次，没有修改过的文件又重新下载一遍明显是一种浪费。二则是这种方法是一种覆盖式发布，无论先部署页面还是先部署静态资源，期间都可能有用户访问到页面，都有可能造成了页面显示错乱问题，所以需要一种非覆盖式的发布方法来避免这种情况。</p>
+
+<pre class="prettyprint linenums">
+&lt;!-- css --&gt;
+&lt;link rel="stylesheet" type="text/css" href="index.css?t=20160121" /&gt;
+
+&lt;!-- js --&gt;
+&lt;script type="text/javascript" src="index.js?t=20160121"&gt;&lt;/script&gt;
+</pre>
+
+<p><br /></p>
+
+<p>总结上诉理论，此刻我们需要一种非覆盖式发布的方法，而此时这种方法就是将静态资源的内容hash后修改其文件名，做到文件名不同从而起到类似于时间戳的作用。如以下静态资源hash后的文件名发生的变化：</p>
+
+<pre class="prettyprint linenums">
+css/index.css  -&gt;  css/index.aa59f6ab.css
+img/demo.png   -&gt;  img/demo.aa59f6ac.png
+</pre>
+
+<p><br /></p>
+
+<p>接下要怎么实现以上方法呢？要用的工具是Grunt，使用到的插件如下：</p>
+
+<pre class="prettyprint linenums">
+"devDependencies": {
+  "grunt": "^0.4.5",
+  "grunt-contrib-clean": "^1.0.0",
+  "grunt-contrib-copy": "^1.0.0",
+  "grunt-filerev": "^2.3.1",
+  "grunt-usemin": "^3.1.1"
+}
+</pre>
+
+<p>这里暂时不涉及到js文件，处理js文件跟处理css文件类似。使用了<a href="https://www.npmjs.com/package/grunt-filerev" target="_blank">grunt-filerev</a>便可以很轻松地生成hash后的静态文件。</p>
+
+<pre class="prettyprint linenums">
+// 静态文件hash
+filerev: {
+  img: {
+    src: 'src/img/**/*.png',
+    dest: 'dest/img/'
+  },
+  css: {
+    src: 'src/css/**/*.css',
+    dest: 'dest/css/'
+  }
+}
+</pre>
+
+<p>静态文件生成后便可以使用<a href="https://www.npmjs.com/package/grunt-usemin" target="_blank">grunt-usemin</a>对使用到这些静态文件的文件里进行文件名替换，改成hash后的静态文件名。</p>
+
+<pre class="prettyprint linenums">
+// 替换
+usemin: {
+  options: {
+    assetsDirs: [
+      'dest', 
+      'dest/img', 
+      'dest/css'
+    ]
+  },
+  css: 'dest/css/**/*.css',
+  html: 'dest/html/**/*.html'
+}
+</pre>
+
+<p><br /></p>
+
+<p>以下的步骤都会避免修改到源文件。具体步骤则是先将图片hash后放置于dest目录（发布目录）。然后将css代码都复制到一个tmp目录（临时目录），替换里面变更的图片名字，再将css文件hash后放置于dest目录。接着将html代码复制到dest目录，替换里面引用到的图片和css文件名。最后将tmp目录删除。具体代码实现如下：</p>
+
+<pre class="prettyprint linenums">
+// 步骤一：对图片进行处理
+grunt.registerTask('img', [
+  'filerev:img'
+]);
+
+// 步骤二：对css进行处理
+grunt.registerTask('css', [
+  'copy:css',
+  'usemin:css',
+  'filerev:css'
+]);
+
+// 步骤三：对html进行处理
+grunt.registerTask('html', [
+  'copy:html',
+  'usemin:html',
+  'clean:tmp'
+]);
+</pre>
+
+<p><br /></p>
+
+<p>未解决的问题：如上代码，我把它分成了三份分别按步骤运行，但是放在一个任务里却会遇到问题，比如css里的图片名称没有被替换等。如哪位朋友有解决办法，不妨传授我一下，感激！</p>
+
+</div>
+</div>
+
+<a id="showDs">
+    显示评论
+</a>
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-01-21-grunt-verision.md" data-title="grunt添加版本号" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/01/21/grunt-verision.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    var showDs = document.getElementById('showDs'),
+        ds = document.getElementById('ds');
+
+    showDs.onclick = function() {
+        showDs.style.display = 'none';
+        ds.style.display = 'block';
+    };
+</script>
+    <script type="text/javascript" src="/assets/js/prettify.js"></script>
+    <script type="text/javascript">
+        prettyPrint();
+    </script>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
