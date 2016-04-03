@@ -63,6 +63,24 @@ a:hover {
     text-decoration: none;
 }
 
+.highlight {
+    background: #f7f7f7;
+    font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.5;
+    margin: 7px 0;
+    padding: 0 15px;
+    overflow: auto;
+    border: 1px solid #e3edf3;
+    border-radius: 2px;
+}
+
+.highlight .lineno {
+    color: #ccc;
+    padding: 0 10px 0 0;
+}
+
 #logo {
     margin: 25px 50px;
 }
@@ -159,7 +177,7 @@ a:hover {
 }
 
 .article pre {
-    margin: 10px 0;
+    margin: 7px 0;
 }
 
 .article-title {

@@ -6,8 +6,8 @@
     <title>git与svn的比较</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
 </head>
 <body class="font-hei">
     <div id="logo">
@@ -18,22 +18,21 @@
     <p class="article-time">2016-03-27</p>
     <div class="article-desc article-content"><p>公司项目最近从svn更换到了git，不舍得那适应没多久的svn分支开发，但毕竟不排斥更好的工具。大家都说git比svn好用，虽然在我接触git与svn的时间内，我也下意识觉得git好用，但真正运用到实际开发项目的也就只有svn，git只是独自一人拿来过家家而已，总算是有机会尝试比较一下了。</p>
 
-<p><br /></p>
+<p><br></p>
 
 <p>svn图形操作有TortoiseSVN，而git图形操作有SourceTree，相比较来说，TortoiseSVN总是要右键去提交更新查看，log也只是显示了提交情况，而SourceTree有一个完整的界面，提交合并情况也显示得很清晰明了，特别是分支的操作情况。不仅如此，git还有简单强大的命令行，有大部分的人都会选择用git命令进行操作。相比之下，我想svn应该是没有几个人想去用svn的命令吧。印象里我接触过一次命令，然后接触了TortoiseSVN就再也没有使用过svn的命令了，因为图形操作更加便捷了。</p>
 
-<p><br /></p>
+<p><br></p>
 
 <p>git最强大之处在于它的分支管理，在本地你可以随意拉取分支，只要你喜欢，而且拉取的速度很快，它实际只是修改了一下指针。svn虽然也有分支管理，但它创建一条分支却是先在远程上创建，然后你才能checkout到本地，实际就是复制了一份一模一样的代码，项目大的话，checkout也得花点时间。实际上，git有几条分支在自己的电脑上都是保留着一个目录的代码，随着你切换分支，目录里的代码会相应进行改变。svn则是你有几条分支则本地电脑保存着几份项目的代码，偶尔可能找错代码。</p>
 
-<p><br /></p>
+<p><br></p>
 
 <p>在使用过TortoiseSVN之后切换到SourceTree不习惯的地方还是有的，TortoiseSVN在项目的目录里的每一个文件或文件夹都有提交或改动情况，已提交则显示一个绿色的勾勾，为提交显示红色的叉叉，还有冲突情况则显示橙色的感叹号。切换之后就再也看不到那些清晰明显的小图标了，一切都只能在SourceTree或命令行中查看，解决冲突时找起文件来也没有那么的方便。</p>
 
-<p><br /></p>
+<p><br></p>
 
 <p>总的来说，git还是比较适合多人之间的协作开发，因为它那强大的分支管理和简单的命令。而svn适合项目人少的开发，分支不需要创建太多。SourceTree虽然直观，但是git命令更加高效，结合两者一起使用也是一个不错的选择。这篇文章不是来说git有多好，svn有多不好的，单纯只是一个客观的比较。萝卜青菜各有所爱，选择适合自己项目的才是最好的。如今项目也慢慢地切换到了git，感谢svn对项目的支持，最后，向即将逝去的svn致敬。</p>
-
 </div>
 </div>
 
@@ -64,10 +63,6 @@
         ds.style.display = 'block';
     };
 </script>
-    <script type="text/javascript" src="/assets/js/prettify.js"></script>
-    <script type="text/javascript">
-        prettyPrint();
-    </script>
     <script>
 var _hmt = _hmt || [];
 (function() {

@@ -6,8 +6,8 @@
     <title>grunt的初次使用</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/prettify.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
 </head>
 <body class="font-hei">
     <div id="logo">
@@ -16,136 +16,121 @@
     <div class="article">
     <h3 class="article-title">grunt的初次使用</h3>
     <p class="article-time">2015-06-28</p>
-    <div class="article-desc article-content"><p>在使用grunt之前，项目静态文件几乎没进行压缩合并便直接放到线上，部分文件手动复制粘贴到某压缩网站进行压缩。没压缩合并的文件显然耗资源，手动压缩的文件后期不易维护，每修改一次便要重复复制粘贴，很不方便。grunt的加入帮忙解决了以上问题，让开发人员更加专注于开发。这里有一篇<a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html" target="_blank">文章</a>很好地教会我们如何搭建grunt环境，而我这有部分插件的<a href="https://github.com/cobish/grunt-demo" target="_blank">demo</a>可供参考学习。</p>
+    <div class="article-desc article-content"><p>在使用grunt之前，项目静态文件几乎没进行压缩合并便直接放到线上，部分文件手动复制粘贴到某压缩网站进行压缩。没压缩合并的文件显然耗资源，手动压缩的文件后期不易维护，每修改一次便要重复复制粘贴，很不方便。grunt的加入帮忙解决了以上问题，让开发人员更加专注于开发。这里有一篇<a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html">文章</a>很好地教会我们如何搭建grunt环境，而我这有部分插件的<a href="https://github.com/cobish/grunt-demo">demo</a>可供参考学习。</p>
 
-<p><br /></p>
+<p><br></p>
 
-<p><a href="http://www.gruntjs.net/" target="_blank">官网</a>的入门文档写得很详细，建议阅读并动手一遍。 网上有人会纠结该用grunt还是glup。个人认为，其实无论是grunt还是glup都是构建工具，基本的功能都差不多，与其浪费时间纠结该使用哪个，还不如先开始选择一个使用，等过段时间熟悉后再考虑是否接触另一个，最后再比较出哪个更适合自己岂不更好。</p>
+<p><a href="http://www.gruntjs.net/">官网</a>的入门文档写得很详细，建议阅读并动手一遍。 网上有人会纠结该用grunt还是glup。个人认为，其实无论是grunt还是glup都是构建工具，基本的功能都差不多，与其浪费时间纠结该使用哪个，还不如先开始选择一个使用，等过段时间熟悉后再考虑是否接触另一个，最后再比较出哪个更适合自己岂不更好。</p>
 
-<p><br /></p>
+<p><br></p>
 
 <p>我开始使用grunt的时候只是用来对css，js文件进行合并压缩，使用到的插件分别如下：</p>
 
-<pre class="prettyprint linenums">
-"devDependencies": {
-  "grunt": "^0.4.5",
-  "grunt-contrib-clean": "^0.6.0",
-  "grunt-contrib-concat": "^0.5.1",
-  "grunt-contrib-cssmin": "^0.14.0",
-  "grunt-contrib-uglify": "^0.10.0",
-  "grunt-contrib-watch": "^0.6.1"
-}
-</pre>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">2</span>   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
+<span class="lineno">3</span>   <span class="s2">&quot;grunt-contrib-clean&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.6.0&quot;</span><span class="p">,</span>
+<span class="lineno">4</span>   <span class="s2">&quot;grunt-contrib-concat&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.5.1&quot;</span><span class="p">,</span>
+<span class="lineno">5</span>   <span class="s2">&quot;grunt-contrib-cssmin&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.14.0&quot;</span><span class="p">,</span>
+<span class="lineno">6</span>   <span class="s2">&quot;grunt-contrib-uglify&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.10.0&quot;</span><span class="p">,</span>
+<span class="lineno">7</span>   <span class="s2">&quot;grunt-contrib-watch&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.6.1&quot;</span>
+<span class="lineno">8</span> <span class="p">}</span></code></pre></div>
 
 <p>我先通过watch监控静态文件，一旦文件有改动并保存，便用concat把css或js目录下的文件进行了合并，再用cssmin或uglify把刚刚合并的文件压缩，最后用clean把合并但未压缩的文件删除掉。部分代码（以js为例）如下：</p>
 
-<pre class="prettyprint linenums">
-// 文件合并
-concat: {
-  js: {
-    files: {
-      'dest/js/index.js': ['src/js/index/*.js']
-    }
-  }
-},
-
-// 压缩js代码
-uglify: {
-  build: {
-    expand: true,
-    cwd: 'dest/js',
-    src: ['**/*.js', '!*.min.js'],
-    dest: 'dest/js',
-    ext: '.min.js'
-  }
-},
-
-// 删除多余的文件
-clean: {
-  js: ['dest/js/*js', '!dest/js/*.min.js']
-},
-
-// 文件监控
-watch: {
-  js: {
-    files: 'src/js/**/*.js',
-    tasks: ['concat:js', 'uglify', 'clean:js']
-  }
-}
-</pre>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="c1">// 文件合并</span>
+<span class="lineno"> 2</span> <span class="nx">concat</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="nx">js</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 5</span>       <span class="s1">&#39;dest/js/index.js&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/js/index/*.js&#39;</span><span class="p">]</span>
+<span class="lineno"> 6</span>     <span class="p">}</span>
+<span class="lineno"> 7</span>   <span class="p">}</span>
+<span class="lineno"> 8</span> <span class="p">},</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="c1">// 压缩js代码</span>
+<span class="lineno">11</span> <span class="nx">uglify</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="nx">build</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">13</span>     <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">14</span>     <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;dest/js&#39;</span><span class="p">,</span>
+<span class="lineno">15</span>     <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;!*.min.js&#39;</span><span class="p">],</span>
+<span class="lineno">16</span>     <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;dest/js&#39;</span><span class="p">,</span>
+<span class="lineno">17</span>     <span class="nx">ext</span><span class="o">:</span> <span class="s1">&#39;.min.js&#39;</span>
+<span class="lineno">18</span>   <span class="p">}</span>
+<span class="lineno">19</span> <span class="p">},</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="c1">// 删除多余的文件</span>
+<span class="lineno">22</span> <span class="nx">clean</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">23</span>   <span class="nx">js</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;dest/js/*js&#39;</span><span class="p">,</span> <span class="s1">&#39;!dest/js/*.min.js&#39;</span><span class="p">]</span>
+<span class="lineno">24</span> <span class="p">},</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span> <span class="c1">// 文件监控</span>
+<span class="lineno">27</span> <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">28</span>   <span class="nx">js</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">29</span>     <span class="nx">files</span><span class="o">:</span> <span class="s1">&#39;src/js/**/*.js&#39;</span><span class="p">,</span>
+<span class="lineno">30</span>     <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;concat:js&#39;</span><span class="p">,</span> <span class="s1">&#39;uglify&#39;</span><span class="p">,</span> <span class="s1">&#39;clean:js&#39;</span><span class="p">]</span>
+<span class="lineno">31</span>   <span class="p">}</span>
+<span class="lineno">32</span> <span class="p">}</span></code></pre></div>
 
 <p>后来发现cssmin和uglify其实已包含了合并的功能，于是乎把concat和clean给移除掉，因为它们功能重复了。代码如下：</p>
 
-<pre class="prettyprint linenums">
-// 合并压缩js代码
-uglify: {
-  build: {
-    files: {
-      'dest/js/index.min.js': ['src/js/index/*.js']
-    }
-  }
-}
-</pre>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="c1">// 合并压缩js代码</span>
+<span class="lineno">2</span> <span class="nx">uglify</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="nx">build</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">5</span>       <span class="s1">&#39;dest/js/index.min.js&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/js/index/*.js&#39;</span><span class="p">]</span>
+<span class="lineno">6</span>     <span class="p">}</span>
+<span class="lineno">7</span>   <span class="p">}</span>
+<span class="lineno">8</span> <span class="p">}</span></code></pre></div>
 
-<p><br /></p>
+<p><br></p>
 
-<p>是的，用了cssmin和uglify后在浏览器的调试工具下便无法定位到源代码处，这是有办法解决的。办法就是使用source map，chrome和firefox的调试工具都支持，具体详情请移步<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html" target="_blank">阮一峰博客</a>。</p>
+<p>是的，用了cssmin和uglify后在浏览器的调试工具下便无法定位到源代码处，这是有办法解决的。办法就是使用source map，chrome和firefox的调试工具都支持，具体详情请移步<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">阮一峰博客</a>。</p>
 
-<p><br /></p>
+<p><br></p>
 
-<p>使用了cssmin和uglify之初项目还不算大的时候，你也许已经发现了一个现象。那就是我们每次一修改保存文件的时候，watch插件便会立马调用cssmin和uglify。而它们在配置里是对所有的css和js文件进行操作，虽然只对其中一个文件修改，但是目录下的所有文件都会大动干戈地进行合并压缩。配置高的电脑还行，配置低的电脑就悲剧了，至少我试过每次一保存文件都要等待个两三秒钟后合并压缩完成才能去刷新浏览器。一旦静态文件多起来，那这等待的时候只会增多不会减少。后来我找到了<a href="https://www.npmjs.com/package/grunt-newer" target="_blank">grunt-newer</a>这个插件来缓解燃眉之急。newer只会对改动的文件进行操作，这样至少不会每次保存都对全部文件进行操作。它的使用方法很简单：</p>
+<p>使用了cssmin和uglify之初项目还不算大的时候，你也许已经发现了一个现象。那就是我们每次一修改保存文件的时候，watch插件便会立马调用cssmin和uglify。而它们在配置里是对所有的css和js文件进行操作，虽然只对其中一个文件修改，但是目录下的所有文件都会大动干戈地进行合并压缩。配置高的电脑还行，配置低的电脑就悲剧了，至少我试过每次一保存文件都要等待个两三秒钟后合并压缩完成才能去刷新浏览器。一旦静态文件多起来，那这等待的时候只会增多不会减少。后来我找到了<a href="https://www.npmjs.com/package/grunt-newer">grunt-newer</a>这个插件来缓解燃眉之急。newer只会对改动的文件进行操作，这样至少不会每次保存都对全部文件进行操作。它的使用方法很简单：</p>
 
-<pre class="prettyprint linenums">
-// 监控
-watch: {
-  js: {
-    files: 'src/js/**/*.js',
-    tasks: ['newer:uglify']
-  }
-}
-</pre>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="c1">// 监控</span>
+<span class="lineno">2</span> <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="nx">js</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="nx">files</span><span class="o">:</span> <span class="s1">&#39;src/js/**/*.js&#39;</span><span class="p">,</span>
+<span class="lineno">5</span>     <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;newer:uglify&#39;</span><span class="p">]</span>
+<span class="lineno">6</span>   <span class="p">}</span>
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
 
-<p><br /></p>
+<p><br></p>
 
 <p>以上便是我目前用于项目的阶段，而此时我做进行开发的项目中主要用了类似于thinkPHP的框架，于是添加css或js外部文件是在php代码里添加，如下：</p>
 
-<pre class="prettyprint linenums">
-&lt;?php
-  $this-&gt;addMoreCss('dest/index.min.css');
-  $this-&gt;addMoreJs('dest/index.min.js');
-?&gt;
-</pre>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;dest/index.min.css&#39;</span><span class="p">);</span>
+<span class="lineno">3</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreJs</span><span class="p">(</span><span class="s1">&#39;dest/index.min.js&#39;</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="cp">?&gt;</span><span class="x"></span></code></pre></div>
 
 <p>这样虽然开发使用到的文件跟上线的文件一致，但也有一些弊端，比如每次改动保存静态文件便会去执行合并压缩代码，我们每天都在时时刻刻地用ctrl+s，这是没有必要的。我们应该只在准备发版上线的时候才去合并压缩。但这时如果在开发时使用原始文件则会是这样：</p>
 
-<pre class="prettyprint linenums">
-&lt;?php
-  $this-&gt;addMoreCss('src/index/test1.css');
-  $this-&gt;addMoreCss('src/index/test2.css');
-  $this-&gt;addMoreCss('src/index/test3.css');
-  $this-&gt;addMoreJs('src/index/test1.js');
-  $this-&gt;addMoreJs('src/index/test2.js');
-?&gt;
-</pre>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;src/index/test1.css&#39;</span><span class="p">);</span>
+<span class="lineno">3</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;src/index/test2.css&#39;</span><span class="p">);</span>
+<span class="lineno">4</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;src/index/test3.css&#39;</span><span class="p">);</span>
+<span class="lineno">5</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreJs</span><span class="p">(</span><span class="s1">&#39;src/index/test1.js&#39;</span><span class="p">);</span>
+<span class="lineno">6</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreJs</span><span class="p">(</span><span class="s1">&#39;src/index/test2.js&#39;</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="cp">?&gt;</span><span class="x"></span></code></pre></div>
 
 <p>上面一段代码在上线时是需要注释掉的，那在修复时又要重新打开这份代码，注释掉上面上线使用的代码。如果涉及到多个页面的修改，那得手动打开很多份类似这样的代码，而在修复完成后又得重新重复地进行注释和打开上线代码。万一有哪一段代码没看见忘了就不好了。</p>
 
-<p><br /></p>
+<p><br></p>
 
-<p>所以接下来我打算在grunt中使用<a href="https://www.npmjs.com/package/grunt-contrib-sass" target="_blank">grunt-contrib-sass</a>和<a href="https://www.npmjs.com/package/grunt-contrib-requirejs" target="_blank">grunt-contrib-requirejs</a>，这样在php函数都只需要引入一个入口文件，然后sass通过import，requirejs通过require便可去加载它们需要的文件。具体结果得等我实践后才知道，但我相信如果ok的话我便可以移除cssmin和uglify两个插件，因为sass和requirejs也有合并压缩的功能。</p>
+<p>所以接下来我打算在grunt中使用<a href="https://www.npmjs.com/package/grunt-contrib-sass">grunt-contrib-sass</a>和<a href="https://www.npmjs.com/package/grunt-contrib-requirejs">grunt-contrib-requirejs</a>，这样在php函数都只需要引入一个入口文件，然后sass通过import，requirejs通过require便可去加载它们需要的文件。具体结果得等我实践后才知道，但我相信如果ok的话我便可以移除cssmin和uglify两个插件，因为sass和requirejs也有合并压缩的功能。</p>
 
-<pre class="prettyprint linenums">
-&lt;?php
-  // 开发
-  $this-&gt;addMoreCss('src/main.css');
-  $this-&gt;addMoreJs('src/main.js');
-
-  // 上线
-  $this-&gt;addMoreCss('dest/main.css');
-  $this-&gt;addMoreJs('dest/main.js');
-?&gt;
-</pre>
-
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span>   <span class="c1">// 开发</span>
+<span class="lineno">3</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;src/main.css&#39;</span><span class="p">);</span>
+<span class="lineno">4</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreJs</span><span class="p">(</span><span class="s1">&#39;src/main.js&#39;</span><span class="p">);</span>
+<span class="lineno">5</span> 
+<span class="lineno">6</span>   <span class="c1">// 上线</span>
+<span class="lineno">7</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreCss</span><span class="p">(</span><span class="s1">&#39;dest/main.css&#39;</span><span class="p">);</span>
+<span class="lineno">8</span>   <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addMoreJs</span><span class="p">(</span><span class="s1">&#39;dest/main.js&#39;</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="cp">?&gt;</span><span class="x"></span></code></pre></div>
 </div>
 </div>
 
@@ -176,10 +161,6 @@ watch: {
         ds.style.display = 'block';
     };
 </script>
-    <script type="text/javascript" src="/assets/js/prettify.js"></script>
-    <script type="text/javascript">
-        prettyPrint();
-    </script>
     <script>
 var _hmt = _hmt || [];
 (function() {
