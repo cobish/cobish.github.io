@@ -50,6 +50,7 @@ legend {
 /* ---------------------------------------------- my blog ---------------------------------------------- */
 body {
     font-size: 14px;
+    -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -217,9 +218,6 @@ a:hover {
 }
 
 @media screen and (max-width: 568px) {
-    body {
-        font-size: 14px;
-    }
     #home {
         margin-top: -100px;
     }
