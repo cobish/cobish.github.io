@@ -217,6 +217,9 @@ a:hover {
 }
 
 @media screen and (max-width: 568px) {
+    body {
+        font-size: 14px;
+    }
     #home {
         margin-top: -100px;
     }
