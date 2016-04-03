@@ -83,7 +83,8 @@ a:hover {
 }
 
 #logo {
-    margin: 25px 50px;
+    /*margin: 25px 50px;*/
+    padding: 25px 15px;
 }
 
 #logo a {
@@ -220,9 +221,6 @@ a:hover {
 @media screen and (max-width: 568px) {
     #home {
         margin-top: -100px;
-    }
-    #logo {
-        margin: 25px 22px;
     }
     #list {
        margin-left: 15px;
