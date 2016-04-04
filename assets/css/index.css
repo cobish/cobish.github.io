@@ -84,7 +84,7 @@ a:hover {
 
 #logo {
     /*margin: 25px 50px;*/
-    padding: 25px 15px;
+    padding: 25px 50px;
 }
 
 #logo a {
@@ -95,9 +95,8 @@ a:hover {
     position: absolute;
     left: 50%;
     top: 50%;
-    margin: -123px 0 0 -150px;
+    margin: -99px 0 0 -150px;
     width: 300px;
-    height: 130px;
     text-align: center;
 }
 
@@ -221,9 +220,12 @@ a:hover {
     overflow: hidden;
 }
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 667px) {
     #home {
         margin-top: -100px;
+    }
+    #logo {
+        padding: 25px 15px;
     }
     #list {
        margin-left: 15px;
@@ -233,6 +235,15 @@ a:hover {
     }
     .list-post .date-long {
         margin: 0 35px;
+    }
+}
+
+@media (min-width: 667px) and (max-width: 736px) {
+    #logo {
+        padding: 25px 43px;
+    }
+    #category {
+        margin-left: 43px;
     }
 }
 
