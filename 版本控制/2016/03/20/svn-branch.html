@@ -40,11 +40,11 @@
 
 <p><br></p>
 
-<p>那么，分支得创建多少，该怎么使用。参考了这篇<a href="http://blog.csdn.net/crylearner/article/details/18779137">《多分支开发策略》</a>{:target=&quot;_blank&quot;}的文章，目前项目中我有四条一直保存着的分支。master主干分支也就是trunk是默认存在的，然后我从trunk上检出了三条分支，分别是hotfix、dev、release。hotfix分支是专门用来应对紧急bug的修复，dev分支是用来新功能的开发，release分支是用来发布测试版本，master则是用来发布正式版本。dev上开发完毕可以合并到release上，然后可以继续功能的开发。一旦release被测出有bug，可以直接在release上面进行修复。线上的bug则可以使用hotfix分支进行修复。</p>
+<p>那么，分支得创建多少，该怎么使用。参考了这篇<a href="http://blog.csdn.net/crylearner/article/details/18779137">「多分支开发策略」</a>的文章，目前项目中我有四条一直保存着的分支。master主干分支也就是trunk是默认存在的，然后我从trunk上检出了三条分支，分别是hotfix、dev、release。hotfix分支是专门用来应对紧急bug的修复，dev分支是用来新功能的开发，release分支是用来发布测试版本，master则是用来发布正式版本。dev上开发完毕可以合并到release上，然后可以继续功能的开发。一旦release被测出有bug，可以直接在release上面进行修复。线上的bug则可以使用hotfix分支进行修复。</p>
 
 <p><br></p>
 
-<p>理论方法说得差不多了，接下来就是实战了，知道了那么多，但还是没有具体的操作也是白搭。可以戳这个<a href="http://blog.csdn.net/eggcalm/article/details/6606520">《TortoiseSVN中Branching和Merging实践》</a>{:target=&quot;_blank&quot;}学习如何操作svn分支的合并。需要注意的是，两条分支之间的合并都需要把本地的代码进行提交并更新才能进行merge操作，否则，你自己试了就会知道了嘿嘿嘿。</p>
+<p>理论方法说得差不多了，接下来就是实战了，知道了那么多，但还是没有具体的操作也是白搭。可以戳这个<a href="http://blog.csdn.net/eggcalm/article/details/6606520">「TortoiseSVN中Branching和Merging实践」</a>学习如何操作svn分支的合并。需要注意的是，两条分支之间的合并都需要把本地的代码进行提交并更新才能进行merge操作，否则，你自己试了就会知道了嘿嘿嘿。</p>
 </div>
 </div>
 

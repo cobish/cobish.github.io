@@ -16,7 +16,7 @@
     <div class="article">
     <h3 class="article-title">基于grunt的前端构建</h3>
     <p class="article-time">2016-01-30</p>
-    <div class="article-desc article-content"><p>在<a href="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2015/06/28/grunt-use.html">《grunt的初次使用》</a>的基础上，这一篇继续对grunt进行探索研究。这一次不再使用php进行include静态文件，而是在html里面引入。然后主要将grunt用于两个大的方向，一个是用于开发期间，一个用于上线前期打包。使用到的插件可能有些更换。具体目录如下，src目录用于开发与维护，dist目录是打包后的项目，用于上线：</p>
+    <div class="article-desc article-content"><p>在<a href="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2015/06/28/grunt-use.html">「grunt的初次使用」</a>的基础上，这一篇继续对grunt进行探索研究。这一次不再使用php进行include静态文件，而是在html里面引入。然后主要将grunt用于两个大的方向，一个是用于开发期间，一个用于上线前期打包。使用到的插件可能有些更换。具体目录如下，src目录用于开发与维护，dist目录是打包后的项目，用于上线：</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> ├─ dist/
 <span class="lineno"> 2</span>     ├─ css/
@@ -41,7 +41,7 @@
 <span class="lineno">5</span>   <span class="s2">&quot;grunt-contrib-watch&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.6.1&quot;</span>
 <span class="lineno">6</span> <span class="p">}</span></code></pre></div>
 
-<p>图片不需要压缩，css使用sass编译，js使用了requirejs，并使用jshint进行检错。其中sass编译好后会在同一目录下生成对应的css目录与文件。jshint的具体配置参考<a href="https://github.com/cobish/grunt-demo/blob/master/grunt-contrib-jshint-demo/Gruntfile.js">例子</a>。</p>
+<p>图片不需要压缩，css使用sass编译，js使用了requirejs，并使用jshint进行检错。其中sass编译好后会在同一目录下生成对应的css目录与文件。jshint的具体配置参考<a href="https://github.com/cobish/grunt-demo/blob/master/grunt-contrib-jshint-demo/Gruntfile.js">「例子」</a>。</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">sass</span><span class="o">:</span> <span class="p">{</span>
 <span class="lineno"> 2</span>   <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
@@ -72,7 +72,7 @@
 
 <p><br /></p>
 
-<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙的博客里讲的<a href="https://github.com/fouber/blog/issues/6">前端部署</a>，于是便有了非覆盖式发布和静态文件hash，主要用到了<a href="https://www.npmjs.com/package/grunt-filerev">grunt-filerev</a>和<a href="https://www.npmjs.com/package/grunt-usemin">grunt-usemin</a>这两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
+<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙博客里讲的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码？」</a>，于是便有了非覆盖式发布和静态文件hash，用到了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>和<a href="https://www.npmjs.com/package/grunt-usemin">「grunt-usemin」</a>这两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
 
 <p><br /></p>
 

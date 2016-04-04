@@ -175,7 +175,10 @@ a:hover {
 }
 
 .article img {
+    display: block;
+    margin: 8px auto;
     max-width: 100%;
+    border-radius: 2px;
 }
 
 .article pre {

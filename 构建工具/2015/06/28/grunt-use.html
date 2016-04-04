@@ -16,11 +16,11 @@
     <div class="article">
     <h3 class="article-title">grunt的初次使用</h3>
     <p class="article-time">2015-06-28</p>
-    <div class="article-desc article-content"><p>在使用grunt之前，项目静态文件几乎没进行压缩合并便直接放到线上，部分文件手动复制粘贴到某压缩网站进行压缩。没压缩合并的文件显然耗资源，手动压缩的文件后期不易维护，每修改一次便要重复复制粘贴，很不方便。grunt的加入帮忙解决了以上问题，让开发人员更加专注于开发。这里有一篇<a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html">文章</a>很好地教会我们如何搭建grunt环境，而我这有部分插件的<a href="https://github.com/cobish/grunt-demo">demo</a>可供参考学习。</p>
+    <div class="article-desc article-content"><p>在使用grunt之前，项目静态文件几乎没进行压缩合并便直接放到线上，部分文件手动复制粘贴到某压缩网站进行压缩。没压缩合并的文件显然耗资源，手动压缩的文件后期不易维护，每修改一次便要重复复制粘贴，很不方便。grunt的加入帮忙解决了以上问题，让开发人员更加专注于开发。这里有一篇<a href="http://www.w3cplus.com/tools/grunt-tutorial-installing-grunt.html">「Grunt教程——安装Grunt」</a>很好地教会我们如何搭建grunt环境，而我这有部分插件的<a href="https://github.com/cobish/grunt-demo">「grunt-demo」</a>可供参考学习。</p>
 
 <p><br></p>
 
-<p><a href="http://www.gruntjs.net/">官网</a>的入门文档写得很详细，建议阅读并动手一遍。 网上有人会纠结该用grunt还是glup。个人认为，其实无论是grunt还是glup都是构建工具，基本的功能都差不多，与其浪费时间纠结该使用哪个，还不如先开始选择一个使用，等过段时间熟悉后再考虑是否接触另一个，最后再比较出哪个更适合自己岂不更好。</p>
+<p><a href="http://www.gruntjs.net/">「官网」</a>的入门文档写得很详细，建议阅读并动手一遍。 网上有人会纠结该用grunt还是glup。个人认为，其实无论是grunt还是glup都是构建工具，基本的功能都差不多，与其浪费时间纠结该使用哪个，还不如先开始选择一个使用，等过段时间熟悉后再考虑是否接触另一个，最后再比较出哪个更适合自己岂不更好。</p>
 
 <p><br></p>
 
@@ -83,11 +83,11 @@
 
 <p><br></p>
 
-<p>是的，用了cssmin和uglify后在浏览器的调试工具下便无法定位到源代码处，这是有办法解决的。办法就是使用source map，chrome和firefox的调试工具都支持，具体详情请移步<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">阮一峰博客</a>。</p>
+<p>是的，用了cssmin和uglify后在浏览器的调试工具下便无法定位到源代码处，这是有办法解决的。办法就是使用source map，chrome和firefox的调试工具都支持，具体详情请移步<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">「JavaScript Source Map 详解」</a>。</p>
 
 <p><br></p>
 
-<p>使用了cssmin和uglify之初项目还不算大的时候，你也许已经发现了一个现象。那就是我们每次一修改保存文件的时候，watch插件便会立马调用cssmin和uglify。而它们在配置里是对所有的css和js文件进行操作，虽然只对其中一个文件修改，但是目录下的所有文件都会大动干戈地进行合并压缩。配置高的电脑还行，配置低的电脑就悲剧了，至少我试过每次一保存文件都要等待个两三秒钟后合并压缩完成才能去刷新浏览器。一旦静态文件多起来，那这等待的时候只会增多不会减少。后来我找到了<a href="https://www.npmjs.com/package/grunt-newer">grunt-newer</a>这个插件来缓解燃眉之急。newer只会对改动的文件进行操作，这样至少不会每次保存都对全部文件进行操作。它的使用方法很简单：</p>
+<p>使用了cssmin和uglify之初项目还不算大的时候，你也许已经发现了一个现象。那就是我们每次一修改保存文件的时候，watch插件便会立马调用cssmin和uglify。而它们在配置里是对所有的css和js文件进行操作，虽然只对其中一个文件修改，但是目录下的所有文件都会大动干戈地进行合并压缩。配置高的电脑还行，配置低的电脑就悲剧了，至少我试过每次一保存文件都要等待个两三秒钟后合并压缩完成才能去刷新浏览器。一旦静态文件多起来，那这等待的时候只会增多不会减少。后来我找到了<a href="https://www.npmjs.com/package/grunt-newer">「grunt-newer」</a>这个插件来缓解燃眉之急。newer只会对改动的文件进行操作，这样至少不会每次保存都对全部文件进行操作。它的使用方法很简单：</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="c1">// 监控</span>
 <span class="lineno">2</span> <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
@@ -120,7 +120,7 @@
 
 <p><br></p>
 
-<p>所以接下来我打算在grunt中使用<a href="https://www.npmjs.com/package/grunt-contrib-sass">grunt-contrib-sass</a>和<a href="https://www.npmjs.com/package/grunt-contrib-requirejs">grunt-contrib-requirejs</a>，这样在php函数都只需要引入一个入口文件，然后sass通过import，requirejs通过require便可去加载它们需要的文件。具体结果得等我实践后才知道，但我相信如果ok的话我便可以移除cssmin和uglify两个插件，因为sass和requirejs也有合并压缩的功能。</p>
+<p>所以接下来我打算在grunt中使用<a href="https://www.npmjs.com/package/grunt-contrib-sass">「grunt-contrib-sass」</a>和<a href="https://www.npmjs.com/package/grunt-contrib-requirejs">「grunt-contrib-requirejs」</a>，这样在php函数都只需要引入一个入口文件，然后sass通过import，requirejs通过require便可去加载它们需要的文件。具体结果得等我实践后才知道，但我相信如果ok的话我便可以移除cssmin和uglify两个插件，因为sass和requirejs也有合并压缩的功能。</p>
 
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="lineno">1</span> <span class="cp">&lt;?php</span>
 <span class="lineno">2</span>   <span class="c1">// 开发</span>
