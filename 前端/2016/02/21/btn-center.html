@@ -68,39 +68,34 @@
 </style>
 
 <p>如果让你写一段代码，来实现三个按钮居中显示，你是否会这样实现：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>增加<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>删除<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>修改<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p>按钮的样式为：</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+  <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="lineno">1</span> <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;</span>
-<span class="lineno">2</span>   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>增加<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">3</span>   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>删除<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">4</span>   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>修改<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">5</span> <span class="nt">&lt;/div&gt;</span></code></pre></div>
-
-
-按钮的样式为：
-
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="lineno"> 1</span> <span class="nc">.box</span> <span class="p">{</span>
-<span class="lineno"> 2</span>   <span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
-<span class="lineno"> 3</span>   <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-<span class="lineno"> 4</span>   <span class="k">font-size</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-<span class="lineno"> 5</span> <span class="p">}</span>
-<span class="lineno"> 6</span> 
-<span class="lineno"> 7</span> <span class="nc">.box</span> <span class="nt">a</span> <span class="p">{</span>
-<span class="lineno"> 8</span>   <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
-<span class="lineno"> 9</span>   <span class="k">width</span><span class="o">:</span> <span class="m">98px</span><span class="p">;</span>
-<span class="lineno">10</span>   <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
-<span class="lineno">11</span>   <span class="k">color</span><span class="o">:</span> <span class="m">#0075eb</span><span class="p">;</span>
-<span class="lineno">12</span>   <span class="k">font-size</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
-<span class="lineno">13</span>   <span class="k">line-height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
-<span class="lineno">14</span>   <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
-<span class="lineno">15</span>   <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#0075eb</span><span class="p">;</span>
-<span class="lineno">16</span>   <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
-<span class="lineno">17</span>   <span class="k">background</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span>
-<span class="lineno">18</span>   <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
-<span class="lineno">19</span> <span class="p">}</span></code></pre></div>
-
-
-效果如下：
+<span class="nc">.box</span> <span class="nt">a</span> <span class="p">{</span>
+  <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="o">-</span><span class="k">block</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">98px</span><span class="p">;</span>
+  <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span> <span class="m">#0075eb</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">14px</span><span class="p">;</span>
+  <span class="k">line-height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#0075eb</span><span class="p">;</span>
+  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+  <span class="k">background</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>效果如下：</p>
 
 <div class="box">
   <a href="#">增加</a>
@@ -111,28 +106,22 @@
 <p><br></p>
 
 <p>当然如果按钮之间还需要10像素的间距，可以这么做：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;box box-2&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>增加<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;ml-10&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>删除<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;ml-10&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>修改<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p>按钮样式：</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box-2</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="lineno">1</span> <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;box box-2&quot;</span><span class="nt">&gt;</span>
-<span class="lineno">2</span>   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>增加<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">3</span>   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;ml-10&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>删除<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">4</span>   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;ml-10&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>修改<span class="nt">&lt;/a&gt;</span>
-<span class="lineno">5</span> <span class="nt">&lt;/div&gt;</span></code></pre></div>
-
-
-按钮样式：
-
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="lineno">1</span> <span class="nc">.box-2</span> <span class="p">{</span>
-<span class="lineno">2</span>   <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
-<span class="lineno">3</span> <span class="p">}</span>
-<span class="lineno">4</span> 
-<span class="lineno">5</span> <span class="nc">.box</span> <span class="nc">.ml-10</span> <span class="p">{</span>
-<span class="lineno">6</span>   <span class="k">margin-left</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
-
-
-
-效果如下：
+<span class="nc">.box</span> <span class="nc">.ml-10</span> <span class="p">{</span>
+  <span class="k">margin-left</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>效果如下：</p>
 
 <div class="box box-2">
   <a href="#">增加</a>
@@ -157,29 +146,24 @@
 <p><br></p>
 
 <p>首先，html的格局不变，而按钮的样式稍作修改，给所有的按钮都设置一个左间距。</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="nt">a</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="o">...</span>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="lineno">1</span> <span class="nc">.box</span> <span class="nt">a</span> <span class="p">{</span>
-<span class="lineno">2</span>   <span class="o">//</span> <span class="o">...</span>
-<span class="lineno">3</span> 
-<span class="lineno">4</span>   <span class="k">margin-left</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-<span class="lineno">5</span> <span class="p">}</span></code></pre></div>
-
-
-然后是父元素的样式，这里父元素不需要宽度和居中对齐，并且给父元素设置一个负的左间距，用来抵消第一个按钮的左间距，然后设置一个文本居中。
-
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="lineno">1</span> <span class="nc">.box</span> <span class="p">{</span>
-<span class="lineno">2</span>   <span class="k">margin-left</span><span class="o">:</span> <span class="m">-10px</span><span class="p">;</span>
-<span class="lineno">3</span>   <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
-<span class="lineno">4</span>   <span class="k">font-size</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-<span class="lineno">5</span> <span class="p">}</span></code></pre></div>
-
-
-来看下效果吧：
+  <span class="k">margin-left</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>然后是父元素的样式，这里父元素不需要宽度和居中对齐，并且给父元素设置一个负的左间距，用来抵消第一个按钮的左间距，然后设置一个文本居中。</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+  <span class="k">margin-left</span><span class="o">:</span> <span class="m">-10px</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>来看下效果吧：
 <div class="box-3">
   <a href="#">增加</a>
   <a href="#">删除</a>
-</div>
+</div></p>
 
 <p><br></p>
 
