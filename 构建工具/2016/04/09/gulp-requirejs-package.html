@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>gulp打包requirejs</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">gulp打包requirejs</h3>
+    <p class="article-time">2016-04-09</p>
+    <div class="article-desc article-content"><p>目前我的项目是一个页面一个js入口，比如登录页面的入口是login.js，而主页面的入口是home.js，它们都是在同一个目录下。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">├─ src/
+    ├─ js/
+        ├─ lib
+            ├─ require.min.js
+            └─ jquery-1.11.1.min.js    
+        ├─ mod
+            ├─ home.js
+            └─ login.js
+        └─ config.js
+├─ gulpfile.js
+└─ package.js
+</code></pre></div>
+<p><br></p>
+
+<p>html每个页面的引入是这样子的：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;__JSPATH__/config.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;__JSPATH__/lib/requirejs.min.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;__JSPATH__/mod/login.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p><br></p>
+
+<p>requirejs的config文件如下：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">requirejs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;../lib/jquery-1.11.1.min&#39;</span><span class="p">,</span>
+        <span class="nx">widget</span><span class="o">:</span> <span class="s1">&#39;../widget&#39;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<p><br></p>
+
+<p>接下来就是使用gulp对js文件进行打包，用到的是<a href="https://www.npmjs.com/package/gulp-requirejs-optimize">「gulp-requirejs-optimize」</a>，由于项目是多入口文件，所以需要批量打包，打包的代码如下：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">requirejsOptimize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-requirejs-optimize&#39;</span><span class="p">);</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;rjs&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">&#39;src/js/mod/*.js&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">requirejsOptimize</span><span class="p">({</span>
+            <span class="nx">mainConfigFile</span><span class="o">:</span> <span class="s1">&#39;src/js/config.js&#39;</span><span class="p">,</span>
+            <span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s1">&#39;jquery&#39;</span>
+            <span class="p">]</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dist/js/mod&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><br></p>
+
+<p>运行相应命令，即可完成打包：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gulp rjs
+</code></pre></div></div>
+</div>
+
+<a id="showDs">
+    显示评论
+</a>
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-04-09-gulp-requirejs-package.md" data-title="gulp打包requirejs" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/04/09/gulp-requirejs-package.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    var showDs = document.getElementById('showDs'),
+        ds = document.getElementById('ds');
+
+    showDs.onclick = function() {
+        showDs.style.display = 'none';
+        ds.style.display = 'block';
+    };
+</script>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
