@@ -21,7 +21,7 @@
     ├─ js/
         ├─ lib
             ├─ require.min.js
-            └─ jquery-1.11.1.min.js    
+            └─ jquery-1.11.1.min.js
         ├─ mod
             ├─ home.js
             └─ login.js
@@ -39,10 +39,10 @@
 
 <p>requirejs的config文件如下：</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">requirejs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;../lib/jquery-1.11.1.min&#39;</span><span class="p">,</span>
-        <span class="nx">widget</span><span class="o">:</span> <span class="s1">&#39;../widget&#39;</span>
-    <span class="p">}</span>
+  <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;../lib/jquery-1.11.1.min&#39;</span><span class="p">,</span>
+    <span class="nx">widget</span><span class="o">:</span> <span class="s1">&#39;../widget&#39;</span>
+  <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
 <p><br></p>
@@ -52,14 +52,14 @@
 <span class="kd">var</span> <span class="nx">requirejsOptimize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-requirejs-optimize&#39;</span><span class="p">);</span>
 
 <span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;rjs&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">&#39;src/js/mod/*.js&#39;</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">requirejsOptimize</span><span class="p">({</span>
-            <span class="nx">mainConfigFile</span><span class="o">:</span> <span class="s1">&#39;src/js/config.js&#39;</span><span class="p">,</span>
-            <span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span>
-                <span class="s1">&#39;jquery&#39;</span>
-            <span class="p">]</span>
-        <span class="p">}))</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dist/js/mod&#39;</span><span class="p">));</span>
+  <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">&#39;src/js/mod/*.js&#39;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">requirejsOptimize</span><span class="p">({</span>
+      <span class="nx">mainConfigFile</span><span class="o">:</span> <span class="s1">&#39;src/js/config.js&#39;</span><span class="p">,</span>
+      <span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s1">&#39;jquery&#39;</span>
+      <span class="p">]</span>
+    <span class="p">}))</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dist/js/mod&#39;</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
 <p><br></p>
