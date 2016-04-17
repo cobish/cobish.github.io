@@ -16,11 +16,9 @@
     <div class="article">
     <h3 class="article-title">gulp自动刷新浏览器</h3>
     <p class="article-time">2016-04-10</p>
-    <div class="article-desc article-content"><p>项目本地后端开发语言是是基于apache的php，域名为cloud.xxx.com。刚开始想实现浏览器F5自动刷新使用到的是grunt和livereload插件，gulp也有对应的方法，参考<a href="http://www.ydcss.com/archives/702">「gulp教程之gulp-livereload」</a>。但是，它需要浏览器安装livereload插件才能使用，chrome的插件需要翻墙下载，firefox的插件不起作用，其它的浏览器也无法实现自动刷新。</p>
+    <div class="article-desc article-content"><p>项目本地后端开发语言是是基于 apache 的 php，域名为 cloud.xxx.com。刚开始想实现浏览器 F5 自动刷新使用到的是 grunt 和 livereload 插件，gulp 也有对应的方法，参考<a href="http://www.ydcss.com/archives/702">「gulp 教程之 gulp-livereload」</a>。但是，它需要浏览器安装 livereload 插件才能使用，chrome 的插件需要翻墙下载，firefox 的插件不起作用，其它的浏览器也无法实现自动刷新。</p>
 
-<p><br></p>
-
-<p>后来，我发现了<a href="http://www.browsersync.cn/">「Browsersync」</a>。简直就像是找到了宝藏一样，同样支持grunt和gulp。以下代码是使用代理去实现：</p>
+<p>后来，我发现了<a href="http://www.browsersync.cn/">「Browsersync」</a>。简直就像是找到了宝藏一样，同样支持 grunt 和 gulp。以下代码是使用代理去实现：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">browserSync</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;browser-sync&#39;</span><span class="p">).</span><span class="nx">create</span><span class="p">();</span>
 
@@ -32,20 +30,16 @@
     <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s1">&#39;*.html&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<p><br></p>
-
 <p>运行命令，默认的浏览器会自动打开 127.0.0.1:3000 链接</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">gulp serve
 </code></pre></div>
-<p><br></p>
-
 <p>如果想多个浏览器都可以自动刷新，只需要打开其它浏览器，把刚刚的链接输入即可。还有，由于项目原因，开发的时候不能使用到 127.0.0.1 ，想换成php配置的域名怎么做？直接把 127.0.0.1:3000 链接换成 cloud.xxx.com:3000 即可，Browsersync实际就是监听 3000 端口来实现刷新浏览器。</p>
 </div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -62,14 +56,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

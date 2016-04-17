@@ -18,8 +18,6 @@
     <p class="article-time">2016-04-04</p>
     <div class="article-desc article-content"><p>我在用了grunt的一段时间内，越来越觉得自己离不开构建工具。但是，grunt的构建速度让我有点苦恼，即使是编译sass也需要花上一段时间。于是，我开始试用gulp，结果意外地让我惊喜。</p>
 
-<p><br></p>
-
 <p>下面代码是使用gulp初次来编译sass，由于一直都有点习惯了grunt那编译速度单位为秒级别的速度，刚输入命令还没反应过来，就已经以毫秒级的速度编译完了。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">sass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-sass&#39;</span><span class="p">);</span>
@@ -34,21 +32,17 @@
     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dev/css&#39;</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
-<p><br></p>
-
 <p>比较一下grunt与gulp编译同一套sass代码下所花费的时间：</p>
 
 <p><img src="/assets/blog-img/gulp-first-use/01.png" alt="gulp与grunt的比较"></p>
-
-<p><br></p>
 
 <p>并不是说grunt就比gulp不好，也有gulp办不到grunt办得到的事情。但是就运行速度相比，gulp的速度确实是完胜。</p>
 </div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -65,14 +59,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

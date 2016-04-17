@@ -29,14 +29,10 @@
 ├─ gulpfile.js
 └─ package.js
 </code></pre></div>
-<p><br></p>
-
 <p>html每个页面的引入是这样子的：</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;__JSPATH__/config.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;__JSPATH__/lib/requirejs.min.js&quot;</span> <span class="na">data-main=</span><span class="s">&quot;__JSPATH__/mod/login.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>
-<p><br></p>
-
 <p>requirejs的config文件如下：</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">requirejs</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
@@ -45,8 +41,6 @@
   <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
-<p><br></p>
-
 <p>接下来就是使用gulp对js文件进行打包，用到的是<a href="https://www.npmjs.com/package/gulp-requirejs-optimize">「gulp-requirejs-optimize」</a>，由于项目是多入口文件，所以需要批量打包，打包的代码如下：</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">requirejsOptimize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-requirejs-optimize&#39;</span><span class="p">);</span>
@@ -62,16 +56,14 @@
     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dist/js/mod&#39;</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
-<p><br></p>
-
 <p>运行相应命令，即可完成打包：</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gulp rjs
 </code></pre></div></div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -88,14 +80,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

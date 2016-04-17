@@ -34,11 +34,7 @@
 <span class="nx">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span><span class="p">;</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span><span class="p">;</span>
 </code></pre></div>
-<p><br /></p>
-
 <p>后来从<a href="http://www.zhangxinxu.com/wordpress/2012/09/javascript-html-json-template/">「基于HTML模板和JSON数据的JavaScript交互」</a>中学习到另一种处理方法，即将html代码放在一个隐藏的标签里，然后通过js获取到并正则匹配进行替换，最后把替换后的代码块显示在网页上。js模板引擎大致都是类似原理。</p>
-
-<p><br /></p>
 
 <p>当然也有现成的模板引擎帮我们解决以上的种种问题，例如<a href="https://github.com/aui/artTemplate">「artTemplate」</a>，下面有一段小例子可以拿来与上面的代码对比，然后细细地品味出它们之前的不同。模板引擎我接触到的还有<a href="http://handlebarsjs.com/">「Handlebars.js」</a>，这里有一份Handlebars.js的<a href="http://segmentfault.com/a/1190000000342636?from=androidqq">「中文文档」</a>和一份<a href="http://www.cnblogs.com/iyangyuan/archive/2013/12/12/3471227.html">「使用教程」</a>。</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;template.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -54,9 +50,9 @@
 </code></pre></div></div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -73,14 +69,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

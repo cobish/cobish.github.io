@@ -23,14 +23,10 @@
 <span class="c">&lt;!-- js --&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;index.js?t=20160121&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>
-<p><br></p>
-
 <p>总结上诉理论，此刻我们需要一种非覆盖式发布的方法，而此时这种方法就是将静态资源的内容hash后修改其文件名，做到文件名不同从而起到类似于时间戳的作用。如以下静态资源hash后的文件名发生的变化：</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">css/index.css  -&gt;  css/index.aa59f6ab.css
 img/demo.png   -&gt;  img/demo.aa59f6ac.png
 </code></pre></div>
-<p><br></p>
-
 <p>接下要怎么实现以上方法呢？要用的工具是Grunt，使用到的插件如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
@@ -58,8 +54,8 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
 <span class="nx">usemin</span><span class="o">:</span> <span class="p">{</span>
   <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">assetsDirs</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s1">&#39;dest&#39;</span><span class="p">,</span> 
-      <span class="s1">&#39;dest/img&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;dest&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;dest/img&#39;</span><span class="p">,</span>
       <span class="s1">&#39;dest/css&#39;</span>
     <span class="p">]</span>
   <span class="p">},</span>
@@ -67,8 +63,6 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
   <span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;dest/html/**/*.html&#39;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><br></p>
-
 <p>以下的步骤都会避免修改到源文件。具体步骤则是先将图片hash后放置于dest目录（发布目录）。然后将css代码都复制到一个tmp目录（临时目录），替换里面变更的图片名字，再将css文件hash后放置于dest目录。接着将html代码复制到dest目录，替换里面引用到的图片和css文件名。最后将tmp目录删除。具体代码实现如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤一：对图片进行处理</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -89,15 +83,13 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
   <span class="s1">&#39;clean:tmp&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p><br></p>
-
 <p>未解决的问题：如上代码，我把它分成了三份分别按步骤运行，但是放在一个任务里却会遇到问题，比如css里的图片名称没有被替换等。如哪位朋友有解决办法，不妨传授我一下，感激！</p>
 </div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -114,14 +106,15 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

@@ -184,6 +184,14 @@ a:hover {
     margin: 7px 0;
 }
 
+.article-content {
+    margin-top: -6px;
+}
+
+.article-content p {
+    margin-top: 26px;
+}
+
 .article-title {
     color: #ff001f;
     font-size: 18px;
@@ -215,10 +223,10 @@ a:hover {
     background: #e7e7e7;
 }
 
-#ds {
+/*#ds {
     display: none;
     overflow: hidden;
-}
+}*/
 
 @media screen and (max-width: 667px) {
     #home {
@@ -246,4 +254,3 @@ a:hover {
         margin-left: 43px;
     }
 }
-

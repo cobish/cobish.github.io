@@ -30,18 +30,12 @@
 <p>如果你有多个贮藏，查看贮藏里它们都有 0，1，2 编号，可以用以下命令来删除特定的贮藏。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash pop stash@<span class="o">{</span>0<span class="o">}</span>
 </code></pre></div>
-<p><br></p>
-
 <p>如果你修改了某个文件，突然不想把它给添加进暂存区，并且想丢弃修改，可是使用以下命令，它会让文件回到最近一次commit或add时的状态，注意的是checkout后面有两个杆杆。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git checkout -- README.md
 </code></pre></div>
-<p><br></p>
-
 <p>还有一种情况，想取消添加到暂存区的文件，可以使用reset命令。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset HEAD README.md
 </code></pre></div>
-<p><br></p>
-
 <p>还有就是提交了不想提交的代码，后悔了，想恢复，那就只能进行版本回退，以下命令为回退上一个版本</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset —hard HEAD^
 </code></pre></div>
@@ -50,9 +44,9 @@
 </code></pre></div></div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -69,14 +63,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {

@@ -29,8 +29,6 @@
     ├─ sass/
     └─ view/
 </code></pre></div>
-<p><br /></p>
-
 <p>在开发期间，使用到的grunt插件如下，watch插件用了监听文件，一旦文件被修改，可以让它触发浏览器自动刷新：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
@@ -67,11 +65,7 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><br /></p>
-
 <p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙博客里讲的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码？」</a>，于是便有了非覆盖式发布和静态文件hash，用到了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>和<a href="https://www.npmjs.com/package/grunt-usemin">「grunt-usemin」</a>这两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
-
-<p><br /></p>
 
 <p>打包分四个步骤。按顺序分别是图片的打包、css文件的打包、js文件的打包、html文件的打包。使用到的插件如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
@@ -95,8 +89,6 @@
   <span class="s2">&quot;time-grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^1.2.1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><br></p>
-
 <p>首先得将dist目录给删除掉，因为是非覆盖式部署，所以删掉一些过期用不到的静态文件。第一个步骤是图片打包，将需要合并的图片合并了（并修改对应的css文件）放置于临时目录（tmp），不需要合并的图片则复制粘贴到临时目录（tmp）。然后对临时目录里的图片进行压缩，最后hash后放置于dist生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤一：对图片进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -107,8 +99,6 @@
   <span class="s1">&#39;filerev:img&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p><br></p>
-
 <p>第二个步骤是css文件的打包，先用sass将css压缩到临时目录(tmp)中，接着用usemin替换掉里面的已经hash的图片资源，最后将css文件进行hash后放置于dist生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤二：对css进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -117,8 +107,6 @@
   <span class="s1">&#39;filerev:css&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p><br></p>
-
 <p>第三个步骤是js文件的打包，用的是requirejs插件将js文件合并压缩到临时目录(tmp)，然后替换掉文件里的图片资源路径，最后hash到生产环境目录（dist），并把不需要hash的第三方库复制到dist生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤三：对js进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;js&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -128,8 +116,6 @@
   <span class="s1">&#39;copy:js&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p><br></p>
-
 <p>第四个步骤则是html文件的打包，先用grunt-replace把里面的php include替换成特定的模式放置于临时目录(tmp)，然后再用grunt-include-replace把html依赖的html片段复制粘贴到一个html中，紧接着替换到html中的已hash的静态文件（包括css，js，image），最后将html压缩至dist目录下。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤四：对html进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -141,16 +127,14 @@
   <span class="s1">&#39;clean:tmp&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p><br></p>
-
 <p>最后如果你想问我为什么上面的四个步骤不直接写成一个task呢，我也无能为力。我试过写成一个task，后果则是文件里的图片资源路径没能够替换成功，可能是在一个task内usemin插件无法执行多次，于是我就分类写成四个了。
 最后总结一下，以上的方式的好处就在于开发时期不需要去合并压缩文件，方便调试。而生产环境则是尽可能去合并压缩，减少用户的请求时间。</p>
 </div>
 </div>
 
-<a id="showDs">
+<!-- <a id="showDs">
     显示评论
-</a>
+</a> -->
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
@@ -167,14 +151,15 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 
-    var showDs = document.getElementById('showDs'),
-        ds = document.getElementById('ds');
-
-    showDs.onclick = function() {
-        showDs.style.display = 'none';
-        ds.style.display = 'block';
-    };
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
 </script>
+
     <script>
 var _hmt = _hmt || [];
 (function() {
