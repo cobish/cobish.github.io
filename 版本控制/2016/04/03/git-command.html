@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>git简单命令</title>
+    <title>Git 简单命令</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
@@ -14,15 +14,15 @@
     <a href="/">cobish.github.io</a>
 </div>
     <div class="article">
-    <h3 class="article-title">git简单命令</h3>
+    <h3 class="article-title">Git 简单命令</h3>
     <p class="article-time">2016-04-03</p>
-    <div class="article-desc article-content"><p>当你正在某分支上进行开发，突然有一个紧急bug需要修复。可是你不想提交现在的代码，可以使用以下命令贮藏来暂时保存代码：</p>
+    <div class="article-desc article-content"><p>当你正在某分支上进行开发，突然有一个紧急 bug 需要修复。可是你不想提交现在的代码，可以使用以下命令贮藏来暂时保存代码：</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash
 </code></pre></div>
 <p>查看贮藏命令：</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash list
 </code></pre></div>
-<p>紧急bug修复完了，你可以恢复到原来的分支，并恢复之前贮藏的代码，即未提交的代码。恢复贮藏有两种办法，一个是用 git stash apply 恢复，恢复后，stash内容没有删除，需要用 git stash drop 来删除。另一种办法是用 git stash pop，恢复的同时把stash内容也删除了。</p>
+<p>紧急 bug 修复完了，你可以恢复到原来的分支，并恢复之前贮藏的代码，即未提交的代码。恢复贮藏有两种办法，一个是用 git stash apply 恢复，恢复后，stash 内容没有删除，需要用 git stash drop 来删除。另一种办法是用 git stash pop，恢复的同时把 stash 内容也删除了。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash apply
 <span class="nv">$ </span>git stash drop
 </code></pre></div><div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash pop
@@ -30,10 +30,10 @@
 <p>如果你有多个贮藏，查看贮藏里它们都有 0，1，2 编号，可以用以下命令来删除特定的贮藏。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash pop stash@<span class="o">{</span>0<span class="o">}</span>
 </code></pre></div>
-<p>如果你修改了某个文件，突然不想把它给添加进暂存区，并且想丢弃修改，可是使用以下命令，它会让文件回到最近一次commit或add时的状态，注意的是checkout后面有两个杆杆。</p>
+<p>如果你修改了某个文件，突然不想把它给添加进暂存区，并且想丢弃修改，可是使用以下命令，它会让文件回到最近一次 commit 或 add 时的状态，注意的是 checkout 后面有两个杆杆。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git checkout -- README.md
 </code></pre></div>
-<p>还有一种情况，想取消添加到暂存区的文件，可以使用reset命令。</p>
+<p>还有一种情况，想取消添加到暂存区的文件，可以使用 reset 命令。</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset HEAD README.md
 </code></pre></div>
 <p>还有就是提交了不想提交的代码，后悔了，想恢复，那就只能进行版本回退，以下命令为回退上一个版本</p>
@@ -50,7 +50,7 @@
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
-    <div class="ds-thread" data-thread-key="_posts/2016-04-03-git-command.md" data-title="git简单命令" data-url="/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/2016/04/03/git-command.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2016-04-03-git-command.md" data-title="Git 简单命令" data-url="/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/2016/04/03/git-command.html"></div>
 </div>
 
 <script type="text/javascript">

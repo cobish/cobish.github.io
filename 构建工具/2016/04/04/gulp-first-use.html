@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>gulp初次试用</title>
+    <title>gulp 初次试用</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
@@ -14,11 +14,11 @@
     <a href="/">cobish.github.io</a>
 </div>
     <div class="article">
-    <h3 class="article-title">gulp初次试用</h3>
+    <h3 class="article-title">gulp 初次试用</h3>
     <p class="article-time">2016-04-04</p>
-    <div class="article-desc article-content"><p>我在用了grunt的一段时间内，越来越觉得自己离不开构建工具。但是，grunt的构建速度让我有点苦恼，即使是编译sass也需要花上一段时间。于是，我开始试用gulp，结果意外地让我惊喜。</p>
+    <div class="article-desc article-content"><p>我在用了 Grunt 的一段时间内，越来越觉得自己离不开构建工具。但是，Grunt 的构建速度让我有点苦恼，即使是编译 sass 也需要花上一段时间。于是，我开始试用 gulp，结果意外地让我惊喜。</p>
 
-<p>下面代码是使用gulp初次来编译sass，由于一直都有点习惯了grunt那编译速度单位为秒级别的速度，刚输入命令还没反应过来，就已经以毫秒级的速度编译完了。</p>
+<p>下面代码是使用 gulp 初次来编译 sass，由于一直都有点习惯了 Grunt 那编译速度单位为秒级别的速度，刚输入命令还没反应过来，就已经以毫秒级的速度编译完了。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">sass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-sass&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">sourcemaps</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-sourcemaps&#39;</span><span class="p">);</span>
@@ -32,11 +32,11 @@
     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dev/css&#39;</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>比较一下grunt与gulp编译同一套sass代码下所花费的时间：</p>
+<p>比较一下 Grunt 与 gulp 编译同一套 sass 代码下所花费的时间：</p>
 
 <p><img src="/assets/blog-img/gulp-first-use/01.png" alt="gulp与grunt的比较"></p>
 
-<p>并不是说grunt就比gulp不好，也有gulp办不到grunt办得到的事情。但是就运行速度相比，gulp的速度确实是完胜。</p>
+<p>并不是说 Grunt 就比 gulp 不好，也有 gulp 办不到 Grunt 办得到的事情。但是就运行速度相比，gulp 的速度确实是完胜。</p>
 </div>
 </div>
 
@@ -46,7 +46,7 @@
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
-    <div class="ds-thread" data-thread-key="_posts/2016-04-04-gulp-first-use.md" data-title="gulp初次试用" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/04/04/gulp-first-use.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2016-04-04-gulp-first-use.md" data-title="gulp 初次试用" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/04/04/gulp-first-use.html"></div>
 </div>
 
 <script type="text/javascript">

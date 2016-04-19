@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>基于grunt的前端构建</title>
+    <title>基于 Grunt 的前端构建</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
@@ -14,9 +14,9 @@
     <a href="/">cobish.github.io</a>
 </div>
     <div class="article">
-    <h3 class="article-title">基于grunt的前端构建</h3>
+    <h3 class="article-title">基于 Grunt 的前端构建</h3>
     <p class="article-time">2016-01-30</p>
-    <div class="article-desc article-content"><p>在<a href="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2015/06/28/grunt-use.html">「grunt的初次使用」</a>的基础上，这一篇继续对grunt进行探索研究。这一次不再使用php进行include静态文件，而是在html里面引入。然后主要将grunt用于两个大的方向，一个是用于开发期间，一个用于上线前期打包。使用到的插件可能有些更换。具体目录如下，src目录用于开发与维护，dist目录是打包后的项目，用于上线：</p>
+    <div class="article-desc article-content"><p>在<a href="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2015/06/28/grunt-use.html">「Grunt的初次使用」</a>的基础上，这一篇继续对 Grunt 进行探索研究。这一次不再使用 php 进行 include 静态文件，而是在 html 里面进行 include。然后主要将 Grunt 用于两个大的方向，一个是用于开发期间，一个用于上线前期打包。使用到的插件可能有些更换。具体目录如下，src 目录用于开发与维护，dist 目录是打包后的项目，用于上线：</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">├─ dist/
     ├─ css/
     ├─ images/
@@ -29,7 +29,7 @@
     ├─ sass/
     └─ view/
 </code></pre></div>
-<p>在开发期间，使用到的grunt插件如下，watch插件用了监听文件，一旦文件被修改，可以让它触发浏览器自动刷新：</p>
+<p>在开发期间，使用到的 Grunt 插件如下，watch 插件用了监听文件，一旦文件被修改，可以让它触发浏览器自动刷新：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
   <span class="s2">&quot;grunt-contrib-jshint&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.12.0&quot;</span><span class="p">,</span>
@@ -37,7 +37,7 @@
   <span class="s2">&quot;grunt-contrib-watch&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.6.1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>图片不需要压缩，css使用sass编译，js使用了requirejs，并使用jshint进行检错。其中sass编译好后会在同一目录下生成对应的css目录与文件。jshint的具体配置参考<a href="https://github.com/cobish/grunt-demo/blob/master/grunt-contrib-jshint-demo/Gruntfile.js">「例子」</a>。</p>
+<p>图片不需要压缩，css 使用 sass 编译，js 使用了 requirejs，并使用 jshint 进行检错。其中 sass 编译好后会在同一目录下生成对应的 css 目录与文件。jshint 的具体配置参考<a href="https://github.com/cobish/grunt-demo/blob/master/grunt-contrib-jshint-demo/Gruntfile.js">「例子」</a>。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">sass</span><span class="o">:</span> <span class="p">{</span>
   <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
@@ -65,9 +65,9 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙博客里讲的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码？」</a>，于是便有了非覆盖式发布和静态文件hash，用到了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>和<a href="https://www.npmjs.com/package/grunt-usemin">「grunt-usemin」</a>这两个插件。网上有很多教程都是图片、css、js文件同一时间进行hash，但我觉得这样不妥，毕竟css(js)代码里引用到了图片，得先图片进行hash后替换了css(js)里引用的路径，然后再对css(js)进行hash才能保证哪些文件是修改过的。</p>
+<p>在开发结束后，接下来就是让项目上线了，于是就有了打包项目的过程。看过张云龙博客里讲的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码？」</a>，于是便有了非覆盖式发布和静态文件hash，用到了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>和<a href="https://www.npmjs.com/package/grunt-usemin">「grunt-usemin」</a>这两个插件。网上有很多教程都是图片、css、js 文件同一时间进行 hash，但我觉得这样不妥，毕竟 css（js）代码里引用到了图片，得先图片进行 hash 后替换了 css（js）里引用的路径，然后再对 css（js）进行hash才能保证哪些文件是修改过的。</p>
 
-<p>打包分四个步骤。按顺序分别是图片的打包、css文件的打包、js文件的打包、html文件的打包。使用到的插件如下：</p>
+<p>打包分四个步骤。按顺序分别是图片的打包、css 文件的打包、js 文件的打包、html 文件的打包。使用到的插件如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
   <span class="s2">&quot;grunt-contrib-clean&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.7.0&quot;</span><span class="p">,</span>
@@ -89,7 +89,7 @@
   <span class="s2">&quot;time-grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^1.2.1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>首先得将dist目录给删除掉，因为是非覆盖式部署，所以删掉一些过期用不到的静态文件。第一个步骤是图片打包，将需要合并的图片合并了（并修改对应的css文件）放置于临时目录（tmp），不需要合并的图片则复制粘贴到临时目录（tmp）。然后对临时目录里的图片进行压缩，最后hash后放置于dist生产环境目录。</p>
+<p>首先得将 dist 目录给删除掉，因为是非覆盖式部署，所以删掉一些过期用不到的静态文件。第一个步骤是图片打包，将需要合并的图片合并了（并修改对应的 css 文件）放置于临时目录（tmp），不需要合并的图片则复制粘贴到临时目录（tmp）。然后对临时目录里的图片进行压缩，最后 hash 后放置于 dist 生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤一：对图片进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">&#39;clean:dist&#39;</span><span class="p">,</span>
@@ -99,7 +99,7 @@
   <span class="s1">&#39;filerev:img&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p>第二个步骤是css文件的打包，先用sass将css压缩到临时目录(tmp)中，接着用usemin替换掉里面的已经hash的图片资源，最后将css文件进行hash后放置于dist生产环境目录。</p>
+<p>第二个步骤是 css 文件的打包，先用 sass 将 css 压缩到临时目录(tmp)中，接着用 usemin 替换掉里面的已经 hash 的图片资源，最后将 css 文件进行 hash 后放置于 dist 生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤二：对css进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">&#39;sass:dist&#39;</span><span class="p">,</span>
@@ -107,7 +107,7 @@
   <span class="s1">&#39;filerev:css&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p>第三个步骤是js文件的打包，用的是requirejs插件将js文件合并压缩到临时目录(tmp)，然后替换掉文件里的图片资源路径，最后hash到生产环境目录（dist），并把不需要hash的第三方库复制到dist生产环境目录。</p>
+<p>第三个步骤是 js 文件的打包，用的是 requirejs 插件将 js 文件合并压缩到临时目录（tmp），然后替换掉文件里的图片资源路径，最后 hash 到生产环境目录（dist），并把不需要 hash 的第三方库复制到 dist 生产环境目录。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤三：对js进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;js&#39;</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">&#39;requirejs&#39;</span><span class="p">,</span>
@@ -116,7 +116,7 @@
   <span class="s1">&#39;copy:js&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p>第四个步骤则是html文件的打包，先用grunt-replace把里面的php include替换成特定的模式放置于临时目录(tmp)，然后再用grunt-include-replace把html依赖的html片段复制粘贴到一个html中，紧接着替换到html中的已hash的静态文件（包括css，js，image），最后将html压缩至dist目录下。</p>
+<p>第四个步骤则是 html 文件的打包，先用 grunt-replace 把里面的 php include 替换成特定的模式放置于临时目录（tmp），然后再用 grunt-include-replace 把 html 依赖的 html 片段复制粘贴到一个 html 中，紧接着替换到 html 中的已 hash 的静态文件（包括css，js，image），最后将 html 压缩至 dist 目录下。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤四：对html进行打包</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">&#39;replace:before&#39;</span><span class="p">,</span>
@@ -127,7 +127,7 @@
   <span class="s1">&#39;clean:tmp&#39;</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p>最后如果你想问我为什么上面的四个步骤不直接写成一个task呢，我也无能为力。我试过写成一个task，后果则是文件里的图片资源路径没能够替换成功，可能是在一个task内usemin插件无法执行多次，于是我就分类写成四个了。
+<p>最后如果你想问我为什么上面的四个步骤不直接写成一个 task 呢，这是我一直解不开的问题。我试过写成一个 task，后果则是文件里的图片资源路径没能够替换成功，可能是在一个 task 内 usemin 插件无法执行多次，于是我就分类写成四个了。
 最后总结一下，以上的方式的好处就在于开发时期不需要去合并压缩文件，方便调试。而生产环境则是尽可能去合并压缩，减少用户的请求时间。</p>
 </div>
 </div>
@@ -138,7 +138,7 @@
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
-    <div class="ds-thread" data-thread-key="_posts/2016-01-30-grunt-use-2.md" data-title="基于grunt的前端构建" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/01/30/grunt-use-2.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2016-01-30-grunt-use-2.md" data-title="基于 Grunt 的前端构建" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/01/30/grunt-use-2.html"></div>
 </div>
 
 <script type="text/javascript">

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
-    <title>grunt添加版本号</title>
+    <title>Grunt 添加版本号</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
@@ -14,7 +14,7 @@
     <a href="/">cobish.github.io</a>
 </div>
     <div class="article">
-    <h3 class="article-title">grunt添加版本号</h3>
+    <h3 class="article-title">Grunt 添加版本号</h3>
     <p class="article-time">2016-01-21</p>
     <div class="article-desc article-content"><p>为了上线之后用户能使用到最新的静态资源，大部分人会使用添加时间戳来清掉缓存，类似于下面这样的代码。读过张云龙的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码」</a>，意识这种方法有几个弊端。一则是每次修改一下时间戳全部的静态资源都会重新被下载一次，没有修改过的文件又重新下载一遍明显是一种浪费。二则是这种方法是一种覆盖式发布，无论先部署页面还是先部署静态资源，期间都可能有用户访问到页面，都有可能造成了页面显示错乱问题，所以需要一种非覆盖式的发布方法来避免这种情况。</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- css --&gt;</span>
@@ -27,7 +27,7 @@
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">css/index.css  -&gt;  css/index.aa59f6ab.css
 img/demo.png   -&gt;  img/demo.aa59f6ac.png
 </code></pre></div>
-<p>接下要怎么实现以上方法呢？要用的工具是Grunt，使用到的插件如下：</p>
+<p>接下要怎么实现以上方法呢？要用的工具是 Grunt，使用到的插件如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
   <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
   <span class="s2">&quot;grunt-contrib-clean&quot;</span><span class="o">:</span> <span class="s2">&quot;^1.0.0&quot;</span><span class="p">,</span>
@@ -36,7 +36,7 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
   <span class="s2">&quot;grunt-usemin&quot;</span><span class="o">:</span> <span class="s2">&quot;^3.1.1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>这里暂时不涉及到js文件，处理js文件跟处理css文件类似。使用了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>便可以很轻松地生成hash后的静态文件。</p>
+<p>这里暂时不涉及到 js 文件，处理 js 文件跟处理 css 文件类似。使用了<a href="https://www.npmjs.com/package/grunt-filerev">「grunt-filerev」</a>便可以很轻松地生成 hash 戳后的静态文件。</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 静态文件hash</span>
 <span class="nx">filerev</span><span class="o">:</span> <span class="p">{</span>
   <span class="nx">img</span><span class="o">:</span> <span class="p">{</span>
@@ -63,7 +63,7 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
   <span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;dest/html/**/*.html&#39;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>以下的步骤都会避免修改到源文件。具体步骤则是先将图片hash后放置于dest目录（发布目录）。然后将css代码都复制到一个tmp目录（临时目录），替换里面变更的图片名字，再将css文件hash后放置于dest目录。接着将html代码复制到dest目录，替换里面引用到的图片和css文件名。最后将tmp目录删除。具体代码实现如下：</p>
+<p>以下的步骤都会避免修改到源文件。具体步骤则是先将图片 hash 后放置于 dest 目录（发布目录）。然后将 css 代码都复制到一个tmp目录（临时目录），替换里面变更的图片名字，再将 css 文件 hash 后放置于 dest 目录。接着将 html 代码复制到 dest 目录，替换里面引用到的图片和 css 文件名。最后将 tmp 目录删除。具体代码实现如下：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 步骤一：对图片进行处理</span>
 <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">&#39;filerev:img&#39;</span>
@@ -93,7 +93,7 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
 
 <div id="ds" class="article">
     <!-- 多说评论框 -->
-    <div class="ds-thread" data-thread-key="_posts/2016-01-21-grunt-verision.md" data-title="grunt添加版本号" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/01/21/grunt-verision.html"></div>
+    <div class="ds-thread" data-thread-key="_posts/2016-01-21-grunt-verision.md" data-title="Grunt 添加版本号" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/01/21/grunt-verision.html"></div>
 </div>
 
 <script type="text/javascript">
