@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>基于 gulp 的前端构建</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">基于 gulp 的前端构建</h3>
+    <p class="article-time">2016-05-14</p>
+    <div class="article-desc article-content"><p>先贴出原文<a href="https://github.com/cobish/gulp-project/issues/1">「基于 gulp 的前端构建」</a>和代码<a href="https://github.com/cobish/gulp-project">「gulp-project」</a>。</p>
+
+<p>项目目录如下：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">├─ gulp/                  <span class="c"># gulp配置目录</span>
+    ├─ tasks              <span class="c"># 任务配置目录</span>
+        ├─ image.js       <span class="c"># 图片配置</span>
+        ├─ other.js       <span class="c"># 其它配置</span>
+        ├─ script.js      <span class="c"># 脚本配置</span>
+        ├─ style.js       <span class="c"># 样式配置</span>
+        └─ view.js        <span class="c"># 页面配置</span>
+    └─ config             <span class="c"># gulp配置文件</span>
+├─ src/                   <span class="c"># 开发目录</span>
+    ├─ html/              <span class="c"># 存放html的目录</span>
+        ├─ app/           <span class="c"># 可提取复用的页面模块</span>
+        └─ page/          <span class="c"># 各页面入口文件</span>
+    ├─ images/            <span class="c"># 存放图片的目录</span>
+        ├─ single/        <span class="c"># 不需要合并的图片</span>
+        └─ sprite/        <span class="c"># 需要合并的图片</span>
+    ├─ js/                <span class="c"># 存放js的目录</span>
+        ├─ app/           <span class="c"># 可提取复用的脚步模块</span>
+        ├─ lib/           <span class="c"># 第三方js库</span>
+        ├─ page/          <span class="c"># 各页面入口脚本文件</span>
+        └─ config.js      <span class="c"># RequireJs的配置文件</span>
+    └─ sass/              <span class="c"># 存放sass的目录</span>
+        ├─ app/           <span class="c"># 可提取复用的样式模块</span>
+        └─ page/          <span class="c"># 各页面入口样式文件</span>
+├─ .jshintrc              <span class="c"># jshint参数配置文件</span>
+├─ gulpfile.js            <span class="c"># gulp入口配置文件</span>
+└─ package.json           <span class="c"># npm包管理文件</span>
+</code></pre></div>
+<p>其中专门创建一个 gulp 目录用来存放 gulp 代码，为了能够将任务更加细化，职责单一，方便日后的维护更新。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">└─ gulp/                  <span class="c"># gulp配置目录</span>
+    ├─ tasks              <span class="c"># 任务配置目录</span>
+        ├─ image.js       <span class="c"># 图片配置</span>
+        ├─ other.js       <span class="c"># 其它配置</span>
+        ├─ script.js      <span class="c"># 脚本配置</span>
+        ├─ style.js       <span class="c"># 样式配置</span>
+        └─ view.js        <span class="c"># 页面配置</span>
+    └─ config             <span class="c"># gulp配置文件</span>
+</code></pre></div>
+<p>配置的命令如下：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gulp <span class="nb">help</span>          <span class="c"># 说明帮助</span>
+<span class="nv">$ </span>gulp sass          <span class="c"># sass本地编译</span>
+<span class="nv">$ </span>gulp jshint        <span class="c"># js语法检测</span>
+<span class="nv">$ </span>gulp include       <span class="c"># html包含依赖编译</span>
+<span class="nv">$ </span>gulp dev           <span class="c"># 开发监控，浏览器不自动刷新</span>
+<span class="nv">$ </span>gulp serve         <span class="c"># 开发监控，浏览器自动刷新</span>
+<span class="nv">$ </span>gulp build         <span class="c"># 打包上线</span>
+</code></pre></div>
+<p>在开发阶段，执行 gulp dev 命令，gulp 会进行一系列构建操作，最后在 dist 目录下生成可运行文件，并实时监听源文件，一旦源文件改动会执行相应的操作。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 开发监控，浏览器不自动刷新</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;clean:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;clean:tmp&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;copy:img&#39;</span><span class="p">,</span> <span class="s1">&#39;sass&#39;</span><span class="p">,</span> <span class="s1">&#39;jshint&#39;</span><span class="p">,</span> <span class="s1">&#39;copy:js&#39;</span><span class="p">,</span> <span class="s1">&#39;include&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;watch&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>执行 gulp serve 命令，gulp 会执行跟 gulp dev 一样的操作并监听源文件，唯一不同的是它在执行后会监听某个端口，一旦有文件改动它会帮你自动刷新浏览器，帮你省下了按 F5 的力气。当然在同时开上多个浏览器测试页面时它将会很有帮助。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 开发监控，浏览器自动刷新</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;serve&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;clean:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;clean:tmp&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;copy:img&#39;</span><span class="p">,</span> <span class="s1">&#39;sass&#39;</span><span class="p">,</span> <span class="s1">&#39;jshint&#39;</span><span class="p">,</span> <span class="s1">&#39;copy:js&#39;</span><span class="p">,</span> <span class="s1">&#39;include&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;reload&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>在上线打包阶段，通过以下代码一个大体知道，上线打包主要是对图片样式脚本进行打包处理。所以接下来的工作就是职责分工，独立完成各自的构建工作。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;clean:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;clean:tmp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;build:img&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;build:css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;build:js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;build:html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;clean:tmp&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>第一个步骤主要是对图片进行处理，包括图片合并压缩 hash 戳等。其中对 css 代码处理是为了替换合并后的图片路径。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 打包图片</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;build:img&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;sass:tmp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;copy:tmpImg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;autoSprite&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;imagemin&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rev:img&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">)</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>第二个步骤主要是对 css 文件进行处理，其中还包括替换已经 hash 的图片资源，并生成 hash 戳。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 打包css文件</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;build:css&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;usemin:css&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sass:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rev:css&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>第三个步骤是 js 文件的打包，打包 RequireJs 代码可以根据依赖进行 js 文件的合并压缩，最终每个页面都打包一个 js 文件为单入口。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 打包js文件</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;build:js&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;requirejs&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uglify:config&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rev:js&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;copy:js&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>第四个步骤是 html 文件的打包，替换掉前面已经 hash 的静态资源即可。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 打包html文件</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;build:html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">runSequence</span><span class="p">(</span>
+        <span class="s1">&#39;include&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;usemin:html&#39;</span><span class="p">,</span>
+        <span class="nx">cb</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>最终生成的代码依然在 dist 目录下，也就是说在开发阶段与上线打包阶段构建生成的代码都在同一个目录下，只不过在开发阶段代码是未进行合并压缩，上线打包阶段代码是经过合并压缩打上 hash 戳的。所以建议该目录下的代码不需要添加到版本控制中。</p>
+
+<p>未解决的问题是对 RequireJs 的路径配置（config.js 与 gulp 中的配置）感到困惑迷糊，多创建一个目录就路径不匹配打包不成功。还有RequireJS 若添加第三方库，需要手动修改 gulp 代码，个人感觉比较麻烦。</p>
+</div>
+</div>
+
+<!-- <a id="showDs">
+    显示评论
+</a> -->
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-05-14-gulp-use.md" data-title="基于 gulp 的前端构建" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/05/14/gulp-use.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
+</script>
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
