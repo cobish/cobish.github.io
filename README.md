@@ -2,7 +2,7 @@
 
 ## 环境变量
 
-请在 **Mac** 或 **linux** 上运行 ``Makefile`` 文件，它将会编译 jekyll 并提交博客的代码到 Github 上，放弃 ``Windows`` 吧，它不适合运行 ``Makefile`` 文件。
+为了能够运行 ``Makefile`` 文件，需将 ``jekyll`` 和 ``git`` 设置为全局变量。Windows 请将 ``Makefile`` 修改成 ``Makefile.bat``。
 
 jekyll 版本号
 

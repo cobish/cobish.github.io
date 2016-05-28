@@ -10,8 +10,10 @@
 	rm -r /tmp/_site/
 	git add -A
 	git commit -m "deploy blog"
+	git pull
 	git push origin master
 	git checkout source
 	echo "deploy succeed"
+	git pull
 	git push origin source
 	echo "push source"
