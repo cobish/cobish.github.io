@@ -15,7 +15,7 @@
 </div>
     <div class="article">
     <h3 class="article-title">合并图片</h3>
-    <p class="article-time">2016-04-17</p>
+    <p class="article-time">2016-04-17， 浏览量：<span data-hk-page="current"> - </span> 次</p>
     <div class="article-desc article-content"><p>一直在寻找更优的方式来解决合并图片问题。这种方式需要满足几个要求：首先它能够将一个或多个 css 文件里引用到的图片合并成一张图片，接着它要能对应地修改 css 里图片的路径，最后它还要能方便维护修改，即如果我想替换图片或增加图片，它能够重新合并图片。</p>
 
 <p>过去都是设计师把所有的小图标合并成一张大的图片，这需要我们不断地去修改 background-position 来调整小图片的显示。这种方式的好处就是前端不需要去合并图片，直接图片拿来使用即可。但它也有一些缺点，图片并不是以最优的方式合并，还可以合并成大小更小的图片；还有就是大图片里的小图标需要更换或是添加的时候，都必须让设计师找到原图进行更改，并且得保证原来的小图标位置不能改动，不然 css 代码也需要随之改动。</p>
@@ -67,7 +67,9 @@
     // };
 </script>
 
-    <script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-lc-0.2.0.js"></script>
+<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");

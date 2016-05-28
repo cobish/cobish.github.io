@@ -15,7 +15,7 @@
 </div>
     <div class="article">
     <h3 class="article-title">Grunt 添加版本号</h3>
-    <p class="article-time">2016-01-21</p>
+    <p class="article-time">2016-01-21， 浏览量：<span data-hk-page="current"> - </span> 次</p>
     <div class="article-desc article-content"><p>为了上线之后用户能使用到最新的静态资源，大部分人会使用添加时间戳来清掉缓存，类似于下面这样的代码。读过张云龙的<a href="https://github.com/fouber/blog/issues/6">「大公司里怎样开发和部署前端代码」</a>，意识这种方法有几个弊端。一则是每次修改一下时间戳全部的静态资源都会重新被下载一次，没有修改过的文件又重新下载一遍明显是一种浪费。二则是这种方法是一种覆盖式发布，无论先部署页面还是先部署静态资源，期间都可能有用户访问到页面，都有可能造成了页面显示错乱问题，所以需要一种非覆盖式的发布方法来避免这种情况。</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- css --&gt;</span>
 <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;index.css?t=20160121&quot;</span> <span class="nt">/&gt;</span>
@@ -115,7 +115,9 @@ img/demo.png   -&gt;  img/demo.aa59f6ac.png
     // };
 </script>
 
-    <script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-lc-0.2.0.js"></script>
+<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
