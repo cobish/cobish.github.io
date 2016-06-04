@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>文字分割线的三种方法</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">文字分割线的三种方法</h3>
+    <p class="article-time">2016-06-04， 浏览量：<span data-hk-page="current"> - </span> 次</p>
+    <div class="article-desc article-content"><style type="text/css">
+.box,
+.box-bg {
+    margin: 10px auto;
+    background: #f7f7f7;
+    padding: 25px 0;
+    border: 1px solid #e3edf3;
+}
+
+.box-bg {
+    color: #fff;
+    background: url("/assets/blog-img/text-cut/01.png");
+}
+
+.line-1 {
+    width: 150px;
+    margin: 0 auto;
+    line-height: 1px;
+    text-align: center;
+    border-left: 200px solid red;
+    border-right: 200px solid red;
+}
+
+.box-bg .line-1 {
+    border-color: #fff;
+}
+
+.line-2 {
+    margin: 0 auto;
+    width: 550px;
+    height: 1px;
+    text-align: center;
+    background: blue;
+}
+.line-2 span {
+    position: relative;
+    top: -13px;
+    background: #f7f7f7;
+    padding: 0 20px;
+}
+
+.box-bg .line-2 {
+    background: #fff;
+}
+
+.box-bg .line-2 span {
+    background: red;
+}
+
+.line-3 {
+    width: 550px;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    border-color: green;
+    text-align: center;
+}
+.line-3 legend {
+    display: block;
+    padding: 0 20px;
+}
+
+.box-bg .line-3 {
+    border-color: #fff;
+}
+</style>
+
+<p>有很多网站都有这么一种实现：就一条分割线的中间有文字的显示，以下则列出三种实现方法。</p>
+
+<p>第一种实现方法的思路是设置 border 和 line-height，看看以下代码：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;line-1&quot;</span><span class="nt">&gt;</span>文字分割线-1<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p>样式如下：</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.line-1</span> <span class="p">{</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">150px</span><span class="p">;</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+    <span class="k">line-height</span><span class="o">:</span> <span class="m">1px</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+    <span class="k">border-left</span><span class="o">:</span> <span class="m">200px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+    <span class="k">border-right</span><span class="o">:</span> <span class="m">200px</span> <span class="k">solid</span> <span class="nb">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>效果：</p>
+
+<div class="box">
+    <div class="line-1">文字分割线-1</div>
+</div>
+
+<p>第二种实现方法则是控制 top 属性，代码如下：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;line-2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span&gt;</span>文字分割线-2<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p>样式如下：</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.line-2</span> <span class="p">{</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">550px</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span> <span class="m">1px</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+    <span class="k">background</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.line-2</span> <span class="nt">span</span> <span class="p">{</span>
+    <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+    <span class="k">top</span><span class="o">:</span> <span class="m">-13px</span><span class="p">;</span>
+    <span class="k">background</span><span class="o">:</span> <span class="m">#f7f7f7</span><span class="p">;</span>
+    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>效果如下：</p>
+
+<div class="box">
+    <div class="line-2">
+        <span>文字分割线-2</span>
+    </div>
+</div>
+
+<p>第三种实现方式则是利用 html 中的 fieldset 标签，具体代码如下：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;fieldset</span> <span class="na">class=</span><span class="s">&quot;line-3&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;legend&gt;</span>文字分割线-3<span class="nt">&lt;/legend&gt;</span>
+<span class="nt">&lt;/fieldset&gt;</span>
+</code></pre></div>
+<p>样式如下：</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.line-3</span> <span class="p">{</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">550px</span><span class="p">;</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+    <span class="k">border-style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+    <span class="k">border-width</span><span class="o">:</span> <span class="m">1px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">border-color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.line-3</span> <span class="nt">legend</span> <span class="p">{</span>
+    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="box">
+    <fieldset class="line-3">
+        <legend>文字分割线-3</legend>
+    </fieldset>
+</div>
+
+<p>最后比较以下三种方法吧。第一种和第二种方法里的文字和分割线只有 1px 的高度，而第三种所占的高度是文字的高度。如果背景只是纯色的话三种方法均可，但如果是有背景图当背景的话，则第二种方式不适合。</p>
+
+<p>方法一：
+<div class="box-bg">
+    <div class="line-1">文字分割线-1</div>
+</div></p>
+
+<p>方法二：
+<div class="box-bg">
+    <div class="line-2">
+        <span>文字分割线-2</span>
+    </div>
+</div></p>
+
+<p>方法三：
+<div class="box-bg">
+    <fieldset class="line-3">
+        <legend>文字分割线-3</legend>
+    </fieldset>
+</div></p>
+</div>
+</div>
+
+<!-- <a id="showDs">
+    显示评论
+</a> -->
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-06-04-text-cut.md" data-title="文字分割线的三种方法" data-url="/%E5%89%8D%E7%AB%AF/2016/06/04/text-cut.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
+</script>
+
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-lc-0.2.0.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
