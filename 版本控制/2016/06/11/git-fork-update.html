@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>Git 同步 fork 的代码</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">Git 同步 fork 的代码</h3>
+    <p class="article-time">2016-06-11， 浏览量：<span data-hk-page="current"> - </span> 次</p>
+    <div class="article-desc article-content"><p>在 fork 了别人的一个项目，这时如果发现了别人的项目更新了，要怎么做才能把他更新的代码给拿过来呢？</p>
+
+<p>首先需给 fork 的项目配置一个 remote。可以先查看远程状态。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git remote -v
+origin  git@github.com:cobish/fork-demo.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:cobish/fork-demo.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div>
+<p>添加一个将被同步给 fork 远程的上游仓库。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git remote add upstream https://github.com/wabish/fork-demo.git
+</code></pre></div>
+<p>然后再次查看远程状态，可以发现 fork 的仓库也被加进来了</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git remote -v
+origin  git@github.com:cobish/fork-demo.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:cobish/fork-demo.git <span class="o">(</span>push<span class="o">)</span>
+upstream    https://github.com/wabish/fork-demo.git <span class="o">(</span>fetch<span class="o">)</span>
+upstream    https://github.com/wabish/fork-demo.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div>
+<p>接下来就是使用 fetch 来更新代码了，fetch 后会被存储在一个本地分支 upstream/master 上。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git fetch upstream
+remote: Counting objects: 3, <span class="k">done</span>.
+remote: Compressing objects: 100% <span class="o">(</span>2/2<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">3</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">3</span> <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+Unpacking objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span>.
+From https://github.com/wabish/fork-demo
+   ee75d93..9b9d3cc  master     -&gt; upstream/master
+</code></pre></div>
+<p>这样就更新成功，但还需要将分支 upstream/master 合并到我们自己的 master 分支上。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git merge upstream/master
+</code></pre></div>
+<p>到这里已经完成了同步 fork 上更新的代码，最后还需 push 到 Github 上。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git push origin master
+</code></pre></div>
+<p>因为项目已经配置了 remote，所以如果下次 fork 的项目又更新的，只要在使用 fetch 和 merge 即可更新自己的项目上。</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">➜ git fetch upstream
+➜ git merge upstream/master
+</code></pre></div></div>
+</div>
+
+<!-- <a id="showDs">
+    显示评论
+</a> -->
+
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-06-11-git-fork-update.md" data-title="Git 同步 fork 的代码" data-url="/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/2016/06/11/git-fork-update.html"></div>
+</div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+
+    // var showDs = document.getElementById('showDs'),
+    //     ds = document.getElementById('ds');
+    //
+    // showDs.onclick = function() {
+    //     showDs.style.display = 'none';
+    //     ds.style.display = 'block';
+    // };
+</script>
+
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-lc-0.2.0.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
