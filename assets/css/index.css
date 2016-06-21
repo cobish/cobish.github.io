@@ -65,7 +65,7 @@ a:hover {
 }
 
 .highlight {
-    background: #f7f7f7;
+    background: #fcfcfc;
     font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
     font-size: 13px;
     font-style: normal;
@@ -73,8 +73,8 @@ a:hover {
     margin: 7px 0;
     padding: 0 15px;
     overflow: auto;
-    border: 1px solid #e3edf3;
-    border-radius: 2px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
 }
 
 .highlight .lineno {
