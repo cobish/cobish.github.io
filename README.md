@@ -23,5 +23,5 @@ jekyll 2.5.3
 
 ## terminal 命令
 
-- 本地运行 ``jekyll serve``可进行调试；
-- 运行 ``make`` 可进行提交代码。
+- 本地运行 ``jekyll serve`` 命令可进行调试；
+- 运行 ``make`` 命令可进行提交代码。
