@@ -111,16 +111,6 @@ a:hover {
     font-size: 14px;
 }
 
-#list {
-    margin-left: 50px;
-}
-
-#category {
-    margin-left: 50px;
-    margin-bottom: 12px;
-    color: #666;
-}
-
 .avatar {
     margin: 0 auto;
     width: 120px;
@@ -141,9 +131,31 @@ a:hover {
     background: none;
 }
 
+.list {
+    max-width: 650px;
+    margin: auto;
+    padding: 0 10px 50px 10px;
+}
+
+.category {
+    color: #666;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
 .list-post {
-    margin-bottom: 12px;
+    padding: 0 5px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #e5e5e5;
     font-size: 14px;
+    overflow: hidden;
+}
+
+.list-post:hover {
+    background: #f6f6f6;
 }
 
 .list-post span {
@@ -153,8 +165,7 @@ a:hover {
 
 .list-post .date-long {
     display: inline-block;
-    margin-right: 50px;
-    margin-left: 50px;
+    float: right;
 }
 
 .list-post a {
@@ -195,12 +206,14 @@ a:hover {
 .article-title {
     color: #ff001f;
     font-size: 18px;
+    text-align: center;
 }
 
 .article-time {
     color: #9b9b9b;
     font-size: 14px;
     margin: 5px 0 20px 0;
+    text-align: center;
 }
 
 #showDs {
@@ -223,11 +236,6 @@ a:hover {
     background: #e7e7e7;
 }
 
-/*#ds {
-    display: none;
-    overflow: hidden;
-}*/
-
 @media screen and (max-width: 667px) {
     #home {
         margin-top: -100px;
@@ -240,9 +248,6 @@ a:hover {
     }
     #category {
         margin-left: 25px;
-    }
-    .list-post .date-long {
-        margin: 0 35px;
     }
 }
 
