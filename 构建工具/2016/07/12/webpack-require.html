@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <title>webpack 第三方插件引用策略</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" media="screen" />    
+</head>
+<body class="font-hei">
+    <div id="logo">
+    <a href="/">cobish.github.io</a>
+</div>
+    <div class="article">
+    <h3 class="article-title">webpack 第三方插件引用策略</h3>
+    <p class="article-time">2016-07-12， 浏览量：<span data-hk-page="current"> - </span> 次</p>
+    <div class="article-desc article-content"><p>在<a href="https://github.com/cobish/gulp-webpack-project/issues/1">「基于 gulp + webpack 的前端构建」</a>中，我用 webpack 替代了 requires。随着 webpack 的深入使用，一些问题也逐渐暴露了出来，其中比较烦恼的是对第三方插件的引用问题。</p>
+
+<p>曾经我试过把 jQuery 打包进 vendor，虽然 $ 好用了，但是 jQuery 下的一系列插件就叫苦了。你想直接从 HTML 中引入 jQuery 的第三方插件？no way！既然 $ 算是 webpack 中的一个变量，那么你只能通过 require 的方式引入 jQuery 的第三方插件。第三方的插件命运只有两个，要不你就被打包进入引入你的 js 文件里，要不你就被引入 vendor 里。</p>
+
+<p>命运一，打包进引入的 js 文件里。如果多个 js 文件都引入了某一个 jQuery 插件，那么就会出现很多重复的代码，冗余。</p>
+
+<p>命运二，打包进 vendor 里。如果都打包进一个 vendor 里，那该文件得多大啊！自己手动配 vendor？你知道哪个插件用到的次数多，哪个用到的少吗？麻烦。</p>
+
+<p>后来我想，干脆第三方的插件我都不加入到 webpack 里，只有自己编写的代码用 webpack 来模块化就行了。第三方插件虽然都单独用了一个 http 请求，但它们改动不大，最终都会被浏览器缓存起来。</p>
+
+<p>说做就做，由于第三方的插件也分为几种，于是有以下几个需处理的事情：
+1、如何引入 jQuery？
+2、如何引入 jQuery 插件？
+3、如何引入不依赖 jQuery 的普通第三方插件？</p>
+
+<p>jQuery 直接在 html 中引入，然后在 webpack 中把它配置为全局即可。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">externals</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;window.$&#39;</span>
+<span class="p">},</span>
+</code></pre></div>
+<p>使用则直接 require 进来，反正 webpack 也不会把它打包进来。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>既然 $ 已经被设置为全局了，那么挂载在它下面的一系列 jQuery 插件就好办了，直接在 html 中引入。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;./src/lib/jquery-1.11.1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;./src/lib/jquery.nail.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p>js 中引入 jquery 直接使用即可。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#leftNav&#39;</span><span class="p">).</span><span class="nx">nail</span><span class="p">();</span>
+</code></pre></div>
+<p>最后就是打包普通的第三方插件了。有两种方案，一种是直接用 webpack 打包到引用到插件的 js 里去，这种不用多说，直接引入就行。另一种则是像 jQuery 一样设置为全局变量，同样的方式引入与使用。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">externals</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">artTemplate</span><span class="o">:</span> <span class="s1">&#39;window.template&#39;</span>
+<span class="p">},</span>
+</code></pre></div>
+<p>webpack 没有 requirejs 的那种引入了第三方插件然后可以忽略打包的功能。所以我对于第三方的插件的做法就是以前该怎么引入就怎么引入，在 webpack 中设置一个全局即可。</p>
+</div>
+</div>
+<div id="ds" class="article">
+    <!-- 多说评论框 -->
+    <div class="ds-thread" data-thread-key="_posts/2016-07-12-webpack-require.md" data-title="webpack 第三方插件引用策略" data-url="/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/2016/07/12/webpack-require.html"></div>
+</div>
+
+<!-- 浏览量 -->
+<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.10.js"></script>
+<script src="http://jerry-cdn.b0.upaiyun.com/hit-kounter/hit-kounter-lc-0.2.0.js"></script>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"cobish"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+    <script>
+if (document.domain.indexOf('github.io') > -1) {
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+}
+</script>
+
+</body>
+</html>
