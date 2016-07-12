@@ -16,7 +16,7 @@
     <div class="article">
     <h3 class="article-title">webpack 第三方插件引用策略</h3>
     <p class="article-time">2016-07-12， 浏览量：<span data-hk-page="current"> - </span> 次</p>
-    <div class="article-desc article-content"><p>在<a href="https://github.com/cobish/gulp-webpack-project/issues/1">「基于 gulp + webpack 的前端构建」</a>中，我用 webpack 替代了 requires。随着 webpack 的深入使用，一些问题也逐渐暴露了出来，其中比较烦恼的是对第三方插件的引用问题。</p>
+    <div class="article-desc article-content"><p>在<a href="https://github.com/cobish/gulp-webpack-project/issues/1">「基于 gulp + webpack 的前端构建」</a>中，我用 webpack 替代了 requirejs。随着 webpack 的深入使用，一些问题也逐渐暴露了出来，其中比较烦恼的是对第三方插件的引用问题。</p>
 
 <p>曾经我试过把 jQuery 打包进 vendor，虽然 $ 好用了，但是 jQuery 下的一系列插件就叫苦了。你想直接从 HTML 中引入 jQuery 的第三方插件？no way！既然 $ 算是 webpack 中的一个变量，那么你只能通过 require 的方式引入 jQuery 的第三方插件。第三方的插件命运只有两个，要不你就被打包进入引入你的 js 文件里，要不你就被引入 vendor 里。</p>
 
