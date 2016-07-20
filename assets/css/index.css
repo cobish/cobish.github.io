@@ -237,25 +237,7 @@ a:hover {
 }
 
 @media screen and (max-width: 667px) {
-    #home {
-        margin-top: -100px;
-    }
     #logo {
         padding: 25px 15px;
-    }
-    #list {
-       margin-left: 15px;
-    }
-    #category {
-        margin-left: 25px;
-    }
-}
-
-@media (min-width: 667px) and (max-width: 736px) {
-    #logo {
-        padding: 25px 43px;
-    }
-    #category {
-        margin-left: 43px;
     }
 }
