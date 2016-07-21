@@ -204,7 +204,7 @@ a:hover {
     margin-bottom: 26px;
 }
 
-.article-content code {
+.article-content p code {
     display: inline-block;
     margin: 0 1px;
     padding: 0 3px;
