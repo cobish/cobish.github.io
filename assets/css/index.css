@@ -187,6 +187,7 @@ a:hover {
 .article img {
     display: block;
     margin: 8px auto;
+    margin-top: -15px;
     max-width: 100%;
     border-radius: 2px;
 }
