@@ -65,13 +65,14 @@ a:hover {
 }
 
 .highlight {
+    margin-bottom: 26px;
+    margin-top: -18px;
+    padding: 0 15px;
     background: #fcfcfc;
     font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
     font-size: 13px;
     font-style: normal;
     line-height: 1.5;
-    margin: 7px 0;
-    padding: 0 15px;
     overflow: auto;
     border: 1px solid #dedede;
     border-radius: 4px;
@@ -83,7 +84,6 @@ a:hover {
 }
 
 #logo {
-    /*margin: 25px 50px;*/
     padding: 25px 50px;
 }
 
@@ -197,10 +197,40 @@ a:hover {
 
 .article-content {
     margin-top: -6px;
+    margin-bottom: -26px;
 }
 
 .article-content p {
-    margin-top: 26px;
+    margin-bottom: 26px;
+}
+
+.article-content code {
+    display: inline-block;
+    margin: 0 1px;
+    padding: 0 3px;
+    border-radius: 2px;
+    border-radius: 2px;
+    line-height: 20px;
+    background: #f7f7f9;
+    border: 1px solid #e3edf3;
+}
+
+.article-content strong {
+    color: #222;
+    font-weight: bold;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+    margin-bottom: 10px;
+    padding: 0 0 5px 0;
+    color: #333;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd
 }
 
 .article-title {
@@ -212,7 +242,7 @@ a:hover {
 .article-time {
     color: #9b9b9b;
     font-size: 14px;
-    margin: 5px 0 20px 0;
+    margin: 5px 0 25px 0;
     text-align: center;
 }
 
