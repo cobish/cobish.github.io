@@ -65,8 +65,8 @@ a:hover {
 }
 
 .highlight {
-    margin-bottom: 26px;
-    margin-top: -18px;
+    margin-bottom: 15px;
+    margin-top: -15px;
     padding: 0 15px;
     background: #fff;
     font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
@@ -187,7 +187,6 @@ a:hover {
 .article img {
     display: block;
     margin: 8px auto;
-    margin-top: -15px;
     max-width: 100%;
     border-radius: 2px;
 }
@@ -207,13 +206,13 @@ a:hover {
 
 .article-content p code {
     display: inline-block;
-    margin: 0 1px;
-    padding: 0 3px;
-    border-radius: 2px;
-    border-radius: 2px;
+    margin: 0 2px;
+    padding: 0 4px;
+    color: #dd0055;
+    border-radius: 3px;
     line-height: 20px;
-    background: #f7f7f9;
-    border: 1px solid #e3edf3;
+    background: #fafafa;
+    border: 1px solid #ddd;
 }
 
 .article-content strong {
