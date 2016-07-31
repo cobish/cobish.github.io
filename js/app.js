@@ -36,7 +36,7 @@
             data: {
                 filter: 'created',
                 per_page: 10000,
-                // access_token: CONFIG['access_token']
+                access_token: CONFIG['access_token']
             },
             beforeSend: function() {
                 $('#container').html('');
@@ -62,7 +62,7 @@
         $.ajax({
             url: 'https://api.github.com/repos/' + CONFIG['owner'] + '/' + CONFIG['repo'] + '/issues/' + id,
             data:{
-                // access_token: CONFIG['access_token']
+                access_token: CONFIG['access_token']
             },
             beforeSend: function() {
                 NProgress.start();
