@@ -36,7 +36,7 @@
             data: {
                 filter: 'created',
                 per_page: 10000,
-                access_token: CONFIG['access_token']
+                // access_token: CONFIG['access_token']
             },
             beforeSend: function() {
                 $('#container').html('');
@@ -51,6 +51,9 @@
                 cb && cb();
 
                 NProgress.done();
+            },
+            error: function() {
+                window.location.href = 'https://github.com/' + CONFIG['owner'] + '/' + CONFIG['repo'] + '/issues';
             }
         });
     }
@@ -62,7 +65,7 @@
         $.ajax({
             url: 'https://api.github.com/repos/' + CONFIG['owner'] + '/' + CONFIG['repo'] + '/issues/' + id,
             data:{
-                access_token: CONFIG['access_token']
+                // access_token: CONFIG['access_token']
             },
             beforeSend: function() {
                 NProgress.start();
@@ -70,6 +73,9 @@
             success: function(json) {
                 cb && cb(json);
                 NProgress.done();
+            },
+            error: function() {
+                window.location.href = 'https://github.com/' + CONFIG['owner'] + '/' + CONFIG['repo'] + '/issues/' + id;
             }
         });
     }
