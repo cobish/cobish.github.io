@@ -4,39 +4,102 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
     <title>cobish - 写给未来的自己</title>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css?v=20160728" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/pygments.css?v=20160728">
-    <link rel="stylesheet" type="text/css" href="/assets/css/index.css?v=20160728" />    
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/nprogress.css" />
+    <link rel="stylesheet" type="text/css" href="css/zenburn.css" />
 </head>
 <body class="font-hei">
     <div id="logo">
-    <a href="/">cobish.github.io</a>
-</div>
-    <div id="home">
-    <div class="avatar"><a href="https://github.com/cobish"></a></div>
-    <h1>cobish</h1>
-    <div class="link">
-        
-            <a href="/page/all.html">全部</a>
-        
-            <a href="/page/archive.html">归档</a>
-        
-            <a href="/page/tags.html">标签</a>
-        
+        <a href="#/">cobish.github.io</a>
     </div>
-</div>
-    <script>
-if (document.domain.indexOf('github.io') > -1) {
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?84602bc3713ca2aeb0258c55adf6a333";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-}
-</script>
 
+    <div id="container"></div>
+
+    <script id="index" type="text/html">
+        <div id="home">
+            <div class="avatar"><a href="javascript:void(0);"></a></div>
+            <h1>cobish</h1>
+            <div class="link">
+                <a href="#/all">全部</a>
+                <a href="#/archive">归档</a>
+                <a href="#/tags">标签</a>
+            </div>
+        </div>
+    </script>
+
+    <script id="all" type="text/html">
+        <div class="list">
+            <h2 class="category">全部</h2>
+            {{each list as value i}}
+                <ul>
+                    <li class="list-post">
+                        <span class="date-long">{{value.created_at | slice: 10}}</span>
+                        <a href="#post/{{value.number}}">
+                            {{value.title}}
+                        </a>
+                    </li>
+                </ul>
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="archive" type="text/html">
+        <div class="list">
+            {{each list as listValue listIndex}}
+                {{each listValue as yearValue yearIndex}}
+                    <h2 class="category">{{yearIndex}}</h2>
+                    <ul>
+                        {{each yearValue as titleValue titleIndex}}
+                            <li class="list-post">
+                                <span class="date-long">{{titleValue.created_at | slice: 10}}</span>
+                                 <a href="#post/{{titleValue.number}}">
+                                    {{titleValue.title}}
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/each}}
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="tags" type="text/html">
+        <div class="list">
+            {{each list as value i}}
+                <h2 class="category">{{i}}</h2>
+                <ul>
+                    {{each value as titleValue titleIndex}}
+                        <li class="list-post">
+                            <span class="date-long">{{titleValue.created_at | slice: 10}}</span>
+                            <a href="#post/{{titleValue.number}}">
+                                {{titleValue.title}}
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="post" type="text/html">
+        <div class="article">
+            <h1 class="article-title">{{title}}</h1>
+            <p class="article-time">{{created_at | slice: 10}}</p>
+            <div id="article" class="article-desc article-content"></div>
+        </div>
+        <div id="ds" class="article"></div>
+    </script>
+
+    <script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/lib/director.min.js"></script>
+    <script type="text/javascript" src="js/lib/artTemplate.min.js"></script>
+    <script type="text/javascript" src="js/lib/nprogress.js"></script>
+    <script type="text/javascript" src="js/lib/marked.min.js"></script>
+    <script type="text/javascript" src="js/lib/highlight.pack.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="http://static.duoshuo.com/embed.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
