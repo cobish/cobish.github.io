@@ -236,6 +236,7 @@ a:hover {
 }
 
 .article-content h2 {
+    border-bottom: 1px solid #eee;
     font-size: 20px;
 }
 
