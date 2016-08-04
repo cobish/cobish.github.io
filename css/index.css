@@ -15,7 +15,7 @@ address,caption,cite,code,dfn,em,strong,th,var {
     font-style: normal;
 }
 ol,ul {
-    list-style: none;
+    /*list-style: none;*/
 }
 a {
     text-decoration: none;
@@ -204,7 +204,7 @@ a:hover {
     margin-bottom: 26px;
 }
 
-.article-content p code {
+.article-content code {
     display: inline-block;
     margin: 0 2px;
     padding: 0 4px;
@@ -241,6 +241,7 @@ a:hover {
 }
 
 .article-content h3 {
+    margin-top: 15px;
     font-size: 19px;
 }
 
@@ -254,6 +255,12 @@ a:hover {
 
 .article-content h6 {
     font-size: 16px;
+}
+
+.article-content ul {
+    /*list-style-type: square;*/
+    margin-left: 2em;
+    margin-bottom: 26px;
 }
 
 .article-title {
