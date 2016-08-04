@@ -204,7 +204,8 @@ a:hover {
     margin-bottom: 26px;
 }
 
-.article-content code {
+.article-content p code,
+.article-content ul code {
     display: inline-block;
     margin: 0 2px;
     padding: 0 4px;
@@ -216,7 +217,7 @@ a:hover {
 }
 
 .article-content strong {
-    color: #222;
+    color: #333;
     font-weight: bold;
 }
 
