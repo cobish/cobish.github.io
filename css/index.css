@@ -191,17 +191,13 @@ a:hover {
     border-radius: 2px;
 }
 
-.article pre {
-    margin: 7px 0;
-}
-
 .article-content {
     margin-top: -6px;
     margin-bottom: -26px;
 }
 
 .article-content p {
-    margin-bottom: 26px;
+    margin-bottom: 16px;
 }
 
 .article-content p code,
@@ -227,7 +223,7 @@ a:hover {
 .article-content h4,
 .article-content h5,
 .article-content h6 {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     padding: 0 0 5px 0;
     color: #454545;
 }
@@ -237,12 +233,12 @@ a:hover {
 }
 
 .article-content h2 {
+    margin-top: 24px;
     border-bottom: 1px solid #eee;
     font-size: 20px;
 }
 
 .article-content h3 {
-    margin-top: 15px;
     font-size: 19px;
 }
 
@@ -261,7 +257,7 @@ a:hover {
 .article-content ul {
     /*list-style-type: square;*/
     margin-left: 2em;
-    margin-bottom: 26px;
+    margin-bottom: 16px;
 }
 
 .article-title {
@@ -274,7 +270,7 @@ a:hover {
 .article-time {
     color: #9b9b9b;
     font-size: 14px;
-    margin: 5px 0 25px 0;
+    margin: 5px 0 16px 0;
     text-align: center;
 }
 
