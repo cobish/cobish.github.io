@@ -178,6 +178,7 @@ a:hover {
     padding: 0 15px 20px 15px;
     line-height: 26px;
     color: #555;
+    word-wrap: break-word;
 }
 
 .article a {
