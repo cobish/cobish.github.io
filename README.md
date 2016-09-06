@@ -1,18 +1,58 @@
 # cobish's blog
 
-这是一个基于 ``github page`` 和 ``github api`` 搭建的单页面静态博客，点击[这里](http://cobish.github.io)查看博客。
+这是一个基于 ``github page`` 和 ``github api`` 搭建的单页面静态博客，点击[「这里」](http://cobish.github.io)查看博客。
 
-## 写文章
+## Fork 使用
 
-在 ``Issues`` 使用 Markdown 书写文章，访问页面时即能够获取到 Issues 上的数据。
+将配置文件 ``config.js`` 的``百度统计``与``多说评论``配置修改成自己的账号。
 
-## 接下来
+## 命令使用
 
-- [ ] 使用 gulp 合并压缩静态资源；
-- [ ] 使用 webpack 模块化 js；
-- [ ]  尝试使用 react 重写博客。
+- 使用 ``npm install`` 安装 ``node_modules``；
+- 使用 ``npm start`` 开发项目；
+- 使用 ``npm run build`` 发布项目。
 
-## 参考
+## 技术栈
 
-- [「基于 Github issues 的单页面静态博客」](https://github.com/wuhaoworld/github-issues-blog)
-- [「利用 github pages 与 github api 搭建博客」](https://github.com/eyasliu/blog/issues/2)
+- react
+- react-router
+- redux
+- webpack
+- redux-devtools
+- es6
+
+## 日志更新
+
+### v3.1
+
+- 使用 react + react-router + redux + es6 重写博客。
+
+### v3.0
+
+- 将博客变成了一个单页面应用；
+- 使用了 github api + issues 的方式显示博客文章。
+
+### v2.3
+
+- 添加文章页面标题的样式；
+- 添加标签 ``<code>`` 的样式；
+- 添加标签 ``<strong>`` 的样式。
+
+### v2.2
+
+- 重构 page 页面样式，让以前文章列表从居左变成居中。
+
+### v2.1
+
+- 代码高亮颜色修改；
+- 优化页面请求，去掉非文章页面的接口调用；
+- 百度统计只有在正式才调用。
+
+### v2.0
+
+- 界面外观大调整，采用简约风格。
+
+### v1.0
+
+- 个人博客新鲜出炉。
+
