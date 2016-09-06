@@ -1,0 +1,55 @@
+body,div,dl,dt,dd,ul,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+fieldset,img {
+  border: 0;
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+caption,th {
+  text-align: left;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+q:before,q:after {
+  content:'';
+}
+
+abbr,acronym {
+  border:0;
+}
+
+legend {
+  display: none;
+}
+
+.clearfix:after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: "020";
+}
+
+.clearfix {
+  zoom: 1;
+}
