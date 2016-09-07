@@ -24,12 +24,18 @@ export function fetchIssues(filter, perPage) {
   return function(dispatch) {
     dispatch(requestIssues(filter, perPage));
 
-    let url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues?filter=${filter}&per_page=${perPage}`;
+    let url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues?filter=${filter}&per_page=${perPage}`,
+        href = `https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues`;
+
     return fetch(url, { method: 'GET'})
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+      })
       .then(json => {
         dispatch(receiveIssues(json));
-      }
-    );
+      })
+      .catch(e => {
+        window.location.href = href;
+      });
   };
 }

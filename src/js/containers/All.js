@@ -8,6 +8,10 @@ class All extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    NProgress.start();
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchIssues('created', 10000));
@@ -16,7 +20,6 @@ class All extends Component {
   render() {
     let showTemplate = () => {
       if (this.props.isFetching || !this.props.items.length) {
-        NProgress.start();
         return null;
       } else {
         NProgress.done();
