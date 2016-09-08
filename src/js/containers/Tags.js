@@ -4,7 +4,7 @@ import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
 import CellView from '../components/CellView.js';
 
-class Archive extends Component {
+class Tags extends Component {
   constructor(props) {
     super(props);
     this.spliceJson = this.spliceJson.bind(this);
@@ -19,23 +19,22 @@ class Archive extends Component {
     dispatch(fetchIssuesIfNeeded('created', 10000));
   }
 
-  // 拼接 json
+   // 拼接 json
   spliceJson(items) {
-    let list = this.props.items,
-        len = list.length,
-        year = 0,
-        index = 0,
+    let list = items,
         articles = {};
 
-    for (let i = 0; i < len; i++) {
-      let time = parseInt(list[i]['created_at'].substring(0, 4));
+    for (let i = 0, listLen = list.length; i < listLen; i++) {
+      let labels = list[i]['labels'];
 
-      if (time !== year) {
-        articles[time + '年'] = [];
-        year = time;
+      for (let j = 0, labelsLen = labels.length; j < labelsLen; j++) {
+        let name = labels[j]['name'];
+        if ( !articles.hasOwnProperty(name) ) {
+          articles[name] = [];
+        }
+        articles[name].push(list[i]);
+
       }
-
-      articles[time + '年'].push(list[i]);
     }
 
     return articles;
@@ -52,10 +51,9 @@ class Archive extends Component {
       let articles = this.spliceJson(this.props.items),
           view = [];
 
-      for (let year in articles) {
-        let yearShow = year.substring(0, year.length - 1);
-        view.push(<CellView key={yearShow} title={yearShow} items={articles[year]} />);
-      } 
+      for (let label in articles) {
+        view.push(<CellView key={label} title={label} items={articles[label]} />);
+      }    
 
       return view;
     };
@@ -83,4 +81,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Archive);
+export default connect(mapStateToProps)(Tags);
+
+

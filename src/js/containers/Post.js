@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
-import CellView from '../components/CellView.js';
-
-class All extends Component {
+ 
+class Post extends Component {
   constructor(props) {
     super(props);
   }
@@ -25,15 +24,22 @@ class All extends Component {
       }
 
       NProgress.done();
-      return (
-        <CellView title="全部" items={this.props.items} />
-      );
-    }
+
+      let view = [];
+      this.props.items.map((item, index) => {
+        if (parseInt(item.number) === parseInt(this.props.params.id)) {
+          view.push(
+            <div key={index}>
+              {item.body}
+            </div>
+          );
+        }
+      });
+      return view;
+    };
 
     return (
-      <div className="list">
-        {showTemplate()}
-      </div>
+      <div>{showTemplate()}</div>
     );
   }
 };
@@ -53,4 +59,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(All);
+export default connect(mapStateToProps)(Post);
