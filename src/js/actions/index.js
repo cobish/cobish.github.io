@@ -36,11 +36,7 @@ export function fetchIssues(filter, perPage) {
         // access_token: CONFIG['access_token']
       },
       success: json => {
-
-
-        var obj = json[3];
-        obj.created_at = '2015-07-31T04:55:23Z';
-
+        console.log(json);
         dispatch(receiveIssues(json));
       },
       error: () => {
