@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^1.11.1",
     "nprogress": "^0.2.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -23,6 +24,7 @@
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.9.0",
     "open-browser-webpack-plugin": "0.0.2",
@@ -32,6 +34,7 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-md5-hash": "0.0.5"

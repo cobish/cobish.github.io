@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchIssues } from '../actions/index.js';
+import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
 
 class All extends Component {
@@ -14,12 +14,12 @@ class All extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchIssues('created', 10000));
+    dispatch(fetchIssuesIfNeeded('created', 10000));
   }
 
   render() {
     let showTemplate = () => {
-      if (this.props.isFetching || !this.props.items.length) {
+      if (this.props.isFetching) {
         return null;
       } else {
         NProgress.done();

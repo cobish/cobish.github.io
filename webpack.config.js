@@ -63,8 +63,9 @@ module.exports = {
       'react-redux',
       'redux',
       'redux-thunk',
-      'isomorphic-fetch',
-      'nprogress'
+      // 'isomorphic-fetch',
+      'nprogress',
+      'jquery'
     ]
   },
   output: {
@@ -79,6 +80,9 @@ module.exports = {
       exclude: /node_modules/,
       // loader: ExtractTextPlugin.extract('sass?sourceMap')
       loaders: ['style', 'css', 'sass']
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'file-loader?name=/[name].[ext]'
     }, {
       test: /\.js$/,
       exclude: /node_modules/,
