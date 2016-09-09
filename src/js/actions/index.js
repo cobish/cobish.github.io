@@ -1,7 +1,7 @@
 // import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 import { REQUEST_ISSUES, RECEIVE_ISSUES } from '../constants/ActionTypes.js';
-import { CONFIG } from '../constants/Menu.js';
+import { CONFIG } from '../constants/Config.js';
 
 // 获取issues
 function requestIssues(filter, perPage) {

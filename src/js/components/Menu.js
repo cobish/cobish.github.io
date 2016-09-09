@@ -15,7 +15,7 @@ export default class Menu extends Component {
     return (
       <div id="home">
         <div className="avatar">
-          <a href="javascript:void(0);"></a>
+          <a href="https://github.com/cobish"></a>
         </div>
         <h1>cobish</h1>
         <div className="link">
