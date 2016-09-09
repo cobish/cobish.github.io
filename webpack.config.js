@@ -84,7 +84,7 @@ module.exports = {
       loaders: ['style', 'css', 'sass']
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'file-loader?name=/[name].[ext]'
+      loader: 'file-loader?name=/[name].[hash:8].[ext]'
     }, {
       test: /\.js$/,
       exclude: /node_modules/,

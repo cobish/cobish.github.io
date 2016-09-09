@@ -8,18 +8,49 @@
 
 ## 命令使用
 
-- 使用 ``npm install`` 安装 ``node_modules``；
-- 使用 ``npm start`` 开发项目；
-- 使用 ``npm run build`` 发布项目。
+### 安装
+
+``` bash
+$ npm install webpack -g
+$ npm install
+```
+
+### 运行
+
+``` js
+"scripts": {
+  "start": "NODE_ENV=development webpack-dev-server --hot --inline",
+  "build": "rm -rf dist && NODE_ENV=production webpack"
+},
+```
+
+开发应用命令
+``` bash
+$ npm start
+```
+
+发布应用命令
+
+``` bash
+$ npm run build
+```
+
+目前命令在 **Mac** 是运行的了，**Windows** 保守估计应该是运行不了的。如想在 **Windows** 上运行需替换 ``NODE_ENV=development`` 和 ``rm -rf dist`` 这两条命令。God bless you.
 
 ## 技术栈
 
-- react
-- react-router
-- redux
-- webpack
-- redux-devtools
+- react@15.3.1
+- react-router@15.3.1
+- redux@3.6.0
+- webpack@1.13.2
 - es6
+
+## 浏览器兼容
+
+- Chrome
+- Firefox
+- Safari
+- 其它的我就不知道啦
 
 ## 日志更新
 

@@ -36,7 +36,6 @@ export function fetchIssues(filter, perPage) {
         // access_token: CONFIG['access_token']
       },
       success: json => {
-        console.log(json);
         dispatch(receiveIssues(json));
       },
       error: () => {
