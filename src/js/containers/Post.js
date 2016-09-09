@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
+import Article from '../components/Article.js';
  
 class Post extends Component {
   constructor(props) {
@@ -29,9 +30,7 @@ class Post extends Component {
       this.props.items.map((item, index) => {
         if (parseInt(item.number) === parseInt(this.props.params.id)) {
           view.push(
-            <div key={index}>
-              {item.body}
-            </div>
+            <Article {...item}  key={index} />
           );
         }
       });

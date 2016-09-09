@@ -7,8 +7,10 @@
     "build": "rm -rf dist && NODE_ENV=production webpack"
   },
   "dependencies": {
+    "highlight.js": "^9.6.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^1.11.1",
+    "marked": "^0.3.6",
     "nprogress": "^0.2.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

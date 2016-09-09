@@ -63,9 +63,11 @@ module.exports = {
       'react-redux',
       'redux',
       'redux-thunk',
-      // 'isomorphic-fetch',
       'nprogress',
-      'jquery'
+      'jquery',
+      'marked',
+      'highlight.js',
+      // 'isomorphic-fetch',
     ]
   },
   output: {

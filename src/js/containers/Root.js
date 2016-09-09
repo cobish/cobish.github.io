@@ -13,6 +13,7 @@ import '../../css/reset.scss';
 import '../../css/fonts.scss';
 import '../../css/index.scss';
 import '../../css/nprogress.scss';
+import '../../css/zenburn.scss';
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
