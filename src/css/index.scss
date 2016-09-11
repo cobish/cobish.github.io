@@ -1,6 +1,10 @@
+html,
 body {
+  height: 100%;
   font-size: 14px;
   -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
