@@ -33,15 +33,15 @@ module.exports = {
       'redux',
       'redux-thunk',
       'nprogress',
-      'jquery',
-      'marked',
-      'highlight.js'
+      // 'jquery',
+      // 'marked',
+      // 'highlight.js'
     ]
   },
   output: {
     path: './dist',
     filename: isProd() ? '[name].[chunkhash:8].js' : '[name].js',
-    chunkFilename: isProd() ? '[name].[chunkhash:8].js' : '[name].chunk.js',
+    chunkFilename: isProd() ? '[name].chunk.[chunkhash:8].js' : '[name].chunk.js',
     publicPath: isProd() ? './dist/' : '/dist/'
   },
   module: {
