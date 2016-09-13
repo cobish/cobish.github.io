@@ -20,8 +20,8 @@ $ npm install
 ``` js
 "scripts": {
   "start": "NODE_ENV=development webpack-dev-server --hot --inline",
-  "build": "rm -rf dist && NODE_ENV=production webpack",
-  "start:win": "set NODE_ENV=development&& webpack-dev-server --hot --inline",
+  "build": "NODE_ENV=production webpack",
+  "start:win": "set NODE_ENV=development && webpack-dev-server --hot --inline",
   "build:win": "set NODE_ENV=production && webpack"
 },
 ```
