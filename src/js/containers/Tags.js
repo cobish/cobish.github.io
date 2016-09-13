@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
 import CellView from '../components/CellView.js';
@@ -10,13 +11,15 @@ class Tags extends Component {
     this.spliceJson = this.spliceJson.bind(this);
   }
 
-  componentWillMount() {
-    NProgress.start();
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchIssuesIfNeeded('created', 10000));
+
+    this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+  }
+
+  routerWillLeave(nextLocation) {
+      NProgress.start();
   }
 
    // 拼接 json
@@ -81,6 +84,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Tags);
+export default connect(mapStateToProps)(withRouter(Tags));
 
 

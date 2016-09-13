@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import NProgress from 'nprogress';
 
-export default class Menu extends Component {
+class Menu extends Component {
   componentWillMount() {
     NProgress.start();
   }
 
   componentDidMount() {
     NProgress.done();
+    this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+  }
+
+  routerWillLeave(nextLocation) {
+      NProgress.start();
   }
 
   render() {
@@ -27,3 +32,5 @@ export default class Menu extends Component {
     );
   }
 };
+
+export default withRouter(Menu);

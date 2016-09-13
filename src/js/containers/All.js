@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { fetchIssuesIfNeeded } from '../actions/index.js';
 import NProgress from 'nprogress';
 import CellView from '../components/CellView.js';
 
 class All extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
-    NProgress.start();
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchIssuesIfNeeded('created', 10000));
+    
+    this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+  }
+
+  routerWillLeave(nextLocation) {
+      NProgress.start();
   }
 
   render() {
@@ -53,4 +52,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(All);
+export default connect(mapStateToProps)(withRouter(All));
