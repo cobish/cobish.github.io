@@ -4,10 +4,6 @@ import { createHashHistory } from 'history';
 
 import App from '../components/App.js';
 import Menu from '../components/Menu.js';
-// import All from '../containers/All.js';
-// import Archive from '../containers/Archive.js';
-// import Tags from '../containers/Tags.js';
-// import Post from '../containers/Post.js';
 
 import '../../css/reset.scss';
 import '../../css/fonts.scss';

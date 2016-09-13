@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var WebpackMd5Hash = require('webpack-md5-hash');
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var copy = require('quickly-copy-file');
 var del = require('del');
@@ -32,10 +32,7 @@ module.exports = {
       'react-redux',
       'redux',
       'redux-thunk',
-      'nprogress',
-      // 'jquery',
-      // 'marked',
-      // 'highlight.js'
+      'nprogress'
     ]
   },
   output: {
@@ -48,8 +45,8 @@ module.exports = {
     loaders: [{
       test: /\.scss$/,
       exclude: /node_modules/,
-      // loader: ExtractTextPlugin.extract('sass?sourceMap')
-      loaders: ['style', 'css', 'sass']
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+      // loaders: ['style', 'css', 'sass']
     }, {
       test: /\.(png|jpg)$/,
       loader: 'file-loader?name=/[name].[hash:8].[ext]'
@@ -95,7 +92,7 @@ function getPlugins() {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV.trim())
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', isProd() ? 'vendor.[chunkhash:8].js' : 'vendor.js'),
-    // new ExtractTextPlugin(isProd() ? '[name].[chunkhash:8].css' : '[name].css'),
+    new ExtractTextPlugin(isProd() ? '[name].[chunkhash:8].css' : '[name].css'),
   ];
 
   if (isDev()) {
