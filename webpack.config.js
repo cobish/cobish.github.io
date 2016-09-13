@@ -45,8 +45,9 @@ module.exports = {
     loaders: [{
       test: /\.scss$/,
       exclude: /node_modules/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      // loaders: ['style', 'css', 'sass']
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader', {
+        publicPath: '.'
+      })
     }, {
       test: /\.(png|jpg)$/,
       loader: 'file-loader?name=/[name].[hash:8].[ext]'

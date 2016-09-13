@@ -20,22 +20,31 @@ $ npm install
 ``` js
 "scripts": {
   "start": "NODE_ENV=development webpack-dev-server --hot --inline",
-  "build": "rm -rf dist && NODE_ENV=production webpack"
+  "build": "rm -rf dist && NODE_ENV=production webpack",
+  "start:win": "set NODE_ENV=development&& webpack-dev-server --hot --inline",
+  "build:win": "set NODE_ENV=production && webpack"
 },
 ```
 
-开发应用命令
+#### 开发命令
+
 ``` bash
+// Mac or Linux
 $ npm start
+
+// Windows
+$ npm run start:win
 ```
 
-发布应用命令
+#### 发布命令
 
 ``` bash
+// Mac or Linux
 $ npm run build
-```
 
-目前命令在 **Mac** 是运行的了，**Windows** 保守估计应该是运行不了的。如想在 **Windows** 上运行需替换 ``NODE_ENV=development`` 和 ``rm -rf dist`` 这两条命令。God bless you.
+// Windows
+$ npm run build:win
+```
 
 ## 技术栈
 
@@ -53,6 +62,12 @@ $ npm run build
 - 其它的我就不知道啦
 
 ## 日志更新
+
+### v3.2
+
+- 开发命令支持 Mac、Linux 和 Windows；
+- 按需加载 js（chunk） 文件；
+- 分离出 css 文件。
 
 ### v3.1
 
