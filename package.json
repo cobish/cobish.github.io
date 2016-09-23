@@ -9,11 +9,13 @@
     "build:win": "set NODE_ENV=production && webpack"
   },
   "dependencies": {
+    "es6-promise": "^3.3.1",
     "highlight.js": "^9.6.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^1.11.1",
     "marked": "^0.3.6",
     "nprogress": "^0.2.0",
+    "object-assign": "^4.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",

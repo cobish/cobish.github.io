@@ -59,13 +59,14 @@ $ npm run build:win
 - Chrome
 - Firefox
 - Safari
-- 其它的我就不知道啦
+- IE10+
 
 ## 日志更新
 
 ### v3.3
 
 - 去掉 -webkit-user-select；
+- 修复 IE 报错 Object doesn't support property or method 'assign'，[参考链接](https://github.com/mozilla-services/react-jsonschema-form/issues/206)；
 
 ### v3.2
 
