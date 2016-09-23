@@ -63,6 +63,10 @@ $ npm run build:win
 
 ## 日志更新
 
+### v3.3
+
+- 去掉 -webkit-user-select；
+
 ### v3.2
 
 - 开发命令支持 Mac、Linux 和 Windows；
