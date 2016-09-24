@@ -67,6 +67,7 @@ $ npm run build:win
 
 - 去掉 -webkit-user-select；
 - 修复 IE 报错 Object doesn't support property or method 'assign'，[参考链接](https://github.com/mozilla-services/react-jsonschema-form/issues/206)；
+- 优化 nprogress 调用代码，简化组件内许多代码；
 
 ### v3.2
 

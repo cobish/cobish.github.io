@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
+import NProgress from 'nprogress';
 
-import App from '../components/App.js';
-import Menu from '../components/Menu.js';
+import App from '../containers/App.js';
 
 import '../../css/reset.scss';
 import '../../css/fonts.scss';
@@ -13,25 +13,34 @@ import '../../css/zenburn.scss';
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
+var Menu = (location, cb) => {
+  NProgress.start();
+  cb(null, require('../components/Menu.js').default);
+};
+
 var All = (location, cb) => {
+  NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/All.js').default);
   }, 'all');
 };
 
 var Archive = (location, cb) => {
+  NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Archive.js').default);
   }, 'archive');
 };
 
 var Tags = (location, cb) => {
+  NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Tags.js').default);
   }, 'tags');
 };
 
 var Post = (location, cb) => {
+  NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Post.js').default);
   }, 'post');
@@ -39,7 +48,7 @@ var Post = (location, cb) => {
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={Menu} />
+    <IndexRoute getComponent={Menu} />
     <Route path="all" getComponent={All} />
     <Route path="archive" getComponent={Archive} />
     <Route path="tags" getComponent={Tags} />

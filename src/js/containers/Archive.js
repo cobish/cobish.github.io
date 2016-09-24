@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { fetchIssuesIfNeeded } from '../actions/index.js';
-import NProgress from 'nprogress';
 import CellView from '../components/CellView.js';
 
 class Archive extends Component {
@@ -14,12 +12,6 @@ class Archive extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchIssuesIfNeeded('created', 10000));
-
-    this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
-  }
-
-  routerWillLeave(nextLocation) {
-      NProgress.start();
   }
 
   // 拼接 json
@@ -45,27 +37,21 @@ class Archive extends Component {
   }
 
   render() {
-    let showTemplate = () => {
-      if (this.props.isFetching) {
-        return null;
-      }
+    if (this.props.isFetching) {
+      return null;
+    }
 
-      NProgress.done();
+    let articles = this.spliceJson(this.props.items),
+        view = [];
 
-      let articles = this.spliceJson(this.props.items),
-          view = [];
-
-      for (let year in articles) {
-        let yearShow = year.substring(0, year.length - 1);
-        view.push(<CellView key={yearShow} title={yearShow} items={articles[year]} />);
-      } 
-
-      return view;
-    };
+    for (let year in articles) {
+      let yearShow = year.substring(0, year.length - 1);
+      view.push(<CellView key={yearShow} title={yearShow} items={articles[year]} />);
+    } 
 
     return (
       <div className="list">
-        {showTemplate()}
+        {view}
       </div>
     );
   }
@@ -86,4 +72,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(Archive));
+export default connect(mapStateToProps)(Archive);

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { CONFIG } from '../constants/Config.js';
+import NProgress from 'nprogress';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.addBaiduAnaly = this.addBaiduAnaly.bind(this);
@@ -10,12 +12,19 @@ export default class App extends Component {
 
   componentWillMount() {
     document.title = CONFIG.title;
+    NProgress.done();
 
     // 添加百度统计
     this.addBaiduAnaly();
 
     // 添加多说评论框
     this.addDuoshuoComment();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isFetching) {
+      NProgress.done();
+    }
   }
 
   addBaiduAnaly() {
@@ -55,3 +64,20 @@ export default class App extends Component {
     );
   }
 };
+
+function mapStateToProps(state) {
+  const {
+    isFetching,
+    items
+  } = state || {
+    isFetching: true,
+    items: []
+  };
+
+  return {
+    isFetching,
+    items
+  }
+}
+
+export default connect(mapStateToProps)(App);
