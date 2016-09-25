@@ -5,11 +5,6 @@ import hljs from 'highlight.js';
 import { CONFIG } from '../constants/Config.js';
 
 export default class Article extends Component {
-  constructor(props) {
-    super(props);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
-  }
-
   componentWillMount() {
     window.scrollTo(0, 0);
     document.title = this.props.title;
@@ -31,10 +26,6 @@ export default class Article extends Component {
   toggleDuoshuoComment() {
     let ele = this.refs['ds'];
     window.DUOSHUO.EmbedThread(ele);
-  }
-
-  componentWillUnmount() {
-    document.title = CONFIG.title;
   }
 
   render() {

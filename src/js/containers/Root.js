@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
+import { CONFIG } from '../constants/Config.js';
 import NProgress from 'nprogress';
 
 import App from '../containers/App.js';
@@ -14,11 +15,13 @@ import '../../css/zenburn.scss';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
 var Menu = (location, cb) => {
+  document.title = CONFIG.titleLoad;
   NProgress.start();
   cb(null, require('../components/Menu.js').default);
 };
 
 var All = (location, cb) => {
+  document.title = CONFIG.titleLoad;
   NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/All.js').default);
@@ -26,6 +29,7 @@ var All = (location, cb) => {
 };
 
 var Archive = (location, cb) => {
+  document.title = CONFIG.titleLoad;
   NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Archive.js').default);
@@ -33,6 +37,7 @@ var Archive = (location, cb) => {
 };
 
 var Tags = (location, cb) => {
+  document.title = CONFIG.titleLoad;
   NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Tags.js').default);
@@ -40,6 +45,7 @@ var Tags = (location, cb) => {
 };
 
 var Post = (location, cb) => {
+  document.title = CONFIG.titleLoad;
   NProgress.start();
   require.ensure([], require => {
     cb(null, require('../containers/Post.js').default);

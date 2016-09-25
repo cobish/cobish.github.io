@@ -23,6 +23,7 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isFetching) {
+      document.title = CONFIG.title;
       NProgress.done();
     }
   }
