@@ -4,6 +4,7 @@ import { createHashHistory } from 'history';
 import { CONFIG } from '../constants/Config.js';
 import NProgress from 'nprogress';
 
+import Menu from '../components/Menu.js';
 import App from '../containers/App.js';
 
 import '../../css/reset.scss';
@@ -13,12 +14,6 @@ import '../../css/nprogress.scss';
 import '../../css/zenburn.scss';
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
-
-var Menu = (location, cb) => {
-  document.title = CONFIG.titleLoad;
-  NProgress.start();
-  cb(null, require('../components/Menu.js').default);
-};
 
 var All = (location, cb) => {
   document.title = CONFIG.titleLoad;
@@ -54,7 +49,7 @@ var Post = (location, cb) => {
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute getComponent={Menu} />
+    <IndexRoute component={Menu} />
     <Route path="all" getComponent={All} />
     <Route path="archive" getComponent={Archive} />
     <Route path="tags" getComponent={Tags} />

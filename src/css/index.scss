@@ -17,24 +17,6 @@ a:hover {
   text-decoration: none;
 }
 
-.highlight {
-  margin-bottom: 15px;
-  margin-top: -15px;
-  padding: 0 15px;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
-  font-size: 13px;
-  font-style: normal;
-  line-height: 1.5;
-  overflow: auto;
-  border: 1px solid #dedede;
-  border-radius: 4px;
-}
-
-.highlight .lineno {
-  color: #ccc;
-  padding: 0 10px 0 0;
-}
-
 #logo {
   padding: 25px 50px;
 }
@@ -163,6 +145,22 @@ a:hover {
   line-height: 20px;
   background: #fafafa;
   border: 1px solid #ddd;
+}
+
+.article-content pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #3f3f3f;
+  color: #dcdcdc;
+  margin-bottom: 16px;
+  padding: 10px 15px;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.5;
+  overflow: auto;
+  border-radius: 4px;
 }
 
 .article-content strong {

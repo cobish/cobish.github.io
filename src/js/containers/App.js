@@ -10,10 +10,7 @@ class App extends Component {
     this.addDuoshuoComment = this.addDuoshuoComment.bind(this);
   }
 
-  componentWillMount() {
-    document.title = CONFIG.title;
-    NProgress.done();
-
+  componentDidMount() {
     // 添加百度统计
     this.addBaiduAnaly();
 
