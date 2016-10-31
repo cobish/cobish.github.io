@@ -10,7 +10,8 @@ a {
   color: #44a340;
   font-size: 14px;
 }
-
+  
+a:active,
 a:hover {
   color: #fff;
   background: #44a340;
@@ -88,8 +89,10 @@ a:hover {
   overflow: hidden;
 }
 
-.list-post:hover {
-  background: #f6f6f6;
+@media screen and (min-width: 736px) {
+  .list-post:hover {
+    background: #f6f6f6;
+  }
 }
 
 .list-post span {
@@ -206,7 +209,6 @@ a:hover {
 }
 
 .article-content ul {
-  /*list-style-type: square;*/
   margin-left: 2em;
   margin-bottom: 16px;
 }
@@ -225,27 +227,7 @@ a:hover {
   text-align: center;
 }
 
-#showDs {
-  display: block;
-  margin: 10px auto 30px auto;
-  width: 95%;
-  max-width: 650px;
-  height: 30px;
-  line-height: 30px;
-  color: #aaa;
-  font-size: 14px;
-  background: #f7f7f7;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#showDs:hover {
-  color: #aaa;
-  background: #e7e7e7;
-}
-
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 736px) {
   #logo {
     padding: 25px 15px;
   }

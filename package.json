@@ -1,6 +1,6 @@
 {
   "name": "cobish.github.io",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "description": "cobish's blog",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --hot --inline",
