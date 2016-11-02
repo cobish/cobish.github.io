@@ -24,7 +24,11 @@ export default class Article extends Component {
 
   toggleDuoshuoComment() {
     let ele = this.refs['ds'];
-    window.DUOSHUO.EmbedThread(ele);
+    try {
+      window.DUOSHUO.EmbedThread(ele);
+    } catch(e) {
+
+    }
   }
 
   render() {
