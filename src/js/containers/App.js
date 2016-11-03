@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CONFIG } from '../constants/Config.js';
 import NProgress from 'nprogress';
+import { CONFIG } from '../constants/Config.js';
 
 class App extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@
 
 ## Fork 使用
 
-将配置文件 ``src/js/constants/Config.js`` 的``百度统计``与``多说评论``配置修改成自己的账号。
+将配置文件 ``src/js/constants/Config.js`` 的 ``百度统计`` 与 ``多说评论`` 配置修改成自己的账号。
 
 ## 命令使用
 

@@ -1,5 +1,5 @@
-// import fetch from 'isomorphic-fetch';
-import $ from 'jquery';
+import fetch from 'isomorphic-fetch';
+// import $ from 'jquery';
 import { REQUEST_ISSUES, RECEIVE_ISSUES } from '../constants/ActionTypes.js';
 import { CONFIG } from '../constants/Config.js';
 
@@ -28,33 +28,32 @@ export function fetchIssues(filter, perPage) {
     let url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues`,
         href = `https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues`;
 
-    return $.ajax({
-      url: url,
-      data: {
-        filter,
-        per_page: perPage,
-        // access_token: CONFIG['access_token']
-      },
-      success: json => {
-        dispatch(receiveIssues(json));
-      },
-      error: () => {
-        window.location.href = href;
-      }
-    });
-
-    // fetch 获取 json 有问题
-    // return fetch(url, { method: 'GET' })
-    //   .then(response => {
-    //     response.json();
-    //   })
-    //   .then(json => {
-    //     console.log(json)
+    // return $.ajax({
+    //   url: url,
+    //   data: {
+    //     filter,
+    //     per_page: perPage,
+    //     // access_token: CONFIG['access_token']
+    //   },
+    //   success: json => {
     //     dispatch(receiveIssues(json));
-    //   });
-    //   .catch(e => {
+    //   },
+    //   error: () => {
     //     window.location.href = href;
-    //   });
+    //   }
+    // });
+
+    // 添加参数
+    url += `?fliter=${filter}&per_page=${perPage}`;
+
+    return fetch(url)
+      .then(response => response.json())
+      .then(json => 
+        dispatch(receiveIssues(json))
+      )
+      .catch(e => {
+        window.location.href = href;
+      });
   };
 }
 
