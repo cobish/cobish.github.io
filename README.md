@@ -63,6 +63,13 @@ $ npm run build:win
 
 ## 日志更新
 
+### v3.4
+
+- css 判断移动端，去掉 hover；
+- css 文件分离；
+- 修复进度条特殊情况一直显示bug；
+- 使用 fetch 替代 jquery。
+
 ### v3.3
 
 - 去掉 -webkit-user-select；
