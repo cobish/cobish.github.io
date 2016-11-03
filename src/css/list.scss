@@ -1,0 +1,40 @@
+.list {
+  max-width: 650px;
+  margin: auto;
+  padding: 0 10px 50px 10px;
+}
+
+.category {
+  color: #666;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.list-post {
+  padding: 0 5px;
+  height: 45px;
+  line-height: 45px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.list-post:hover {
+  background: #f6f6f6;
+}
+
+.list-post span {
+  color: #999;
+  text-align: right;
+}
+
+.list-post .date-long {
+  display: inline-block;
+  float: right;
+}
+
+.list-post a {
+  text-decoration: none;
+}
