@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import marked from 'marked';
-import $ from 'jquery';
 import hljs from 'highlight.js';
 import { CONFIG } from '../constants/Config.js';
 
 export default class Article extends Component {
   componentWillMount() {
     window.scrollTo(0, 0);
-    // document.title = this.props.title;
 
     // 代码高亮
     marked.setOptions({
