@@ -17,8 +17,9 @@ class App extends Component {
     // 添加多说评论框
     this.addDuoshuoComment();
 
+    document.title = CONFIG.title;
+
     if (!this.props.isFetching) {
-      document.title = CONFIG.title;
       NProgress.done();
     }
   }
