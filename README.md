@@ -6,12 +6,35 @@
 
 将配置文件 ``src/js/constants/Config.js`` 的 ``百度统计`` 与 ``多说评论`` 配置修改成自己的账号。
 
+## 环境搭建
+
+### 运行环境
+
+- [node.js@5.8.0](https://nodejs.org)
+
+```bash
+$ node -v
+v5.8.0
+
+$ npm -v
+3.7.3
+```
+
+
+### 依赖
+
+- webpack@1.13.2
+
+```bash
+$ npm install -g webpack@1.13.2
+```
+
 ## 命令使用
 
 ### 安装
 
 ``` bash
-$ npm install webpack -g
+$ cd cobish.github.io
 $ npm install
 ```
 
@@ -19,31 +42,19 @@ $ npm install
 
 ``` js
 "scripts": {
-  "start": "NODE_ENV=development webpack-dev-server --hot --inline",
-  "build": "NODE_ENV=production webpack",
-  "start:win": "set NODE_ENV=development && webpack-dev-server --hot --inline",
-  "build:win": "set NODE_ENV=production && webpack"
+  "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
+  "build": "cross-env NODE_ENV=production webpack"
 },
 ```
 
-#### 开发命令
+#### 命令
 
 ``` bash
-// Mac or Linux
-$ npm start
+// 开发
+$ npm run dev
 
-// Windows
-$ npm run start:win
-```
-
-#### 发布命令
-
-``` bash
-// Mac or Linux
+// 打包
 $ npm run build
-
-// Windows
-$ npm run build:win
 ```
 
 ## 技术栈
