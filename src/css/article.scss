@@ -66,8 +66,8 @@
 .article-content h4,
 .article-content h5,
 .article-content h6 {
-  margin-bottom: 16px;
-  padding: 0 0 5px 0;
+  margin-top: 18px;
+  margin-bottom: 12px;
   color: #454545;
 }
 
@@ -76,25 +76,25 @@
 }
 
 .article-content h2 {
-  margin-top: 24px;
+  padding: 0 0 6px 0;
   border-bottom: 1px solid #eee;
   font-size: 20px;
 }
 
 .article-content h3 {
-  font-size: 19px;
-}
-
-.article-content h4 {
   font-size: 18px;
 }
 
+.article-content h4 {
+  font-size: 16px;
+}
+
 .article-content h5 {
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .article-content h6 {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .article-content ul {
