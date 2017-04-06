@@ -9,24 +9,17 @@ export default class Article extends Component {
 
     // 代码高亮
     marked.setOptions({
-      highlight: function (code) {
+      highlight: code => {
         return hljs.highlightAuto(code).value;
       }
     });
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    // 显示多说评论框
-    this.toggleDuoshuoComment();
-  }
-
-  toggleDuoshuoComment() {
-    let ele = this.refs['ds'];
-    try {
-      window.DUOSHUO.EmbedThread(ele);
-    } catch(e) {
-
-    }
+  handleClick() {
+    let url = `https://github.com/cobish/cobish.github.io/issues/${this.props.number}`;
+    window.location.href = url;
   }
 
   render() {
@@ -40,7 +33,7 @@ export default class Article extends Component {
           </div>
         </div>
         <div className="article">
-          <div ref="ds" className="ds-thread" data-thread-key={this.props.number} data-title={this.props.title} data-url={window.location.href}></div>
+          <button className="article-comment" onClick={this.handleClick}>点击评论</button>
         </div>
       </div>
     );
