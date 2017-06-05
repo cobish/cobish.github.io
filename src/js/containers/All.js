@@ -6,7 +6,7 @@ import CellView from '../components/CellView.js';
 class All extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchIssuesIfNeeded('created', 10000));
+    dispatch(fetchIssuesIfNeeded());
   }
 
   render() {

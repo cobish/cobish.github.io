@@ -11,7 +11,7 @@ class Tags extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchIssuesIfNeeded('created', 10000));
+    dispatch(fetchIssuesIfNeeded());
   }
 
   // 拼接 json

@@ -13,7 +13,7 @@ class Post extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchIssuesIfNeeded('created', 10000));
+    dispatch(fetchIssuesIfNeeded());
   }
 
   render() {
