@@ -13,7 +13,6 @@ import '../../css/index.scss';
 import '../../css/list.scss';
 import '../../css/nprogress.scss';
 
-//以下代码可以解决以上问题，不依赖jq
 setTimeout(function(){
   //利用iframe的onload事件刷新页面
   document.title = CONFIG.title;
@@ -29,7 +28,7 @@ setTimeout(function(){
   document.body.appendChild(iframe);
 },0);
 
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+const appHistory = useRouterHistory(createHashHistory)();
 
 var All = (location, cb) => {
   document.title = CONFIG.titleLoad;
