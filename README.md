@@ -69,6 +69,7 @@ $ npm run build
 - Chrome
 - Firefox
 - Safari
+- IE10+
 
 ## 日志更新
 
