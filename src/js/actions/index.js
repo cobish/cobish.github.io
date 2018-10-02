@@ -26,16 +26,20 @@ export function fetchIssues() {
         href = `https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues`;
 
     // 添加参数
-    url += `?creator=${CONFIG.owner}&per_page=1000&access_token=${CONFIG.token}`;
+    url += `?creator=${CONFIG.owner}&per_page=1000`;
 
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => 
-        dispatch(receiveIssues(json))
-      )
-      .catch(e => {
-        window.location.href = href;
-      });
+    return fetch(url, {
+      headers: {
+        Authorization: 'token ' + CONFIG.token
+      }
+    })
+    .then(response => response.json())
+    .then(json => 
+      dispatch(receiveIssues(json))
+    )
+    .catch(e => {
+      window.location.href = href;
+    });
   };
 }
 
