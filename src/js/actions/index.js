@@ -28,11 +28,7 @@ export function fetchIssues() {
     // 添加参数
     url += `?creator=${CONFIG.owner}&per_page=1000`;
 
-    return fetch(url, {
-      headers: {
-        Authorization: 'token ' + CONFIG.token
-      }
-    })
+    return fetch(url)
     .then(response => response.json())
     .then(json => 
       dispatch(receiveIssues(json))
