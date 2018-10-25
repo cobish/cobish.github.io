@@ -26,7 +26,7 @@ export function fetchIssues() {
         href = `https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues`;
 
     // 添加参数
-    url += `?creator=${CONFIG.owner}&per_page=1000`;
+    url += `?creator=${CONFIG.owner}&per_page=1000&access_token=${CONFIG.token}`;
 
     return fetch(url)
     .then(response => response.json())

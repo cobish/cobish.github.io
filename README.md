@@ -4,8 +4,8 @@
 
 ## Fork 使用
 
-1. 将配置文件 ``src/js/constants/Config.js`` 的 ``百度统计`` 配置修改成自己的账号。
-2. 将配置文件里的 token 修改成自己 Github 的 access_token，详情参考[「这里」](https://liuhongjiang.github.io/hexotech/2015/12/04/calling-github-api/)。
+1. 将配置文件的[百度统计](https://github.com/cobish/cobish.github.io/blob/master/src/js/constants/Config.js#L7)配置修改成自己的账号。
+2. 将配置文件里的 [token](https://github.com/cobish/cobish.github.io/blob/master/src/js/constants/Config.js#L8) 修改成自己 Github 的 access_token。
 
 ## 环境搭建
 
